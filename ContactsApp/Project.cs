@@ -32,7 +32,7 @@ namespace ContactsAppBL
 				}
 			}
 			return Contacts.OrderBy(
-				contact => contact.Surname);
+				contact => contact.LastName);
 			var contacts = new List<Contact>();
 		}
 
@@ -51,11 +51,11 @@ namespace ContactsAppBL
 	        var query = SortContacts();
 			foreach (var i in query)
 			{
-				if (i.Surname.Contains(substring))
+				if (i.LastName.Contains(substring))
 				{
 					contacts.Add(i);
 				}
-				else if (i.Name.Contains(substring))
+				else if (i.FirstName.Contains(substring))
 				{
 					contacts.Add(i);
 				}
@@ -110,8 +110,8 @@ namespace ContactsAppBL
 		{
 			for (int i = 0; i < Contacts.Count; i++)
 			{
-				if (Contacts[i].Name == contact.Name && 
-				    Contacts[i].Surname == contact.Surname)
+				if (Contacts[i].FirstName == contact.FirstName && 
+				    Contacts[i].LastName == contact.LastName)
 				{
 					return i;
 				}

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,11 +14,11 @@ using System.Windows.Shapes;
 namespace ContactsAppUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PersonDataControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PersonDataControl : UserControl
     {
-        public MainWindow()
+        public PersonDataControl()
         {
             InitializeComponent();
         }

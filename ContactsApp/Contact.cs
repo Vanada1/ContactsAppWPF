@@ -4,19 +4,21 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace ContactsAppBL
 {
 	/// <summary>
 	/// The <see cref="Contact"> class contains information about the contact: 
-	/// <see cref="Name">, <see cref="Surname">, <see cref="PhoneNumber">,
+	/// <see cref="FirstName">, <see cref="LastName">, <see cref="PhoneNumber">,
 	/// <see cref="Birthday">, <see cref="Email">, <see cref="VkId">
 	/// </summary>
-	public class Contact : ICloneable
-    {
+	public class Contact : ICloneable, INotifyPropertyChanged
+	{
 		/// <summary>
-		/// Max count of letters for <see cref="Name"/>, 
-		/// <see cref="Surname"/>, <see cref="Email"/>
+		/// Max count of letters for <see cref="FirstName"/>, 
+		/// <see cref="LastName"/>, <see cref="Email"/>
 		/// </summary>
         public const int MAXLETTERCOUNT = 50;
 
@@ -26,12 +28,12 @@ namespace ContactsAppBL
 		public const int MAXVKLETTERCOUNT = 15;
 
 		/// <summary>
-		/// Contact <see cref="Name"/>
+		/// Contact <see cref="FirstName"/>
 		/// </summary>
 		private string _name;
 
 		/// <summary>
-		/// Contact <see cref="Surname"/>
+		/// Contact <see cref="LastName"/>
 		/// </summary>
 		private string _surname;
 
@@ -50,10 +52,20 @@ namespace ContactsAppBL
 		/// </summary>
 		private string _vkId;
 
-		/// <summary>
-		/// Sets and returns <see cref="Name"> values 
-		/// </summary>
-		public string Name
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if(prop != null)
+            {
+				PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
+        }
+
+        /// <summary>
+        /// Sets and returns <see cref="FirstName"> values 
+        /// </summary>
+        public string FirstName
 		{
 			get 
 			{
@@ -62,16 +74,17 @@ namespace ContactsAppBL
 			set
 			{
 				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(Name)); 
-				this._name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
+					MAXLETTERCOUNT, nameof(FirstName)); 
+				_name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
+				OnPropertyChanged(nameof(FirstName));
 			}
 			
 		}
 
 		/// <summary>
-		/// Sets and returns <see cref="Surname"> values
+		/// Sets and returns <see cref="LastName"> values
 		/// </summary>
-		public string Surname
+		public string LastName
 		{
 			get 
 			{ 
@@ -80,15 +93,16 @@ namespace ContactsAppBL
 			set
 			{
 				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(Surname));
-				this._surname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value); ;
+					MAXLETTERCOUNT, nameof(LastName));
+				this._surname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
+				OnPropertyChanged(nameof(LastName));
 			}
 		}
 
-		/// <summary>
-		/// Sets and returns <see cref="Email"> values 
-		/// </summary>
-		public string Email
+	/// <summary>
+	/// Sets and returns <see cref="Email"> values 
+	/// </summary>
+	public string Email
 		{
 			get 
 			{ 
@@ -99,6 +113,7 @@ namespace ContactsAppBL
 				StringValidator.AssertStringLength(value,
 					MAXLETTERCOUNT, nameof(Email));
 				this._email = value;
+				OnPropertyChanged(nameof(Email));
 			}
 			
 		}
@@ -122,6 +137,8 @@ namespace ContactsAppBL
 				StringValidator.AssertStringLength(value,
 					MAXVKLETTERCOUNT, nameof(VkId));
 				this._vkId = value;
+
+				OnPropertyChanged(nameof(VkId));
 			}
 			
 		}
@@ -139,28 +156,29 @@ namespace ContactsAppBL
 			{
 				DateValidator.AssertDate(value);
 				this._birthday = value;
-            }
+				OnPropertyChanged(nameof(Birthday));
+			}
 		}
 
 		/// <summary>
 		/// <see cref="Contact"> object constructor
 		/// </summary>
-		/// <param name="surname"><see cref="Surname"></param>
-		/// <param name="name"><see cref="Name"/></param>
+		/// <param name="lasrName"><see cref="Surname"></param>
+		/// <param name="firstName"><see cref="Name"/></param>
 		/// <param name="phoneNumber"><see cref="PhoneNumber"/></param>
 		/// <param name="birthday"><see cref="Birthday"/></param>
 		/// <param name="email"><see cref="Email"/></param>
 		/// <param name="vkId"><see cref="VkId"/></param>
-		public Contact(string name, string surname,
+		public Contact(string firstName, string lasrName,
 			 PhoneNumber phoneNumber, DateTime birthday,
 			 string email, string vkId)
 		{
-			this.Surname = surname;
-			this.Name = name;
-			this.PhoneNumber = phoneNumber;
-			this.Birthday = birthday;
-			this.Email = email;
-			this.VkId = vkId;
+			LastName = lasrName;
+			FirstName = firstName;
+			PhoneNumber = phoneNumber;
+			Birthday = birthday;
+			Email = email;
+			VkId = vkId;
 		}
 
 		/// <summary>
@@ -170,9 +188,9 @@ namespace ContactsAppBL
 		/// object</returns>
 		public object Clone()
         {
-            return new Contact(this.Name, this.Surname,
-				 new PhoneNumber(this.PhoneNumber.Number),  
-				 this.Birthday,  this.Email, this.VkId);
+            return new Contact(FirstName, LastName,
+				 new PhoneNumber(PhoneNumber.Number),  
+				 Birthday,  Email, VkId);
 		}
 	}
 }

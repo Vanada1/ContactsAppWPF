@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContactsApp
+namespace ContactsAppUI
 {
     /// <summary>
-    /// Interaction logic for PersonData.xaml
+    /// Interaction logic for BirthdayControl.xaml
     /// </summary>
-    public partial class PersonData : UserControl
+    public partial class BirthdayControl : UserControl
     {
-        public PersonData()
+        public BirthdayControl()
         {
             InitializeComponent();
         }
