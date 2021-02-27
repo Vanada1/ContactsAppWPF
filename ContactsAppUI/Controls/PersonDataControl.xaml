@@ -67,7 +67,7 @@
         <DatePicker
             Grid.Row="2"
             Grid.Column="1"
-            Style="{StaticResource TextBoxStyle}" />
+            Style="{StaticResource ControlStyle}" />
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
