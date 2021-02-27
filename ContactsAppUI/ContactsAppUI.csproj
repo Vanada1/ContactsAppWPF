@@ -16,6 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ContactsApp\ContactsApp.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\AddFile.png" />
     <Resource Include="Resources\Customize.png" />
     <Resource Include="Resources\ExclamationMark.png" />

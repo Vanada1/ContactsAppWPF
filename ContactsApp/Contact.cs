@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
 	/// <summary>
 	/// The <see cref="Contact"> class contains information about the contact: 
@@ -20,7 +16,7 @@ namespace ContactsAppBL
 		/// Max count of letters for <see cref="FirstName"/>, 
 		/// <see cref="LastName"/>, <see cref="Email"/>
 		/// </summary>
-        public const int MAXLETTERCOUNT = 50;
+		public const int MAXLETTERCOUNT = 50;
 
 		/// <summary>
 		/// Max count of letters for <see cref="VkId"/>
@@ -52,20 +48,17 @@ namespace ContactsAppBL
 		/// </summary>
 		private string _vkId;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if(prop != null)
-            {
-				PropertyChanged(this, new PropertyChangedEventArgs(prop));
-            }
-        }
+		public void OnPropertyChanged([CallerMemberName] string prop = "")
+		{ 
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+		}
 
-        /// <summary>
-        /// Sets and returns <see cref="FirstName"> values 
-        /// </summary>
-        public string FirstName
+		/// <summary>
+		/// Sets and returns <see cref="FirstName"> values 
+		/// </summary>
+		public string FirstName
 		{
 			get 
 			{
@@ -187,8 +180,8 @@ namespace ContactsAppBL
 		/// <returns>Returns a clone of the <see cref="Contact"/>
 		/// object</returns>
 		public object Clone()
-        {
-            return new Contact(FirstName, LastName,
+		{
+			return new Contact(FirstName, LastName,
 				 new PhoneNumber(PhoneNumber.Number),  
 				 Birthday,  Email, VkId);
 		}

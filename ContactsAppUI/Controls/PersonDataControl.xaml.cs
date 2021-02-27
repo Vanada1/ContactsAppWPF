@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using ContactsApp;
 
 namespace ContactsAppUI.Controls
 {

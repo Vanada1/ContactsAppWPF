@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
     public class ContactBase
     {

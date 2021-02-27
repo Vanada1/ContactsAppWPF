@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.SqlServer.Server;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
 	/// <summary>
 	/// contains all the data about the <see cref="Project"/>

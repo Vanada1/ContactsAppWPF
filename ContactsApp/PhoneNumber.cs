@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ContactsAppBL
+﻿namespace ContactsApp
 {
 	/// <summary>
 	/// Class <see cref="PhoneNumber"> contains the telephone number of the person

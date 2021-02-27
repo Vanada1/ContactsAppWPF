@@ -2,6 +2,7 @@
     x:Class="ContactsAppUI.Controls.PersonDataControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:ContactsApp;assembly=ContactsApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -24,12 +25,12 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
+
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
             Text="Surname:" />
-
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
@@ -59,27 +60,34 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Style="{StaticResource TextBoxStyle}" />
+            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Text="{Binding Path=LastName}" />
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Style="{StaticResource TextBoxStyle}" />
+            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Text="{Binding Path=FirstName}" />
         <DatePicker
             Grid.Row="2"
             Grid.Column="1"
-            Style="{StaticResource ControlStyle}" />
+            Style="{StaticResource ControlStyle}"
+            Text="{Binding Path=Birthday}" />
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
-            Style="{StaticResource TextBoxStyle}" />
+            DataContext="{Binding Path=PhoneNumber}"
+            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Text="{Binding Path=Number}" />
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
-            Style="{StaticResource TextBoxStyle}" />
+            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Text="{Binding Path=Email}" />
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Width="Auto"
-            Style="{StaticResource TextBoxStyle}" />
+            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Text="{Binding Path=VkId}" />
     </Grid>
 </UserControl>
