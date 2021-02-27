@@ -6,4 +6,22 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\AddFile.png" />
+    <None Remove="Resources\Customize.png" />
+    <None Remove="Resources\ExclamationMark.png" />
+    <None Remove="Resources\phonebook.ico" />
+    <None Remove="Resources\phonebook.png" />
+    <None Remove="Resources\RemoveFile.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\AddFile.png" />
+    <Resource Include="Resources\Customize.png" />
+    <Resource Include="Resources\ExclamationMark.png" />
+    <Resource Include="Resources\phonebook.ico" />
+    <Resource Include="Resources\phonebook.png" />
+    <Resource Include="Resources\RemoveFile.png" />
+  </ItemGroup>
+
 </Project>
