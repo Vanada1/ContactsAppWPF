@@ -14,9 +14,6 @@
     MinHeight="400"
     Icon="Resources/phonebook.ico"
     mc:Ignorable="d">
-    <Window.Resources>
-        <ResourceDictionary Source="Dictionaries/StyleDictionary.xaml" />
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
@@ -39,6 +36,7 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
+            DataContext="{Binding Path=ContactsModel}"
             Style="{StaticResource ControlStyle}" />
 
         <controls:PersonDataControl
@@ -47,7 +45,7 @@
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
-            DataContext="{Binding Path=CurrentContact}"
+            DataContext="{Binding Path=ContactsModel.SelectedContact}"
             Style="{StaticResource ControlStyle}" />
 
         <controls:BirthdayControl

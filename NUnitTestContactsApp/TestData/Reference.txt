@@ -1,0 +1,1 @@
+{"Contacts":[{"Name":"Name","Surname":"Surname","Email":"me@gg.conm","PhoneNumber":{"Number":71111111111},"VkId":"id1234567","Birthday":"2000-12-12T00:00:00"}]}

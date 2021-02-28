@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ContactsApp
@@ -12,7 +13,7 @@ namespace ContactsApp
 		/// <summary>
 		/// Contains all <see cref="Contacts"/> at the moment
 		/// </summary>
-		public List<Contact> Contacts { set; get; } = new List<Contact>();
+		public ObservableCollection<Contact> Contacts { set; get; } = new ObservableCollection<Contact>();
 
 		/// <summary>
 		/// Sort contacts list
@@ -27,9 +28,9 @@ namespace ContactsApp
 					Contacts.RemoveAt(i);
 				}
 			}
+
 			return Contacts.OrderBy(
 				contact => contact.LastName);
-			var contacts = new List<Contact>();
 		}
 
 		/// <summary>
@@ -41,39 +42,13 @@ namespace ContactsApp
 		/// <returns>
 		/// Returns all contacts that have a <paramref name="substring"/>
 		/// </returns>
-		public List<Contact> SearchContacts(string substring)
+		public ObservableCollection<Contact> SearchContacts(string substring)
         {
 			var contacts = new List<Contact>();
-	        var query = SortContacts();
-			foreach (var i in query)
-			{
-				if (i.LastName.Contains(substring))
-				{
-					contacts.Add(i);
-				}
-				else if (i.FirstName.Contains(substring))
-				{
-					contacts.Add(i);
-				}
-			}
-
-			return contacts;
-		}
-
-		/// <summary>
-		/// Looking for all non-zero contacts
-		/// </summary>
-		/// <returns>Returns all contacts</returns>
-		public List<Contact> SearchContacts()
-        {
-			var contacts = new List<Contact>();
-	        var query = SortContacts();
-	        foreach (var i in query)
-	        {
-		        contacts.Add(i);
-	        }
-
-	        return contacts;
+	        var response = SortContacts().Where(contact => contact.FirstName.Contains(substring) ||
+                                                        contact.LastName.Contains(substring)).ToArray();
+            
+			return response.Length == 0 ? Contacts : new ObservableCollection<Contact>(response);
 		}
 
 		/// <summary>
@@ -81,19 +56,12 @@ namespace ContactsApp
 		/// </summary>
 		/// <param name="date"></param>
 		/// <returns></returns>
-		public List<Contact> FindBirthdayContacts(DateTime date) 
+		public ObservableCollection<Contact> FindBirthdayContacts(DateTime date)
         {
-			var birthdayContacts = new List<Contact>();
-			foreach (var contact in Contacts)
-			{
-				if (contact.Birthday.Day == date.Day &&
-				    contact.Birthday.Month == date.Month)
-				{
-					birthdayContacts.Add(contact);
-				}
-			}
+            var response = Contacts.Where(contact =>
+                contact.Birthday.Day == date.Date.Day && contact.Birthday.Month == date.Month).ToArray();
 
-			return birthdayContacts;
+			return new ObservableCollection<Contact>(response);
 		}
 
 		/// <summary>
