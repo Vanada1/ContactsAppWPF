@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="ControlViewModels\BirthdayControlViewModel.cs" />
     <Compile Include="ControlViewModels\ContactsListControlViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />

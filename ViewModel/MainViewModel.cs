@@ -17,24 +17,45 @@ namespace ViewModel
 		/// <summary>
 		/// Все данные приложения
 		/// </summary>
-		private Project _project;
+		private readonly Project _project;
 
-        private ContactsListControlViewModel _contactsModel;
+        /// <summary>
+        /// Контрол со списком контактов
+        /// </summary>
+        private ContactsListControlViewModel _contactsControlView;
+
+        /// <summary>
+        /// Контрол с контактами, у которых ДР
+        /// </summary>
+        private BirthdayControlViewModel _birthdayControlView;
 
         /// <summary>
         /// Модель элемента списка контактов
         /// </summary>
         public ContactsListControlViewModel ContactsModel
         {
-            get=>_contactsModel;
+            get=>_contactsControlView;
             set
             {
-                _contactsModel = value;
+                _contactsControlView = value;
 				OnPropertyChanged(nameof(ContactsModel));
             }
         }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Возвращает и устанавливает контрол с контактами, у которых ДР
+        /// </summary>
+        public BirthdayControlViewModel BirthdayControlView
+        {
+            get => _birthdayControlView;
+            set
+            {
+                _birthdayControlView = value;
+                OnPropertyChanged(nameof(BirthdayControlView));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
 		[NotifyPropertyChangedInvocator]
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -54,8 +75,15 @@ namespace ViewModel
             };
             ContactsModel = new ContactsListControlViewModel(_project.Contacts);
             ContactsModel.SearchedStringChanged += OnSearchedStringChanged;
-		}
+            BirthdayControlViewModel.CreatedViewModel += OnCreatedViewModel;
+            BirthdayControlView = new BirthdayControlViewModel();
+        }
 
+        /// <summary>
+        /// Обработчик события для изменения строки поиска
+        /// </summary>
+        /// <param name="sender"><see cref="ContactsListControlViewModel"/></param>
+        /// <param name="e"></param>
         private void OnSearchedStringChanged(object sender, EventArgs e)
         {
             var model = (ContactsListControlViewModel) sender;
@@ -64,5 +92,12 @@ namespace ViewModel
             model.SearchedContacts = _project.SearchContacts(model.SearchingString);
         }
 
+        private void OnCreatedViewModel(object sender, EventArgs e)
+        {
+            var model = (BirthdayControlViewModel)sender;
+            if (model == null) return;
+
+            model.SearchedContacts = _project.FindBirthdayContacts(DateTime.Now);
+        }
     }
 }
