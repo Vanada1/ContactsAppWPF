@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices.ComTypes;
 using NUnit.Framework;
-using ContactsAppBL;
-using NUnit.Framework.Internal;
 
 namespace ContactsApp.UnitTests
 {
 	[TestFixture]
-	class ContactTests
+	public class ContactTests
 	{
         private Contact CreateEmptyContact()
 		{
@@ -22,9 +19,9 @@ namespace ContactsApp.UnitTests
 			var expected = "Name";
 
 			var contact = CreateEmptyContact();
-			contact.Name = expected;
+			contact.FirstName = expected;
 
-			var actual = contact.Name;
+			var actual = contact.FirstName;
 
 			Assert.AreEqual(expected, actual, 
 				"Getter Name returns incorrect value");
@@ -40,7 +37,7 @@ namespace ContactsApp.UnitTests
 		{
 			var contact = CreateEmptyContact();
 			Assert.Throws<ArgumentException>(
-				() => { contact.Name = wrongValue; },
+				() => { contact.FirstName = wrongValue; },
 				message);
 		}
 
@@ -50,7 +47,7 @@ namespace ContactsApp.UnitTests
 			var contact = CreateEmptyContact();
 			var name = "Name";
 			Assert.DoesNotThrow(
-				() => { contact.Name = name; },
+				() => { contact.FirstName = name; },
 				"Positive test of the Name setter not passed");
 		}
 		//Test Name end
@@ -62,9 +59,9 @@ namespace ContactsApp.UnitTests
 			var expected = "Surname";
 
 			var contact = CreateEmptyContact();
-			contact.Surname = expected;
+			contact.LastName = expected;
 
-			var actual = contact.Surname;
+			var actual = contact.LastName;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Surname returns incorrect value");
@@ -80,7 +77,7 @@ namespace ContactsApp.UnitTests
 		{
 			var contact = CreateEmptyContact();
 			Assert.Throws<ArgumentException>(
-				() => { contact.Surname = wrongValue; },
+				() => { contact.LastName = wrongValue; },
 				message);
 		}
 
@@ -90,7 +87,7 @@ namespace ContactsApp.UnitTests
 			var contact = CreateEmptyContact();
 			var surname = "Surname";
 			Assert.DoesNotThrow(
-				() => { contact.Surname = surname; },
+				() => { contact.LastName = surname; },
 				"Positive test of the Surname setter not passed");
 		}
 		//Test Surname End
@@ -170,7 +167,7 @@ namespace ContactsApp.UnitTests
 			var contact = CreateEmptyContact();
 			var vkid = "VKID";
 			Assert.DoesNotThrow(
-				() => { contact.Name = vkid; },
+				() => { contact.FirstName = vkid; },
 				"Positive test of the VKID setter not passed");
 		}
 		//Test VkId end

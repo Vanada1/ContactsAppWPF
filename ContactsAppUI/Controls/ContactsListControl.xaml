@@ -64,8 +64,11 @@
             <Button VerticalAlignment="Top" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Height="18" Source="../Resources/Customize.png" />
             </Button>
-            <Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Button Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Height="20" Source="../Resources/RemoveFile.png" />
+                <Button.CommandParameter>
+                    <Binding />
+                </Button.CommandParameter>
             </Button>
         </StackPanel>
     </Grid>

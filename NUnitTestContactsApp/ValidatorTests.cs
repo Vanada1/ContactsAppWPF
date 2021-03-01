@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.ComTypes;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using ContactsAppBL;
+using ContactsApp;
 using NUnit.Framework.Internal;
 
 namespace ContactsApp.UnitTests

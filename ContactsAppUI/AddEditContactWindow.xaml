@@ -9,8 +9,8 @@
     Title="AddEditContactWindow"
     Width="400"
     Height="210"
-    ResizeMode="NoResize"
     Icon="Resources/phonebook.ico"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>

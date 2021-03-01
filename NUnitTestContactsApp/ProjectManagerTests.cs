@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.IO;
 using System.Reflection;
 using NUnit.Framework;
-using ContactsAppBL;
+using ContactsApp;
 using NUnit.Framework.Internal;
 using Newtonsoft.Json;
 

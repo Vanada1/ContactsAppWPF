@@ -29,7 +29,7 @@ namespace ViewModel.ControlViewModels
         /// <summary>
         /// Возвращает все контакты
         /// </summary>
-        private ObservableCollection<Contact> AllContacts { get; }
+        internal ObservableCollection<Contact> AllContacts { get; }
 
         /// <summary>
         /// Возвращает и устанавливает все найденные контакты
@@ -46,6 +46,11 @@ namespace ViewModel.ControlViewModels
         }
 
         /// <summary>
+        /// Возвращает команды, которые используются кнопками
+        /// </summary>
+        public Command Command { get; }
+
+        /// <summary>
         /// Возвращает и устанавливает выбранный контакт 
         /// </summary>
         public Contact SelectedContact
@@ -57,7 +62,7 @@ namespace ViewModel.ControlViewModels
                 OnPropertyChanged(nameof(SelectedContact));
             }
         }
-
+        
         /// <summary>
         /// Возвращает и устанавливает поисковую строку
         /// </summary>
@@ -75,6 +80,7 @@ namespace ViewModel.ControlViewModels
         public ContactsListControlViewModel(ObservableCollection<Contact> allContacts)
         {
             SearchedContacts = AllContacts = allContacts;
+            Command = new Command();
         }
 
         /// <summary>

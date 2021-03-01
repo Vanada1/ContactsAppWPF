@@ -2,8 +2,9 @@
 using System.Runtime.InteropServices.ComTypes;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using ContactsAppBL;
+using ContactsApp;
 using NUnit.Framework.Internal;
 
 namespace ContactsApp.UnitTests
@@ -15,7 +16,7 @@ namespace ContactsApp.UnitTests
 		public void TestContactsSet_CurrentValue()
 		{
 			Project project = new Project();
-			var testList = new List<Contact>();
+			var testList = new ObservableCollection<Contact>();
 
 			Assert.DoesNotThrow(
 				() => { project.Contacts = testList; },
@@ -26,7 +27,7 @@ namespace ContactsApp.UnitTests
 		public void TestSort_CorrectValue()
 		{
 			var project =new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
 					new PhoneNumber(70000000000),
@@ -43,7 +44,7 @@ namespace ContactsApp.UnitTests
 			};
 
 			var expected = new Project();
-			expected.Contacts = new List<Contact>()
+			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
 					new PhoneNumber(70000000000),
@@ -60,10 +61,10 @@ namespace ContactsApp.UnitTests
 			};
 
 			var actual = new Project();
-			actual.Contacts = project.SearchContacts();
+			actual.Contacts = project.SearchContacts(string.Empty);
 
-			Assert.AreEqual(expected.Contacts[0].Surname, 
-				actual.Contacts[0].Surname, "Dotes not sorted");
+			Assert.AreEqual(expected.Contacts[0].LastName, 
+				actual.Contacts[0].LastName, "Dotes not sorted");
 		}
 
 		[Test(Description = "Test Sort without values")]
@@ -71,9 +72,9 @@ namespace ContactsApp.UnitTests
 		{
 			var project = new Project();
 
-			var excepted = new List<Contact>();
+			var excepted = new ObservableCollection<Contact>();
 
-			var actual = project.SearchContacts();
+			var actual = project.SearchContacts(string.Empty);
 
 			Assert.AreEqual(excepted, actual,
 				"Don't Contain Values");
@@ -83,7 +84,7 @@ namespace ContactsApp.UnitTests
 		public void TestSort_WithNullValues()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				null,
 				new Contact("C", "C",
@@ -101,7 +102,7 @@ namespace ContactsApp.UnitTests
 			};
 
 			var expected = new Project();
-			expected.Contacts = new List<Contact>()
+			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
 					new PhoneNumber(70000000000),
@@ -118,17 +119,17 @@ namespace ContactsApp.UnitTests
 			};
 
 			var actual = new Project();
-			actual.Contacts = project.SearchContacts();
+			actual.Contacts = project.SearchContacts(string.Empty);
 
-			Assert.AreEqual(expected.Contacts[0].Surname,
-				actual.Contacts[0].Surname, "Dotes not sorted");
+			Assert.AreEqual(expected.Contacts[0].LastName,
+				actual.Contacts[0].LastName, "Dotes not sorted");
 		}
 
 		[Test(Description = "Test the sort with substring")]
 		public void TestSort_CorrectValueSubstring()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
 					new PhoneNumber(70000000000),
@@ -145,7 +146,7 @@ namespace ContactsApp.UnitTests
 			};
 
 			var expected = new Project();
-			expected.Contacts = new List<Contact>()
+			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
 					new PhoneNumber(70000000000),
@@ -156,8 +157,8 @@ namespace ContactsApp.UnitTests
 			var actual = new Project();
 			actual.Contacts = project.SearchContacts("A");
 
-			Assert.AreEqual(expected.Contacts[0].Surname,
-				actual.Contacts[0].Surname, "Dotes not sorted");
+			Assert.AreEqual(expected.Contacts[0].LastName,
+				actual.Contacts[0].LastName, "Dotes not sorted");
 		}
 
 		[Test(Description = "Test Sort without values with substring")]
@@ -165,7 +166,7 @@ namespace ContactsApp.UnitTests
 		{
 			var project = new Project();
 
-			var excepted = new List<Contact>();
+			var excepted = new ObservableCollection<Contact>();
 
 			var actual = project.SearchContacts("A");
 
@@ -177,7 +178,7 @@ namespace ContactsApp.UnitTests
 		public void TestSort_WithNullValuesSubstring()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				null,
 				new Contact("C", "C",
@@ -195,7 +196,7 @@ namespace ContactsApp.UnitTests
 			};
 
 			var expected = new Project();
-			expected.Contacts = new List<Contact>()
+			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
 					new PhoneNumber(70000000000),
@@ -206,15 +207,15 @@ namespace ContactsApp.UnitTests
 			var actual = new Project();
 			actual.Contacts = project.SearchContacts("C");
 
-			Assert.AreEqual(expected.Contacts[0].Surname,
-				actual.Contacts[0].Surname, "Dotes not sorted");
+			Assert.AreEqual(expected.Contacts[0].LastName,
+				actual.Contacts[0].LastName, "Dotes not sorted");
 		}
 
 		[Test(Description = "Birthday found")]
 		public void TestFindBirthday_HasContacts()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
 					new PhoneNumber(70000000000),
@@ -230,7 +231,7 @@ namespace ContactsApp.UnitTests
 					"A", "A")
 			};
 
-			var expected = new List<Contact>()
+			var expected = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
 					new PhoneNumber(70000000000),
@@ -241,17 +242,17 @@ namespace ContactsApp.UnitTests
 			var actual = project.FindBirthdayContacts(
 				new DateTime(1900, 12, 31));
 
-			Assert.AreEqual(expected[0].Surname, 
-				actual[0].Surname, "Fail to find people's birthday");
+			Assert.AreEqual(expected[0].LastName, 
+				actual[0].LastName, "Fail to find people's birthday");
 		}
 
 		[Test(Description = "Birthday found")]
 		public void TestFindBirthday_HasNotContacts()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>();
+			project.Contacts = new ObservableCollection<Contact>();
 
-			var expected = new List<Contact>();
+			var expected = new ObservableCollection<Contact>();
 
 			var actual = project.FindBirthdayContacts(
 				new DateTime(1900, 12, 31));
@@ -264,7 +265,7 @@ namespace ContactsApp.UnitTests
 		public void TestFindIndex_HasContacts()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
 					new PhoneNumber(70000000000),
@@ -296,7 +297,7 @@ namespace ContactsApp.UnitTests
 		public void TestFindIndex_HasNotContacts()
 		{
 			var project = new Project();
-			project.Contacts = new List<Contact>()
+			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
 					new PhoneNumber(70000000000),
