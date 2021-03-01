@@ -13,12 +13,12 @@
             <MenuItem Header="File">
                 <MenuItem Header="Exit" />
             </MenuItem>
-            <MenuItem Header="File">
+            <MenuItem Header="Edit">
                 <MenuItem Header="Add Contact" />
                 <MenuItem Header="Edit Contact" />
                 <MenuItem Header="Remove Contact" />
             </MenuItem>
-            <MenuItem Header="File">
+            <MenuItem Header="Help">
                 <MenuItem Header="About" />
             </MenuItem>
         </Menu>

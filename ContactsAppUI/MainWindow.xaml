@@ -55,8 +55,18 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
+            Margin="3,0,0,0"
             VerticalAlignment="Bottom"
-            DataContext="{Binding Path=BirthdayControlView}"
-            Style="{StaticResource ControlStyle}" />
+            DataContext="{Binding Path=BirthdayControlView}">
+            <controls:BirthdayControl.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding SearchedContacts.Count}" Value="0">
+                            <Setter Property="UserControl.Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:BirthdayControl.Style>
+        </controls:BirthdayControl>
     </Grid>
 </Window>
