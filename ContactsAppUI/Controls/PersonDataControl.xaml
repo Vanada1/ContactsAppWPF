@@ -61,12 +61,12 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Style="{StaticResource TextBoxStyle}"
             Text="{Binding Path=LastName}" />
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Style="{StaticResource TextBoxStyle}"
             Text="{Binding Path=FirstName}" />
         <DatePicker
             Grid.Row="2"
@@ -77,18 +77,18 @@
             Grid.Row="3"
             Grid.Column="1"
             DataContext="{Binding Path=PhoneNumber}"
-            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Style="{StaticResource TextBoxStyle}"
             Text="{Binding Path=Number}" />
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
-            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Style="{StaticResource TextBoxStyle}"
             Text="{Binding Path=Email}" />
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Width="Auto"
-            Style="{StaticResource ReadOnlyTextBoxStyle}"
+            Style="{StaticResource TextBoxStyle}"
             Text="{Binding Path=VkId}" />
     </Grid>
 </UserControl>

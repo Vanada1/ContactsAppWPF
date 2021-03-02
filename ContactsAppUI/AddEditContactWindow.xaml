@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
     Title="AddEditContactWindow"
     Width="400"
     Height="210"
+    d:DataContext="{d:DesignInstance vm:AddEditContactWindowViewModel}"
     Icon="Resources/phonebook.ico"
     ResizeMode="NoResize"
     mc:Ignorable="d">
@@ -21,6 +23,7 @@
         <controls:PersonDataControl
             Grid.Row="0"
             VerticalAlignment="Top"
+            DataContext="{Binding Path=Contact}"
             Style="{StaticResource ControlStyle}" />
 
         <Grid
@@ -37,9 +40,13 @@
 
             <Button
                 Grid.Column="0"
+                Command="{Binding OkCommand}"
                 Content="Ok"
                 Style="{StaticResource ControlStyle}" />
-            <Button Grid.Column="1" Style="{StaticResource ControlStyle}">
+            <Button
+                Grid.Column="1"
+                Command="{Binding CancelCommand}"
+                Style="{StaticResource ControlStyle}">
                 <ContentControl>
                     <TextBlock Margin="3,0,3,0" Text="Cancel" />
                 </ContentControl>

@@ -48,6 +48,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
             DataContext="{Binding Path=ContactsModel.SelectedContact}"
+            IsEnabled="False"
             Style="{StaticResource ControlStyle}" />
 
         <controls:BirthdayControl

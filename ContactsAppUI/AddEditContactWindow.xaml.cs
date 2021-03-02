@@ -9,6 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ContactsApp;
+using ViewModel;
+using ViewModel.Commands;
 
 namespace ContactsAppUI
 {
@@ -17,9 +20,29 @@ namespace ContactsAppUI
     /// </summary>
     public partial class AddEditContactWindow : Window
     {
-        public AddEditContactWindow()
+        /// <summary>
+        /// VM окна
+        /// </summary>
+        public AddEditContactWindowViewModel Model { get; set; }
+
+        public AddEditContactWindow(Contact contact)
         {
             InitializeComponent();
+            Model = new AddEditContactWindowViewModel(contact)
+            {
+                OkCommand = new RelayCommand(o =>
+                {
+                    DialogResult = true;
+                    Close();
+                }),
+                CancelCommand = new RelayCommand(o =>
+                {
+                    DialogResult = false;
+                    Close();
+                })
+            };
         }
+
+        public AddEditContactWindow():this(null){}
     }
 }
