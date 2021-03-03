@@ -179,9 +179,9 @@ namespace ContactsApp.UnitTests
 				"Getter PhoneNumber returns incorrect value");
 		}
 
-		[TestCase(88005553535, "Number starts at 7",
+		[TestCase("88005553535", "Number starts at 7",
 			TestName = "Assignment of the Number starting not with 7")]
-		[TestCase(880055535353, "Number has 11 numbers",
+		[TestCase("880055535353", "Number has 11 numbers",
 			TestName = "Assignment of the Number has not 11 numbers")]
 		public void TestPhoneNumber_ArgumentException(string wrongNumber,
 			string message)
