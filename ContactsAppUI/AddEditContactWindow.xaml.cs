@@ -41,8 +41,11 @@ namespace ContactsAppUI
                     Close();
                 })
             };
+            DataContext = Model;
         }
 
-        public AddEditContactWindow():this(null){}
+        public AddEditContactWindow() : this(new Contact(string.Empty, String.Empty, new PhoneNumber("70000000000"),
+            new DateTime(1900,1,1), string.Empty, string.Empty))
+        { }
     }
 }

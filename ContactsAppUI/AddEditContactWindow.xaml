@@ -9,7 +9,7 @@
     xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
     Title="AddEditContactWindow"
     Width="400"
-    Height="210"
+    Height="230"
     d:DataContext="{d:DesignInstance vm:AddEditContactWindowViewModel}"
     Icon="Resources/phonebook.ico"
     ResizeMode="NoResize"

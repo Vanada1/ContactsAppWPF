@@ -63,14 +63,14 @@ namespace ViewModel
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
+        public void Save()
+        {
+            ProjectManager.SaveProject(_project);
+        }
+
 		public MainViewModel()
 		{
 			_project = ProjectManager.ReadProject();
-            _project.Contacts = new ObservableCollection<Contact>
-            {
-                new Contact("TestName", "TestLastName", new PhoneNumber(78005553535), DateTime.Now, "dsa@g,mai.ds", "vsda"),
-                new Contact("TestName", "TestLastName", new PhoneNumber(78995553535), DateTime.Now, "dsa@g,mai.ds", "vsda")
-            };
             ContactsModel = new ContactsListControlViewModel(_project.Contacts);
             ContactsModel.SearchedStringChanged += OnSearchedStringChanged;
             BirthdayControlViewModel.CreatedViewModel += OnCreatedViewModel;

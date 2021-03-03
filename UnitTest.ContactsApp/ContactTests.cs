@@ -8,7 +8,7 @@ namespace ContactsApp.UnitTests
 	{
         private Contact CreateEmptyContact()
 		{
-			return new Contact(" ", " ", new PhoneNumber(70000000000),
+			return new Contact(" ", " ", new PhoneNumber("70000000000"),
 				DateTime.Now, " ", " ");
 		}
 
@@ -27,8 +27,6 @@ namespace ContactsApp.UnitTests
 				"Getter Name returns incorrect value");
 		}
 
-		[TestCase("", "Name is not empty",
-			TestName = "Assignment of the Name is empty")]
 		[TestCase("NameNameNameNameNameNameNameNameNameNameNameNameNameName",
 			"Name is not large of max value",
 			TestName = "Assignment of the Name is large of max value")]
@@ -67,8 +65,6 @@ namespace ContactsApp.UnitTests
 				"Getter Surname returns incorrect value");
 		}
 
-		[TestCase("", "Surname is not empty",
-			TestName = "Assignment of the Surname is empty")]
 		[TestCase("SurnameSurnameSurnameSurnameSurnameSurnameSurnameSurname",
 			"Surname is not large of max value",
 			TestName = "Assignment of the Surname is large of max value")]
@@ -107,8 +103,6 @@ namespace ContactsApp.UnitTests
 				"Getter Email returns incorrect value");
 		}
 
-		[TestCase("", "Email is not empty",
-			TestName = "Assignment of the Email is empty")]
 		[TestCase("EmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmail",
 			"Email is not large of max value",
 			TestName = "Assignment of the Email is large of max value")]
@@ -147,8 +141,6 @@ namespace ContactsApp.UnitTests
 				"Getter VKID returns incorrect value");
 		}
 
-		[TestCase("", "VKID is not empty",
-			TestName = "Assignment of the VKID is empty")]
 		[TestCase("1234567890qwertyui",
 			"VKID is not large of max value",
 			TestName = "Assignment of the VKID is large of max value")]
@@ -176,7 +168,7 @@ namespace ContactsApp.UnitTests
 		[Test(Description = "Positive test of the PhoneNumber getter")]
 		public void TestPhoneNumberGet_CorrectValue()
 		{
-			var expected = new PhoneNumber(78005553535);
+			var expected = new PhoneNumber("78005553535");
 
 			var contact = CreateEmptyContact();
 			contact.PhoneNumber = expected;
@@ -191,7 +183,7 @@ namespace ContactsApp.UnitTests
 			TestName = "Assignment of the Number starting not with 7")]
 		[TestCase(880055535353, "Number has 11 numbers",
 			TestName = "Assignment of the Number has not 11 numbers")]
-		public void TestPhoneNumber_ArgumentException(long wrongNumber,
+		public void TestPhoneNumber_ArgumentException(string wrongNumber,
 			string message)
 		{
 			var contact = CreateEmptyContact();
@@ -204,7 +196,7 @@ namespace ContactsApp.UnitTests
 		public void TestPhoneNumberSet_CorrectValue()
 		{
 			var contact = CreateEmptyContact();
-			var phoneNumber = new PhoneNumber(78005553535);
+			var phoneNumber = new PhoneNumber("78005553535");
 			Assert.DoesNotThrow(
 				() => { contact.PhoneNumber = phoneNumber; },
 				"Positive test of the PhoneNumber setter not passed");
@@ -259,7 +251,7 @@ namespace ContactsApp.UnitTests
 		{
 			var expectedName = "Name";
 			var expectedSurname = "Surname";
-			var expectedPhoneNumber = new PhoneNumber(78005553535);
+			var expectedPhoneNumber = new PhoneNumber("78005553535");
 			var expectedBirthday = new DateTime(2000, 12, 12);
 			var expectedEmail = "Email";
 			var expectedVkId = "VkId";

@@ -29,7 +29,7 @@ namespace ViewModel.ControlViewModels
         /// <summary>
         /// Возвращает все контакты
         /// </summary>
-        internal ObservableCollection<Contact> AllContacts { get; }
+        public ObservableCollection<Contact> AllContacts { get; }
 
         /// <summary>
         /// Возвращает и устанавливает все найденные контакты

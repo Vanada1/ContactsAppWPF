@@ -8,7 +8,7 @@
 		/// <summary>
 		/// Number phone
 		/// </summary>
-		private long _number;
+		private string _number;
 
 		/// <summary>
 		/// Max count of <see cref="Number"/>
@@ -18,7 +18,7 @@
 		/// <summary>
 		/// Sets and returns <see cref="Number"> values 
 		/// </summary>
-		public long Number
+		public string Number
 		{
 			get 
 			{
@@ -37,9 +37,14 @@
 		/// <param name="number">
 		/// Gets a phone number
 		/// </param>
-		public PhoneNumber(long number)
+		public PhoneNumber(string number)
 		{
 			this.Number = number;
 		}
+
+        public PhoneNumber()
+        {
+
+        }
 	}
 }

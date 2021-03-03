@@ -174,6 +174,11 @@ namespace ContactsApp
 			VkId = vkId;
 		}
 
+        public Contact()
+        {
+			PhoneNumber = new PhoneNumber();
+        }
+
 		/// <summary>
 		/// Creates a <see cref="Contact"/> clone
 		/// </summary>

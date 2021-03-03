@@ -34,21 +34,6 @@ namespace ContactsApp.UnitTests
 			}, "Incorrect date values");
 		}
 
-		[TestCase("", 12, "Length is not 0",
-			TestName = "Number of characters 0")]
-		[TestCase("dasdfsdfsafdsfasdfasfadfadfa", 5,
-			"Number of characters no more than max",
-			TestName = "More max")]
-		public void TestAssertStringLength_IncorrectValue(string name,
-			int maxCount, string message)
-		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				StringValidator.AssertStringLength(name,
-					maxCount, null);
-			}, message);
-		}
-
 		[Test(Description = "Correctly value of date")]
 		public void TestAssertStringLength_CorrectlyValue()
 		{
@@ -85,12 +70,12 @@ namespace ContactsApp.UnitTests
 				"Actual is not empty sting");
 		}
 
-		[TestCase(88005553535, 11, "Start with 7",
+		[TestCase("88005553535", 11, "Start with 7",
 			TestName = "Number start with not 7")]
-		[TestCase(792355865554, 11,
+		[TestCase("792355865554", 11,
 			"Correct Phone number",
 			TestName = "Number is not equal then value")]
-		public void TestAssertPhoneNumber_IncorrectValue(long number,
+		public void TestAssertPhoneNumber_IncorrectValue(string number,
 			int maxCount, string message)
 		{
 			Assert.Throws<ArgumentException>(() =>
@@ -105,7 +90,7 @@ namespace ContactsApp.UnitTests
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				StringValidator.AssertPhoneNumber(78005553535, 11);
+				StringValidator.AssertPhoneNumber("78005553535", 11);
 			}, "Incorrect date values");
 		}
 	}

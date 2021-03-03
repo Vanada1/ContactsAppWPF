@@ -30,15 +30,15 @@ namespace ContactsApp.UnitTests
 			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A")
 			};
@@ -47,15 +47,15 @@ namespace ContactsApp.UnitTests
 			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C")
 			};
@@ -88,15 +88,15 @@ namespace ContactsApp.UnitTests
 			{
 				null,
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A")
 			};
@@ -105,15 +105,15 @@ namespace ContactsApp.UnitTests
 			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C")
 			};
@@ -132,15 +132,15 @@ namespace ContactsApp.UnitTests
 			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A")
 			};
@@ -149,7 +149,7 @@ namespace ContactsApp.UnitTests
 			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A"),
 			};
@@ -182,15 +182,15 @@ namespace ContactsApp.UnitTests
 			{
 				null,
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 12),
 					"A", "A")
 			};
@@ -199,7 +199,7 @@ namespace ContactsApp.UnitTests
 			expected.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 12),
 					"C", "C")
 			};
@@ -218,15 +218,15 @@ namespace ContactsApp.UnitTests
 			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 21),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 31),
 					"A", "A")
 			};
@@ -234,7 +234,7 @@ namespace ContactsApp.UnitTests
 			var expected = new ObservableCollection<Contact>()
 			{
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 31),
 					"A", "A")
 			};
@@ -268,22 +268,22 @@ namespace ContactsApp.UnitTests
 			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 21),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 31),
 					"A", "A")
 			};
 
 			var expected = 2;
 			var foundContact = new Contact("A", "A",
-				new PhoneNumber(70000000000),
+				new PhoneNumber("70000000000"),
 				new DateTime(2001, 12, 31),
 				"A", "A");
 
@@ -300,15 +300,15 @@ namespace ContactsApp.UnitTests
 			project.Contacts = new ObservableCollection<Contact>()
 			{
 				new Contact("C", "C",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2000, 12, 21),
 					"C", "C"),
 				new Contact("B", "B",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2010, 12, 12),
 					"B", "B"),
 				new Contact("A", "A",
-					new PhoneNumber(70000000000),
+					new PhoneNumber("70000000000"),
 					new DateTime(2001, 12, 31),
 					"A", "A")
 			};
@@ -316,7 +316,7 @@ namespace ContactsApp.UnitTests
 			var expected = -1;
 
 			var actual = project.FindIndex(new Contact(
-				"U", "U", new PhoneNumber(77800000000),
+				"U", "U", new PhoneNumber("77800000000"),
 				new DateTime(2001, 12, 31),
 				"U", "U"));
 

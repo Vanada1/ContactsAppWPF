@@ -13,7 +13,7 @@ namespace ContactsApp
 		public static void AssertStringLength(string checkedString,
 			int maxLength, string name)
 		{
-			if (checkedString.Length > maxLength || checkedString.Length == 0)
+			if (checkedString.Length > maxLength)
 			{
 				throw new ArgumentException(name + " is wrong");
 			}
@@ -37,7 +37,7 @@ namespace ContactsApp
 			return clearPhoneNumber;
 		}
 
-        public static void AssertPhoneNumber(long number, int maxDigitCount)
+        public static void AssertPhoneNumber(string number, int maxDigitCount)
         {
 	        string numberString = number.ToString();
 	        if (numberString.Length != maxDigitCount)

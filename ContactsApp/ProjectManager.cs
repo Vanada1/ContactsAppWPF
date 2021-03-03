@@ -55,13 +55,11 @@ namespace ContactsApp
 		            DefaultPath, System.Text.Encoding.Default))
 	            {
 		            var projectText = file.ReadLine();
-		            if (string.IsNullOrEmpty(projectText))
+		            if (!string.IsNullOrEmpty(projectText))
 		            {
-			            projectText = null;
-		            }
-
-		            project = JsonConvert.DeserializeObject<Project>(projectText);
-	            }
+						project = JsonConvert.DeserializeObject<Project>(projectText);
+					}
+                }
             }
             catch (SerializationException)
             {
