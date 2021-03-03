@@ -13,7 +13,7 @@ namespace ViewModel
         /// <summary>
         /// Команда на удаление контакта
         /// </summary>
-        public RelayCommand RemoveContactCommand { get; }
+        public RelayCommand RemoveContactCommand { get; set; }
 
         /// <summary>
         /// Команда на добавление контакта
@@ -27,26 +27,7 @@ namespace ViewModel
 
         public Command()
         {
-            RemoveContactCommand= new RelayCommand(RemoveContact);
-        }
 
-        /// <summary>
-        /// Удаляет выбранный объект
-        /// </summary>
-        /// <param name="obj"><see cref="ContactsListControlViewModel"/></param>
-        private void RemoveContact(object obj)
-        {
-            if (!(obj is ContactsListControlViewModel model))
-            {
-                throw new TypeAccessException("Inappropriate data type");
-            }
-
-            if (model.SelectedContact == null)
-            {
-                throw new ArgumentNullException("Item not selected");
-            }
-
-            model.AllContacts.Remove(model.SelectedContact);
         }
     }
 }

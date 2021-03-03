@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ContactsApp;
 using ViewModel;
 using ViewModel.Commands;
+using ViewModel.ControlViewModels;
 
 namespace ContactsAppUI
 {
@@ -29,14 +30,15 @@ namespace ContactsAppUI
 
             var mainVM = new MainViewModel();
             var listBoxControl = mainVM.ContactsModel;
+            var command = listBoxControl.Command;
             MenuControl.AboutButton.Command = new RelayCommand(o => (new AboutWindow()).ShowDialog());
             MenuControl.ExitButton.Command = new RelayCommand(o =>
             {
                 mainVM.Save();
                 Close();
             });
-            MenuControl.RemoveButton.Command = listBoxControl.Command.RemoveContactCommand;
-            MenuControl.AddButton.Command = listBoxControl.Command.AddContactCommand = new RelayCommand(o =>
+            MenuControl.RemoveButton.Command = command.RemoveContactCommand;
+            MenuControl.AddButton.Command = command.AddContactCommand = new RelayCommand(o =>
             {
                 var window = new AddEditContactWindow();
                 if (window.ShowDialog() != true) return;
@@ -45,10 +47,11 @@ namespace ContactsAppUI
                 mainVM.Save();
             });
 
-            MenuControl.EditButton.Command = listBoxControl.Command.EditContactCommand= new RelayCommand(o =>
+            MenuControl.EditButton.Command = command.EditContactCommand= new RelayCommand(o =>
             {
                 if (listBoxControl.SelectedContact == null)
                 {
+                    MessageBox.Show("Select Item");
                     return;
                 }
 
@@ -56,7 +59,26 @@ namespace ContactsAppUI
                 var itemIndex = listBoxControl.AllContacts.IndexOf(listBoxControl.SelectedContact);
                 if (window.ShowDialog() != true) return;
 
-                listBoxControl.AllContacts[itemIndex] = window.Model.Contact;
+                listBoxControl.SelectedContact = 
+                    listBoxControl.AllContacts[itemIndex] = window.Model.Contact;
+                mainVM.Save();
+            });
+            
+            command.RemoveContactCommand = new RelayCommand(o =>
+            {
+                if (!(o is ContactsListControlViewModel model))
+                {
+                    MessageBox.Show("Inappropriate data type");
+                    return;
+                }
+
+                if (model.SelectedContact == null)
+                {
+                    MessageBox.Show("Item not selected");
+                    return;
+                }
+
+                model.AllContacts.Remove(model.SelectedContact);
                 mainVM.Save();
             });
 
