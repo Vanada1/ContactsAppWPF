@@ -41,12 +41,12 @@ namespace ContactsApp
 		/// </param>
 		public PhoneNumber(string number)
 		{
-			this.Number = number;
+			Number = number;
 		}
 
         public PhoneNumber()
         {
-
+            Number = string.Empty;
         }
 
         public string this[string columnName]

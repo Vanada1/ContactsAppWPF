@@ -32,8 +32,15 @@ namespace ContactsAppUI
             {
                 OkCommand = new RelayCommand(o =>
                 {
-                    DialogResult = true;
-                    Close();
+                    if(Model.IsNotEmptyField())
+                    {
+                        DialogResult = true;
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fields are empty");
+                    }
                 }),
                 CancelCommand = new RelayCommand(o =>
                 {
@@ -44,8 +51,8 @@ namespace ContactsAppUI
             DataContext = Model;
         }
 
-        public AddEditContactWindow() : this(new Contact(string.Empty, String.Empty, new PhoneNumber("70000000000"),
-            new DateTime(1900,1,1), string.Empty, string.Empty))
+        public AddEditContactWindow() : this(new Contact(string.Empty, String.Empty, new PhoneNumber(), 
+            DateTime.Now, string.Empty, string.Empty))
         { }
     }
 }

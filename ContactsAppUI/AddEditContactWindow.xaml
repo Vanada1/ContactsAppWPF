@@ -21,6 +21,7 @@
         </Grid.RowDefinitions>
 
         <controls:PersonDataControl
+            x:Name="PersonData"
             Grid.Row="0"
             VerticalAlignment="Top"
             DataContext="{Binding Path=Contact}"
@@ -42,7 +43,7 @@
                 Grid.Column="0"
                 Command="{Binding OkCommand}"
                 Content="Ok"
-                Style="{StaticResource ControlStyle}" />
+                Style="{StaticResource ControlStyle}"/>
             <Button
                 Grid.Column="1"
                 Command="{Binding CancelCommand}"

@@ -151,9 +151,9 @@ namespace ContactsApp
 			VkId = vkId;
 		}
 
-        public Contact()
+        public Contact(): this(String.Empty, String.Empty, 
+            new PhoneNumber(), DateTime.Now, String.Empty, String.Empty)
         {
-			PhoneNumber = new PhoneNumber();
         }
 
 		/// <summary>
@@ -180,10 +180,13 @@ namespace ContactsApp
                 try
                 {
                     var propertyValue = foundProperty.GetValue(this);
-
-					if(propertyValue is DateTime dateTime)
+					if (propertyValue is DateTime dateTime)
                     {
                         DateValidator.AssertDate(dateTime);
+                    }
+					else if (propertyValue is PhoneNumber phoneNumber)
+                    {
+						StringValidator.AssertPhoneNumber(phoneNumber.Number, PhoneNumber.MaxPhoneNumberSymbolsCount);
                     }
                     else
                     {
@@ -194,7 +197,7 @@ namespace ContactsApp
                         StringValidator.AssertStringLength(propertyValue.ToString(),
                             maxLetters, nameProperty);
 					}
-                }
+				}
                 catch (ArgumentException e)
                 {
                     error = e.Message;
@@ -204,6 +207,6 @@ namespace ContactsApp
             }
         }
 
-        public string Error { get; }
+        public string Error { get; } = string.Empty;
     }
 }
