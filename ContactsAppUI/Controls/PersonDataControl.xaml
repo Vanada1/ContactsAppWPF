@@ -62,33 +62,45 @@
             Grid.Row="0"
             Grid.Column="1"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=LastName}" />
+            Text ="{Binding LastName, 
+							ValidatesOnDataErrors=True, 
+							UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=FirstName}" />
+            Text ="{Binding FirstName, 
+							ValidatesOnDataErrors=True, 
+							UpdateSourceTrigger=PropertyChanged}"/>
         <DatePicker
             Grid.Row="2"
             Grid.Column="1"
             Style="{StaticResource ControlStyle}"
-            Text="{Binding Path=Birthday}" />
+            Text ="{Binding Birthday, 
+							ValidatesOnDataErrors=True, 
+							UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
             DataContext="{Binding Path=PhoneNumber}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=Number}" />
+            Text ="{Binding Number, 
+							ValidatesOnDataErrors=True, 
+							UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=Email}" />
+            Text ="{Binding Email, 
+							ValidatesOnDataErrors=True, 
+							UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Width="Auto"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=VkId}" />
+            Text ="{Binding VkId, 
+							ValidatesOnDataErrors=True, 
+							UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>

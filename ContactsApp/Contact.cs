@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace ContactsApp
@@ -10,20 +11,20 @@ namespace ContactsApp
 	/// <see cref="FirstName">, <see cref="LastName">, <see cref="PhoneNumber">,
 	/// <see cref="Birthday">, <see cref="Email">, <see cref="VkId">
 	/// </summary>
-	public class Contact : ICloneable, INotifyPropertyChanged
+	public class Contact : ICloneable, INotifyPropertyChanged, IDataErrorInfo
 	{
-		/// <summary>
-		/// Max count of letters for <see cref="FirstName"/>, 
-		/// <see cref="LastName"/>, <see cref="Email"/>
-		/// </summary>
-		public const int MAXLETTERCOUNT = 50;
+        /// <summary>
+        /// Max count of letters for <see cref="FirstName"/>, 
+        /// <see cref="LastName"/>, <see cref="Email"/>
+        /// </summary>
+        public const int MaxLettersCount = 50;
 
-		/// <summary>
-		/// Max count of letters for <see cref="VkId"/>
-		/// </summary>
-		public const int MAXVKLETTERCOUNT = 15;
+        /// <summary>
+        /// Max count of letters for <see cref="VkId"/>
+        /// </summary>
+        public const int MaxVkLettersCount = 15;
 
-		/// <summary>
+        /// <summary>
 		/// Contact <see cref="FirstName"/>
 		/// </summary>
 		private string _name;
@@ -60,14 +61,9 @@ namespace ContactsApp
 		/// </summary>
 		public string FirstName
 		{
-			get 
-			{
-				return _name; 
-			}
-			set
-			{
-				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(FirstName)); 
+			get => _name;
+            set
+			{ 
 				_name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
 				OnPropertyChanged(nameof(FirstName));
 			}
@@ -79,14 +75,9 @@ namespace ContactsApp
 		/// </summary>
 		public string LastName
 		{
-			get 
-			{ 
-				return this._surname; 
-			}
-			set
+			get => this._surname;
+            set
 			{
-				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(LastName));
 				this._surname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
 				OnPropertyChanged(nameof(LastName));
 			}
@@ -97,14 +88,9 @@ namespace ContactsApp
 	/// </summary>
 	public string Email
 		{
-			get 
-			{ 
-				return this._email;
-			}
-			set
+			get => this._email;
+            set
 			{
-				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(Email));
 				this._email = value;
 				OnPropertyChanged(nameof(Email));
 			}
@@ -121,14 +107,9 @@ namespace ContactsApp
 		/// </summary>
 		public string VkId
 		{
-			get
-			{ 
-				return this._vkId;
-			}
-			set
+			get => this._vkId;
+            set
 			{
-				StringValidator.AssertStringLength(value,
-					MAXVKLETTERCOUNT, nameof(VkId));
 				this._vkId = value;
 
 				OnPropertyChanged(nameof(VkId));
@@ -141,13 +122,9 @@ namespace ContactsApp
 		/// </summary>
 		public DateTime Birthday
 		{
-			get
+			get => this._birthday;
+            set
 			{
-				return this._birthday;
-			}
-			set
-			{
-				DateValidator.AssertDate(value);
 				this._birthday = value;
 				OnPropertyChanged(nameof(Birthday));
 			}
@@ -156,8 +133,8 @@ namespace ContactsApp
 		/// <summary>
 		/// <see cref="Contact"> object constructor
 		/// </summary>
-		/// <param name="lasrName"><see cref="Surname"></param>
-		/// <param name="firstName"><see cref="Name"/></param>
+		/// <param name="lasrName"><see cref="LastName"></param>
+		/// <param name="firstName"><see cref="FirstName"/></param>
 		/// <param name="phoneNumber"><see cref="PhoneNumber"/></param>
 		/// <param name="birthday"><see cref="Birthday"/></param>
 		/// <param name="email"><see cref="Email"/></param>
@@ -190,5 +167,43 @@ namespace ContactsApp
 				 new PhoneNumber(PhoneNumber.Number),  
 				 Birthday,  Email, VkId);
 		}
-	}
+
+        public string this[string columnName]
+        {
+            get
+            {
+                var error = string.Empty;
+                var properties = GetType().GetProperties();
+                var foundProperty = properties.Select(o => o)
+                    .First(o => o.Name == columnName);
+
+                try
+                {
+                    var propertyValue = foundProperty.GetValue(this);
+
+					if(propertyValue is DateTime dateTime)
+                    {
+                        DateValidator.AssertDate(dateTime);
+                    }
+                    else
+                    {
+						var nameProperty = foundProperty.Name;
+                        var maxLetters = nameProperty == nameof(VkId) ?
+                            MaxVkLettersCount
+                            : MaxLettersCount;
+                        StringValidator.AssertStringLength(propertyValue.ToString(),
+                            maxLetters, nameProperty);
+					}
+                }
+                catch (ArgumentException e)
+                {
+                    error = e.Message;
+                }
+
+                return error;
+            }
+        }
+
+        public string Error { get; }
+    }
 }

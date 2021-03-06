@@ -13,7 +13,7 @@ namespace ContactsApp
 		public static void AssertStringLength(string checkedString,
 			int maxLength, string name)
 		{
-			if (checkedString.Length > maxLength)
+			if (checkedString.Length > maxLength || checkedString.Length == 0)
 			{
 				throw new ArgumentException(name + " is wrong");
 			}

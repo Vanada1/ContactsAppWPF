@@ -1,37 +1,39 @@
-﻿namespace ContactsApp
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using ContactsApp.Annotations;
+
+namespace ContactsApp
 {
 	/// <summary>
 	/// Class <see cref="PhoneNumber"> contains the telephone number of the person
 	/// </summary>
-	public class PhoneNumber
+	public class PhoneNumber:IDataErrorInfo, INotifyPropertyChanged
 	{
-		/// <summary>
-		/// Number phone
-		/// </summary>
-		private string _number;
+        /// <summary>
+        /// Number phone
+        /// </summary>
+        private string _number;
 
-		/// <summary>
-		/// Max count of <see cref="Number"/>
-		/// </summary>
-		public const int MAXDIGITCOUNT = 11;
+        /// <summary>
+        /// Max count of symbols for <see cref="Contact.PhoneNumber"/>
+        /// </summary>
+        public const int MaxPhoneNumberSymbolsCount = 11;
 
-		/// <summary>
+        /// <summary>
 		/// Sets and returns <see cref="Number"> values 
 		/// </summary>
 		public string Number
-		{
-			get 
-			{
-				return this._number;
-			}
-			set
-			{
-               StringValidator.AssertPhoneNumber(value, MAXDIGITCOUNT);
-				this._number = value;
-			}
-		}
+        { 
+            get => _number;
+            set
+            {
+                _number = value;
+                OnPropertyChanged(nameof(Number));
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		/// <see cref="PhoneNumber"/> constructor
 		/// </summary>
 		/// <param name="number">
@@ -46,5 +48,33 @@
         {
 
         }
-	}
+
+        public string this[string columnName]
+        {
+            get
+            {
+                var error = string.Empty;
+                try
+                {
+                    StringValidator.AssertPhoneNumber(Number, MaxPhoneNumberSymbolsCount);
+                }
+                catch (ArgumentException e)
+                {
+                    error = e.Message;
+                }
+
+                return error;
+            }
+        }
+
+        public string Error { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

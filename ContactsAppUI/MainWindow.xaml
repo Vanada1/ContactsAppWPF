@@ -39,7 +39,7 @@
             Grid.RowSpan="2"
             Grid.Column="0"
             DataContext="{Binding Path=ContactsModel}"
-            Style="{StaticResource ControlStyle}" />
+            Style="{StaticResource ControlStyle}"/>
 
         <controls:PersonDataControl
             x:Name="PersonDataControl"
