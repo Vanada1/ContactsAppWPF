@@ -52,7 +52,7 @@ namespace ContactsAppUI
         }
 
         public AddEditContactWindow() : this(new Contact(string.Empty, String.Empty, new PhoneNumber(), 
-            DateTime.Now, string.Empty, string.Empty))
+            new DateTime(), string.Empty, string.Empty))
         { }
     }
 }
