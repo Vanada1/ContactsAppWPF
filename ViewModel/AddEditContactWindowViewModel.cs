@@ -17,8 +17,6 @@ namespace ViewModel
     /// </summary>
     public class AddEditContactWindowViewModel:INotifyPropertyChanged
     {
-        private bool _isEnable;
-
         /// <summary>
         /// Контакт
         /// </summary>
@@ -41,7 +39,7 @@ namespace ViewModel
 
         public AddEditContactWindowViewModel():this(null){}
 
-        public bool IsNotEmptyField()
+        public bool IsNotEmptyFields()
         {
             const string errorName = "Error";
             var properties = Contact.GetType().GetProperties();

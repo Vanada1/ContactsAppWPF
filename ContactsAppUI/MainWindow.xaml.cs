@@ -51,7 +51,8 @@ namespace ContactsAppUI
             {
                 if (listBoxControl.SelectedContact == null)
                 {
-                    MessageBox.Show("Select Item");
+                    MessageBox.Show("Select Item", "Alert",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -74,7 +75,8 @@ namespace ContactsAppUI
 
                 if (model.SelectedContact == null)
                 {
-                    MessageBox.Show("Item not selected");
+                    MessageBox.Show("Item not selected","Alert",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
