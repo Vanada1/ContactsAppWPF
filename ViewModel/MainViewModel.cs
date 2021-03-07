@@ -68,7 +68,7 @@ namespace ViewModel
             ProjectManager.SaveProject(_project);
         }
 
-		public MainViewModel()
+        public MainViewModel()
 		{
 			_project = ProjectManager.ReadProject();
             ContactsModel = new ContactsListControlViewModel(_project.Contacts);
