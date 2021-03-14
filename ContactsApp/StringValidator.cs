@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ContactsApp
 {
@@ -25,26 +26,24 @@ namespace ContactsApp
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
         public static string GetClearPhoneNumber(string phoneNumber)
-		{
-			string clearPhoneNumber = "";
-			foreach(var i in phoneNumber)
-			{
-				if(i >= '0' && i<='9')
-				{
-					clearPhoneNumber += i;
-				}
-			}
-			return clearPhoneNumber;
-		}
-
-        public static void AssertPhoneNumber(string number, int maxDigitCount)
         {
-	        string numberString = number.ToString();
-	        if (numberString.Length != maxDigitCount)
+            return phoneNumber.Where(i => i >= '0' && i <= '9')
+                .Aggregate("", (current, i) => current + i);
+        }
+
+		/// <summary>
+		/// Throws an error if incorrect phone number
+		/// </summary>
+		/// <param name="number"></param>
+		/// <param name="maxDigitCount"></param>
+		public static void AssertPhoneNumber(string number, int maxDigitCount)
+        {
+	        if (number.Length != maxDigitCount)
 	        {
 		        throw new ArgumentException("Invalid phone number");
 	        }
-	        if (numberString[0] != '7')
+
+	        if (number[0] != '7')
 	        {
 		        throw new ArgumentException(
 			        "The first digit is not 7");

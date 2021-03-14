@@ -19,9 +19,9 @@ namespace ContactsApp
 		/// Sort contacts list
 		/// </summary>
 		/// <returns>All sorted contacts</returns>
-		private IOrderedEnumerable<Contact> SortContacts()
+		private IEnumerable<Contact> SortContacts()
 		{
-			for (int i = 0; i < Contacts.Count; i++)
+			for (var i = 0; i < Contacts.Count; i++)
 			{
 				if (Contacts[i] == null)
 				{
