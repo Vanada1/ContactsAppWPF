@@ -12,25 +12,28 @@ using ViewModel.ControlViewModels;
 
 namespace ViewModel
 {
+    /// <summary>
+    /// ViewModel for window MainWindow
+    /// </summary>
 	public class MainViewModel : INotifyPropertyChanged
 	{
-		/// <summary>
-		/// Все данные приложения
-		/// </summary>
-		private readonly Project _project;
+        /// <summary>
+        /// Application data
+        /// </summary>
+        private readonly Project _project;
 
         /// <summary>
-        /// Контрол со списком контактов
+        /// Control with contact list
         /// </summary>
         private ContactsListControlViewModel _contactsControlView;
 
         /// <summary>
-        /// Контрол с контактами, у которых ДР
+        /// Control with contacts who have a birthday
         /// </summary>
         private BirthdayControlViewModel _birthdayControlView;
 
         /// <summary>
-        /// Модель элемента списка контактов
+        /// Contact list item model
         /// </summary>
         public ContactsListControlViewModel ContactsModel
         {
@@ -43,7 +46,7 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Возвращает и устанавливает контрол с контактами, у которых ДР
+        /// Revives and establishes control with contacts who have birthday
         /// </summary>
         public BirthdayControlViewModel BirthdayControlView
         {
@@ -55,18 +58,8 @@ namespace ViewModel
             }
         }
 
+        /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
-
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-        public void Save()
-        {
-            ProjectManager.SaveProject(_project);
-        }
 
         public MainViewModel()
 		{
@@ -78,7 +71,25 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Обработчик события для изменения строки поиска
+        /// Save application data
+        /// </summary>
+        public void Save()
+        {
+            ProjectManager.SaveProject(_project);
+        }
+
+        /// <summary>
+        /// Notifies about value change
+        /// </summary>
+        /// <param name="propertyName"></param>
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Event handler for changing the search string
         /// </summary>
         /// <param name="sender"><see cref="ContactsListControlViewModel"/></param>
         /// <param name="e"></param>
@@ -90,6 +101,11 @@ namespace ViewModel
             model.SearchedContacts = _project.SearchContacts(model.SearchingString);
         }
 
+        /// <summary>
+        /// Processor creating a ViewModel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCreatedViewModel(object sender, EventArgs e)
         {
             var model = (BirthdayControlViewModel)sender;

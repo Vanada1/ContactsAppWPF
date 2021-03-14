@@ -82,6 +82,7 @@ namespace ContactsApp
                 Validation(value, nameof(LastName));
                 _lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
                 OnPropertyChanged(nameof(LastName));
+                OnPropertyChanged(nameof(HasErrors));
             }
         }
 
@@ -96,6 +97,7 @@ namespace ContactsApp
                 Validation(value, nameof(Email));
                 _email = value;
                 OnPropertyChanged(nameof(Email));
+                OnPropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -116,6 +118,7 @@ namespace ContactsApp
                 Validation(value, nameof(VkId));
                 _vkId = value;
                 OnPropertyChanged(nameof(VkId));
+                OnPropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -131,6 +134,7 @@ namespace ContactsApp
                 Validation(value, nameof(Birthday));
                 _birthday = value;
                 OnPropertyChanged(nameof(Birthday));
+                OnPropertyChanged(nameof(HasErrors));
             }
         }
 

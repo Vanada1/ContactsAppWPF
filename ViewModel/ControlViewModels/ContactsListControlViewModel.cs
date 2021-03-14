@@ -12,27 +12,30 @@ using ViewModel.Commands;
 
 namespace ViewModel.ControlViewModels
 {
+    /// <summary>
+    /// ViewModel class for contact list
+    /// </summary>
     public class ContactsListControlViewModel : INotifyPropertyChanged
     {
         /// <summary>
-        /// Выбранный контакт
+        /// Selected contact
         /// </summary>
         private Contact _selectedContact;
 
         /// <summary>
-        /// Строка поиска
+        /// Search line
         /// </summary>
         private string _searchingString;
 
         private ObservableCollection<Contact> _searchedContacts;
 
         /// <summary>
-        /// Возвращает все контакты
+        /// Returns all contacts
         /// </summary>
         public ObservableCollection<Contact> AllContacts { get; }
 
         /// <summary>
-        /// Возвращает и устанавливает все найденные контакты
+        /// Returns and sets all found contacts
         /// </summary>
         public ObservableCollection<Contact> SearchedContacts 
         { 
@@ -46,12 +49,12 @@ namespace ViewModel.ControlViewModels
         }
 
         /// <summary>
-        /// Возвращает команды, которые используются кнопками
+        /// Returns the commands used by buttons
         /// </summary>
         public Command Command { get; }
 
         /// <summary>
-        /// Возвращает и устанавливает выбранный контакт 
+        /// Returns and sets the selected contact
         /// </summary>
         public Contact SelectedContact
         {
@@ -62,9 +65,9 @@ namespace ViewModel.ControlViewModels
                 OnPropertyChanged(nameof(SelectedContact));
             }
         }
-        
+
         /// <summary>
-        /// Возвращает и устанавливает поисковую строку
+        /// Returns and sets the search string
         /// </summary>
         public string SearchingString
         {
@@ -77,6 +80,14 @@ namespace ViewModel.ControlViewModels
             }
         }
 
+        /// <summary>
+        /// Event that occurs when the search string changes
+        /// </summary>
+        public event EventHandler SearchedStringChanged;
+
+        /// <inheritdoc />
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ContactsListControlViewModel(ObservableCollection<Contact> allContacts)
         {
             SearchedContacts = AllContacts = allContacts;
@@ -84,12 +95,9 @@ namespace ViewModel.ControlViewModels
         }
 
         /// <summary>
-        /// Событие, возникающее при изменении поисковой строки
+        /// Notifies about value change
         /// </summary>
-        public event EventHandler SearchedStringChanged;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <param name="propertyName"></param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

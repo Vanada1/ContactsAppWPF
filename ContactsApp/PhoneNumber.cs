@@ -39,6 +39,7 @@ namespace ContactsApp
                 Validation(value, nameof(Number));
                 _number = value;
                 OnPropertyChanged(nameof(Number));
+                OnPropertyChanged(nameof(HasErrors));
             }
         }
 

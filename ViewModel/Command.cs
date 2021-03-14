@@ -8,20 +8,23 @@ using ViewModel.ControlViewModels;
 
 namespace ViewModel
 {
+    /// <summary>
+    /// Basic command class
+    /// </summary>
     public class Command
     {
         /// <summary>
-        /// Команда на удаление контакта
+        /// Command to delete a contact
         /// </summary>
         public RelayCommand RemoveContactCommand { get; set; }
 
         /// <summary>
-        /// Команда на добавление контакта
+        /// Command to add a contact
         /// </summary>
         public RelayCommand AddContactCommand { get; set; }
 
         /// <summary>
-        /// Команда на изменения контакта
+        /// Contact change command
         /// </summary>
         public RelayCommand EditContactCommand { get; set; }
 
