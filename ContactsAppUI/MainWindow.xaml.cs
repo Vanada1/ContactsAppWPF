@@ -17,7 +17,7 @@ namespace ContactsAppUI
             InitializeComponent();
 
             var mainVM = new MainViewModel();
-            var listBoxControl = mainVM.ContactsModel;
+            var listBoxControl = mainVM.ContactsListControlViewModel;
             var command = listBoxControl.Command;
             MenuControl.AboutButton.Command = new RelayCommand(o => (new AboutWindow()).ShowDialog());
             MenuControl.ExitButton.Command = new RelayCommand(o =>
@@ -26,16 +26,17 @@ namespace ContactsAppUI
                 Close();
             });
             MenuControl.RemoveButton.Command = command.RemoveContactCommand;
-            MenuControl.AddButton.Command = command.AddContactCommand = new RelayCommand(o =>
+            command.AddContactCommand = new RelayCommand(o =>
             {
                 var window = new AddEditContactWindow();
                 if (window.ShowDialog() != true) return;
 
-                listBoxControl.AllContacts.Add(window.Model.Contact);
+                listBoxControl.AllContacts.Add(window.Model.PersonDataControlViewModel.Contact);
                 mainVM.Save();
             });
+            MenuControl.AddButton.Command = command.AddContactCommand;
 
-            MenuControl.EditButton.Command = command.EditContactCommand= new RelayCommand(o =>
+            command.EditContactCommand = new RelayCommand(o =>
             {
                 if (listBoxControl.SelectedContact == null)
                 {
@@ -44,15 +45,16 @@ namespace ContactsAppUI
                     return;
                 }
 
-                var window = new AddEditContactWindow((Contact)listBoxControl.SelectedContact.Clone());
+                var window = new AddEditContactWindow((Contact) listBoxControl.SelectedContact.Clone());
                 var itemIndex = listBoxControl.AllContacts.IndexOf(listBoxControl.SelectedContact);
                 if (window.ShowDialog() != true) return;
 
-                listBoxControl.SelectedContact = 
-                    listBoxControl.AllContacts[itemIndex] = window.Model.Contact;
+                listBoxControl.SelectedContact =
+                    listBoxControl.AllContacts[itemIndex] = window.Model.PersonDataControlViewModel.Contact;
                 mainVM.Save();
             });
-            
+           MenuControl.EditButton.Command = command.EditContactCommand;
+
             command.RemoveContactCommand = new RelayCommand(o =>
             {
                 if (!(o is ContactsListControlViewModel model))

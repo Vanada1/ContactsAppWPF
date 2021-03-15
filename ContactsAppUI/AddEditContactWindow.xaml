@@ -24,7 +24,7 @@
             x:Name="PersonData"
             Grid.Row="0"
             VerticalAlignment="Top"
-            DataContext="{Binding Path=Contact}"
+            DataContext="{Binding Path=PersonDataControlViewModel}"
             Style="{StaticResource ControlStyle}" />
 
         <Grid

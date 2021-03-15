@@ -32,7 +32,7 @@ namespace ContactsAppUI
             {
                 OkCommand = new RelayCommand(o =>
                 {
-                    if(Model.Contact.HasErrors)
+                    if(Model.PersonDataControlViewModel.Contact.HasErrors)
                     {
                         DialogResult = true;
                         Close();

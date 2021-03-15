@@ -24,7 +24,7 @@ namespace ViewModel
         public RelayCommand AddContactCommand { get; set; }
 
         /// <summary>
-        /// Contact change command
+        /// PersonDataControlViewModel change command
         /// </summary>
         public RelayCommand EditContactCommand { get; set; }
 

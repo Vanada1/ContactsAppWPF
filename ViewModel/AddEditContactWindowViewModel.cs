@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ContactsApp;
 using ViewModel.Annotations;
 using ViewModel.Commands;
+using ViewModel.ControlViewModels;
 
 namespace ViewModel
 {
@@ -18,9 +19,9 @@ namespace ViewModel
     public class AddEditContactWindowViewModel:INotifyPropertyChanged
     {
         /// <summary>
-        /// Contact
+        /// PersonDataControlViewModel
         /// </summary>
-        public Contact Contact { get; set; }
+        public PersonDataControlViewModel PersonDataControlViewModel { get; set; }
 
         /// <summary>
         /// Command when you click on the Ok button
@@ -37,7 +38,7 @@ namespace ViewModel
 
         public AddEditContactWindowViewModel(Contact contact)
         {
-            Contact = contact;
+            PersonDataControlViewModel = new PersonDataControlViewModel(false, contact);
         }
 
         public AddEditContactWindowViewModel():this(null){}

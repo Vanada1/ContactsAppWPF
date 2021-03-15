@@ -14,9 +14,9 @@
     MinWidth="600"
     MinHeight="400"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
+    Closing="ClosingWindow"
     Icon="Resources/phonebook.ico"
-    mc:Ignorable="d"
-    Closing="ClosingWindow">
+    mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
@@ -39,8 +39,8 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
-            DataContext="{Binding Path=ContactsModel}"
-            Style="{StaticResource ControlStyle}"/>
+            DataContext="{Binding Path=ContactsListControlViewModel}"
+            Style="{StaticResource ControlStyle}" />
 
         <controls:PersonDataControl
             x:Name="PersonDataControl"
@@ -48,8 +48,7 @@
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
-            DataContext="{Binding Path=ContactsModel.SelectedContact}"
-            IsEnabled="False"
+            DataContext="{Binding Path=ContactsListControlViewModel.PersonDataControlViewModel}"
             Style="{StaticResource ControlStyle}" />
 
         <controls:BirthdayControl
@@ -59,7 +58,7 @@
             Grid.Column="1"
             Margin="3,0,0,0"
             VerticalAlignment="Bottom"
-            DataContext="{Binding Path=BirthdayControlView}">
+            DataContext="{Binding Path=BirthdayControlViewModel}">
             <controls:BirthdayControl.Style>
                 <Style>
                     <Style.Triggers>

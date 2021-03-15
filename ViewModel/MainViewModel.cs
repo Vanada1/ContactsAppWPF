@@ -25,36 +25,36 @@ namespace ViewModel
         /// <summary>
         /// Control with contact list
         /// </summary>
-        private ContactsListControlViewModel _contactsControlView;
+        private ContactsListControlViewModel _contactsListControlViewModel;
 
         /// <summary>
         /// Control with contacts who have a birthday
         /// </summary>
-        private BirthdayControlViewModel _birthdayControlView;
+        private BirthdayControlViewModel _birthdayControlViewModel;
 
         /// <summary>
-        /// Contact list item model
+        /// PersonDataControlViewModel list item model
         /// </summary>
-        public ContactsListControlViewModel ContactsModel
+        public ContactsListControlViewModel ContactsListControlViewModel
         {
-            get=>_contactsControlView;
+            get=>_contactsListControlViewModel;
             set
             {
-                _contactsControlView = value;
-				OnPropertyChanged(nameof(ContactsModel));
+                _contactsListControlViewModel = value;
+				OnPropertyChanged(nameof(ContactsListControlViewModel));
             }
         }
 
         /// <summary>
         /// Revives and establishes control with contacts who have birthday
         /// </summary>
-        public BirthdayControlViewModel BirthdayControlView
+        public BirthdayControlViewModel BirthdayControlViewModel
         {
-            get => _birthdayControlView;
+            get => _birthdayControlViewModel;
             set
             {
-                _birthdayControlView = value;
-                OnPropertyChanged(nameof(BirthdayControlView));
+                _birthdayControlViewModel = value;
+                OnPropertyChanged(nameof(BirthdayControlViewModel));
             }
         }
 
@@ -64,10 +64,10 @@ namespace ViewModel
         public MainViewModel()
 		{
 			_project = ProjectManager.ReadProject();
-            ContactsModel = new ContactsListControlViewModel(_project.Contacts);
-            ContactsModel.SearchedStringChanged += OnSearchedStringChanged;
+            ContactsListControlViewModel = new ContactsListControlViewModel(_project.Contacts);
+            ContactsListControlViewModel.SearchedStringChanged += OnSearchedStringChanged;
             BirthdayControlViewModel.CreatedViewModel += OnCreatedViewModel;
-            BirthdayControlView = new BirthdayControlViewModel();
+            BirthdayControlViewModel = new BirthdayControlViewModel();
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace ViewModel
         /// <summary>
         /// Event handler for changing the search string
         /// </summary>
-        /// <param name="sender"><see cref="ContactsListControlViewModel"/></param>
+        /// <param name="sender"><see cref="ControlViewModels.ContactsListControlViewModel"/></param>
         /// <param name="e"></param>
         private void OnSearchedStringChanged(object sender, EventArgs e)
         {

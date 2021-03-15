@@ -20,7 +20,7 @@ namespace ViewModel.ControlViewModels
         /// <summary>
         /// Selected contact
         /// </summary>
-        private Contact _selectedContact;
+        private readonly PersonDataControlViewModel _selectedContact = new PersonDataControlViewModel(true, null);
 
         /// <summary>
         /// Search line
@@ -58,13 +58,15 @@ namespace ViewModel.ControlViewModels
         /// </summary>
         public Contact SelectedContact
         {
-            get => _selectedContact;
+            get => _selectedContact.Contact;
             set
             {
-                _selectedContact = value;
+                _selectedContact.Contact = value;
                 OnPropertyChanged(nameof(SelectedContact));
             }
         }
+
+        public PersonDataControlViewModel PersonDataControlViewModel => _selectedContact;
 
         /// <summary>
         /// Returns and sets the search string

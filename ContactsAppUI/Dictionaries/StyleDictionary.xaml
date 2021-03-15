@@ -9,13 +9,14 @@
         <Setter Property="TextBlock.HorizontalAlignment" Value="Right" />
         <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
     </Style>
-    <Style x:Key="TextBoxStyle" BasedOn="{StaticResource ControlStyle}" TargetType="TextBox">
+    <Style
+        x:Key="TextBoxStyle"
+        BasedOn="{StaticResource ControlStyle}"
+        TargetType="TextBox">
         <Setter Property="TextBox.VerticalAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
-                <Setter Property="ToolTip"
-                        Value="{Binding RelativeSource={RelativeSource Self},
-                    Path=(Validation.Errors)[0].ErrorContent}" />
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
                 <Setter Property="Foreground" Value="Red" />
             </Trigger>
         </Style.Triggers>

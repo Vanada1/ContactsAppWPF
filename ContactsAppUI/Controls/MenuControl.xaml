@@ -14,9 +14,9 @@
                 <MenuItem x:Name="ExitButton" Header="Exit" />
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem x:Name="AddButton" Header="Add Contact" />
-                <MenuItem x:Name="EditButton" Header="Edit Contact" />
-                <MenuItem x:Name="RemoveButton" Header="Remove Contact" />
+                <MenuItem x:Name="AddButton" Header="Add PersonDataControlViewModel" />
+                <MenuItem x:Name="EditButton" Header="Edit PersonDataControlViewModel" />
+                <MenuItem x:Name="RemoveButton" Header="Remove PersonDataControlViewModel" />
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem x:Name="AboutButton" Header="About" />
