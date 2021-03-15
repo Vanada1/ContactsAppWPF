@@ -32,14 +32,14 @@ namespace ContactsAppUI
             {
                 OkCommand = new RelayCommand(o =>
                 {
-                    if(Model.PersonDataControlViewModel.Contact.HasErrors)
+                    if(!Model.PersonDataControlViewModel.Contact.HasErrors)
                     {
                         DialogResult = true;
                         Close();
                     }
                     else
                     {
-                        MessageBox.Show("Fields are empty", "Error", 
+                        MessageBox.Show("Some fields are wrong!\nCheck your entries", "Error", 
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }),
