@@ -52,7 +52,7 @@ namespace ContactsAppUI
             DataContext = Model;
         }
 
-        public AddEditContactWindow() : this(new Contact(string.Empty, String.Empty, new PhoneNumber(), 
+        public AddEditContactWindow() : this(new Contact(string.Empty, string.Empty, new PhoneNumber(), 
             DateTime.Now, string.Empty, string.Empty))
         { }
     }
