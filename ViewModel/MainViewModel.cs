@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ContactsApp;
 using ViewModel.Annotations;
 using ViewModel.ControlViewModels;
+using ViewModel.Services;
 
 namespace ViewModel
 {
@@ -58,10 +59,10 @@ namespace ViewModel
             }
         }
         
-        public MainViewModel()
+        public MainViewModel(IWindowService windowService, IMessageBoxService messageBoxService)
 		{
 			_project = ProjectManager.ReadProject();
-            ContactsListControlViewModel = new ContactsListControlViewModel(_project.Contacts);
+            ContactsListControlViewModel = new ContactsListControlViewModel(_project.Contacts, windowService, messageBoxService);
             ContactsListControlViewModel.SearchedStringChanged += OnSearchedStringChanged;
             BirthdayControlViewModel.CreatedViewModel += OnCreatedViewModel;
             BirthdayControlViewModel = new BirthdayControlViewModel();

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ContactsApp;
 using ViewModel.Annotations;
 using ViewModel.Commands;
+using ViewModel.Services;
 
 namespace ViewModel.ControlViewModels
 {
@@ -87,10 +88,11 @@ namespace ViewModel.ControlViewModels
         /// </summary>
         public event EventHandler SearchedStringChanged;
         
-        public ContactsListControlViewModel(ObservableCollection<Contact> allContacts)
+        public ContactsListControlViewModel(ObservableCollection<Contact> allContacts, 
+            IWindowService windowService, IMessageBoxService messageBoxService)
         {
             SearchedContacts = AllContacts = allContacts;
-            Command = new Command();
+            Command = new Command(windowService, messageBoxService);
         }
     }
 }
