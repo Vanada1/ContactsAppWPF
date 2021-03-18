@@ -39,7 +39,7 @@ namespace ContactsAppUI
                     }
                     else
                     {
-                        MessageBox.Show("Some fields are wrong!\nCheck your entries", "Error", 
+                        MessageBox.Show($"Some fields are wrong!\nCheck your entries", "Error", 
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }),

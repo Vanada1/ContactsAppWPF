@@ -14,7 +14,7 @@ namespace ViewModel.ControlViewModels
 	/// <summary>
 	/// ViewModel class for a list of people who have a birthday
 	/// </summary>
-	public class BirthdayControlViewModel : INotifyPropertyChanged
+	public class BirthdayControlViewModel : ViewModelBase
 	{
 		/// <summary>
 		/// All names of contacts who have a birthday
@@ -62,26 +62,13 @@ namespace ViewModel.ControlViewModels
 			}
 		}
 
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
-
 		public BirthdayControlViewModel()
 		{
 			CreatedViewModel?.Invoke(this, EventArgs.Empty);
 			BirthdayNames = GetBirthdayNames();
 		}
 
-		/// <summary>
-		/// Notifies about value change
-		/// </summary>
-		/// <param name="propertyName"></param>
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Makes a string of first and last names of contacts who have DR today
 		/// </summary>
 		/// <returns>

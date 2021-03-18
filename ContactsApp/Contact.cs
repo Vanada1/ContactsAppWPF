@@ -13,19 +13,8 @@ namespace ContactsApp
     /// <see cref="FirstName">, <see cref="LastName">, <see cref="PhoneNumber">,
     /// <see cref="Birthday">, <see cref="Email">, <see cref="VkId">
     /// </summary>
-    public class Contact : ICloneable, INotifyPropertyChanged, INotifyDataErrorInfo
+    public class Contact : NotifyDataErrorInfoViewModelBase, ICloneable
     {
-        /// <summary>
-        /// Max count of letters for <see cref="FirstName"/>, 
-        /// <see cref="LastName"/>, <see cref="Email"/>
-        /// </summary>
-        public const int MaxLettersCount = 50;
-
-        /// <summary>
-        /// Max count of letters for <see cref="VkId"/>
-        /// </summary>
-        public const int MaxVkLettersCount = 15;
-
         /// <summary>
         /// Contact <see cref="FirstName"/>
         /// </summary>
@@ -50,11 +39,6 @@ namespace ContactsApp
         /// Contact <see cref="VkId"/>
         /// </summary>
         private string _vkId;
-
-        /// <summary>
-        /// Contains all <see cref="Contact"/> errors
-        /// </summary>
-        private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
 
         /// <summary>
         /// Sets and returns <see cref="FirstName"> values 
@@ -139,13 +123,7 @@ namespace ContactsApp
         }
 
         /// <inheritdoc />
-        public bool HasErrors => _errors.Any() || PhoneNumber.HasErrors;
-
-        /// <inheritdoc />
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
+        public override bool HasErrors => base.HasErrors || PhoneNumber.HasErrors;
 
         /// <summary>
         /// <see cref="Contact"> object constructor
@@ -179,88 +157,6 @@ namespace ContactsApp
             return new Contact(FirstName, LastName,
                 (PhoneNumber)PhoneNumber.Clone(),
                 Birthday, Email, VkId);
-        }
-
-        /// <inheritdoc />
-        public IEnumerable GetErrors(string propertyName)
-        {
-            return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
-        }
-
-        /// <summary>
-        /// Notifies about value change
-        /// </summary>
-        /// <param name="prop"></param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-        /// <summary>
-        /// Notifies about errors change
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void OnErrorsChanged(string propertyName)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        /// Add error in the dictionary <see cref="_errors"/>
-        /// </summary>
-        /// <param name="propertyName"></param>
-        /// <param name="error"></param>
-        private void AddError(string propertyName, string error)
-        {
-            if (!_errors.ContainsKey(propertyName))
-            {
-                _errors[propertyName] = new List<string>();
-            }
-
-            if (_errors[propertyName].Contains(error)) return;
-            _errors[propertyName].Add(error);
-            OnErrorsChanged(propertyName);
-        }
-
-        /// <summary>
-        /// Clear errors by key
-        /// </summary>
-        /// <param name="propertyName">key of dictionary</param>
-        private void ClearErrors(string propertyName)
-        {
-            if (!_errors.ContainsKey(propertyName)) return;
-            _errors[propertyName].Clear();
-            OnErrorsChanged(propertyName);
-        }
-
-        /// <summary>
-        /// Check validation
-        /// </summary>
-        /// <param name="value">Property value</param>
-        /// <param name="propertyName"></param>
-        private void Validation(object value, string propertyName)
-        {
-            ClearErrors(propertyName);
-            try
-            {
-                switch (value)
-                {
-                    case string stringValue:
-                    {
-                        StringValidator.AssertStringLength(stringValue, MaxLettersCount, propertyName);
-                        break;
-                    }
-                    case DateTime dateTimeValue:
-                    {
-                        DateValidator.AssertDate(dateTimeValue);
-                        break;
-                    }
-                }
-            }
-            catch (ArgumentException e)
-            {
-                AddError(propertyName, e.Message);
-            }
         }
     }
 }

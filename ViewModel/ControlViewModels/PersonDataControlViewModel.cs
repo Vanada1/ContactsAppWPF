@@ -10,7 +10,7 @@ using ContactsApp.Annotations;
 
 namespace ViewModel.ControlViewModels
 {
-    public class PersonDataControlViewModel:INotifyPropertyChanged
+    public class PersonDataControlViewModel : ViewModelBase
     {
         /// <summary>
         /// PersonDataControlViewModel
@@ -55,20 +55,6 @@ namespace ViewModel.ControlViewModels
         {
             IsReadOnly = isReadOnly;
             Contact = contact;
-        }
-
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        /// <summary>
-        /// Notifies about value change
-        /// </summary>
-        /// <param name="propertyName"></param>
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

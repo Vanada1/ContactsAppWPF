@@ -15,7 +15,7 @@ namespace ViewModel.ControlViewModels
     /// <summary>
     /// ViewModel class for contact list
     /// </summary>
-    public class ContactsListControlViewModel : INotifyPropertyChanged
+    public class ContactsListControlViewModel : ViewModelBase
     {
         /// <summary>
         /// Selected contact
@@ -86,24 +86,11 @@ namespace ViewModel.ControlViewModels
         /// Event that occurs when the search string changes
         /// </summary>
         public event EventHandler SearchedStringChanged;
-
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        
         public ContactsListControlViewModel(ObservableCollection<Contact> allContacts)
         {
             SearchedContacts = AllContacts = allContacts;
             Command = new Command();
-        }
-
-        /// <summary>
-        /// Notifies about value change
-        /// </summary>
-        /// <param name="propertyName"></param>
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

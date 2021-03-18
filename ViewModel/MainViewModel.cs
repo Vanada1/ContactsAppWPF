@@ -15,7 +15,7 @@ namespace ViewModel
     /// <summary>
     /// ViewModel for window MainWindow
     /// </summary>
-	public class MainViewModel : INotifyPropertyChanged
+	public class MainViewModel : ViewModelBase
 	{
         /// <summary>
         /// Application data
@@ -57,10 +57,7 @@ namespace ViewModel
                 OnPropertyChanged(nameof(BirthdayControlViewModel));
             }
         }
-
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        
         public MainViewModel()
 		{
 			_project = ProjectManager.ReadProject();
@@ -76,16 +73,6 @@ namespace ViewModel
         public void Save()
         {
             ProjectManager.SaveProject(_project);
-        }
-
-        /// <summary>
-        /// Notifies about value change
-        /// </summary>
-        /// <param name="propertyName"></param>
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>

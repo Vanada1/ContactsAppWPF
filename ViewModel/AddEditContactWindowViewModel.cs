@@ -16,7 +16,7 @@ namespace ViewModel
     /// <summary>
     /// ViewModel for window AddEditContactWindow
     /// </summary>
-    public class AddEditContactWindowViewModel:INotifyPropertyChanged
+    public class AddEditContactWindowViewModel : ViewModelBase
     {
         /// <summary>
         /// PersonDataControlViewModel
@@ -33,24 +33,11 @@ namespace ViewModel
         /// </summary>
         public RelayCommand CancelCommand { get; set; }
 
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public AddEditContactWindowViewModel(Contact contact)
         {
             PersonDataControlViewModel = new PersonDataControlViewModel(false, contact);
         }
 
-        public AddEditContactWindowViewModel():this(null){}
-
-        /// <summary>
-        /// Notifies about value change
-        /// </summary>
-        /// <param name="propertyName"></param>
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public AddEditContactWindowViewModel():this(new Contact()){}
     }
 }

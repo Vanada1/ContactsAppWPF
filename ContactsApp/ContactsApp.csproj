@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Contact.cs" />
     <Compile Include="DateValidator.cs" />
+    <Compile Include="NotifyDataErrorInfoViewModelBase.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="PhoneNumber.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectManager.cs" />
