@@ -70,7 +70,7 @@ namespace ViewModel
         /// </summary>
         public RelayCommand AddContactCommand => _addContactCommand ?? (_addContactCommand = new RelayCommand(o =>
         {
-            var viewModel = new AddEditContactWindowViewModel();
+            var viewModel = new ContactWindowViewModel();
             if (_windowService.ShowDialog(viewModel) != true) return;
 
             ((ContactsListControlViewModel)o).AllContacts.Add(viewModel.PersonDataControlViewModel.Contact);
@@ -90,7 +90,7 @@ namespace ViewModel
                 return;
             }
 
-            var window = new AddEditContactWindowViewModel((Contact) listBoxControl.SelectedContact.Clone());
+            var window = new ContactWindowViewModel((Contact) listBoxControl.SelectedContact.Clone());
             var itemIndex = listBoxControl.AllContacts.IndexOf(listBoxControl.SelectedContact);
             if (_windowService.ShowDialog(window) != true) return;
 

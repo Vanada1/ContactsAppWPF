@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="ContactsAppUI.AddEditContactWindow"
+    x:Class="ContactsAppUI.ContactWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:ContactsAppUI.Controls"
@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-    Title="AddEditContactWindow"
+    Title="ContactWindow"
     Width="400"
     Height="230"
-    d:DataContext="{d:DesignInstance vm:AddEditContactWindowViewModel}"
+    d:DataContext="{d:DesignInstance vm:ContactWindowViewModel}"
     Icon="Resources/phonebook.ico"
     ResizeMode="NoResize"
     mc:Ignorable="d">

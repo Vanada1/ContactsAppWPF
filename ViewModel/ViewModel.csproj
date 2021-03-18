@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEditContactWindowViewModel.cs" />
+    <Compile Include="ContactWindowViewModel.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ControlViewModels\BirthdayControlViewModel.cs" />

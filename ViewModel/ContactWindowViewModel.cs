@@ -16,7 +16,7 @@ namespace ViewModel
     /// <summary>
     /// ViewModel for window AddEditContactWindow
     /// </summary>
-    public class AddEditContactWindowViewModel : ViewModelBase
+    public class ContactWindowViewModel : ViewModelBase
     {
         /// <summary>
         /// PersonDataControlViewModel
@@ -33,11 +33,11 @@ namespace ViewModel
         /// </summary>
         public RelayCommand CancelCommand { get; set; }
 
-        public AddEditContactWindowViewModel(Contact contact)
+        public ContactWindowViewModel(Contact contact)
         {
             PersonDataControlViewModel = new PersonDataControlViewModel(false, contact);
         }
 
-        public AddEditContactWindowViewModel():this(new Contact()){}
+        public ContactWindowViewModel():this(new Contact()){}
     }
 }

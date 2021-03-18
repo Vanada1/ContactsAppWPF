@@ -9,7 +9,7 @@ namespace ContactsAppUI.Services
     {
         public bool? ShowDialog(object dataContext)
         {
-            var window = new AddEditContactWindow {DataContext = dataContext};
+            var window = new ContactWindow {DataContext = dataContext};
             return window.ShowDialog();
         }
     }

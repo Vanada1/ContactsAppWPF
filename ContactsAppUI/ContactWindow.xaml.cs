@@ -16,19 +16,19 @@ using ViewModel.Commands;
 namespace ContactsAppUI
 {
     /// <summary>
-    /// Interaction logic for AddEditContactWindow.xaml
+    /// Interaction logic for ContactWindow.xaml
     /// </summary>
-    public partial class AddEditContactWindow : Window
+    public partial class ContactWindow : Window
     {
         /// <summary>
         /// VM окна
         /// </summary>
-        public AddEditContactWindowViewModel Model { get; set; }
+        public ContactWindowViewModel Model { get; set; }
 
-        public AddEditContactWindow(Contact contact)
+        public ContactWindow(Contact contact)
         {
             InitializeComponent();
-            Model = new AddEditContactWindowViewModel(contact)
+            Model = new ContactWindowViewModel(contact)
             {
                 OkCommand = new RelayCommand(o =>
                 {
@@ -52,7 +52,7 @@ namespace ContactsAppUI
             DataContext = Model;
         }
 
-        public AddEditContactWindow() : this(new Contact(string.Empty, string.Empty, new PhoneNumber(), 
+        public ContactWindow() : this(new Contact(string.Empty, string.Empty, new PhoneNumber(), 
             DateTime.Now, string.Empty, string.Empty))
         { }
     }
