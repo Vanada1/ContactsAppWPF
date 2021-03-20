@@ -17,21 +17,12 @@ namespace ContactsAppUI
         {
             InitializeComponent();
 
-            var mainVM = new MainViewModel(new AddEditWindowService(), new MessageBoxService());
-            var listBoxControl = mainVM.ContactsListControlViewModel;
-            var command = listBoxControl.Command;
-            MenuControl.AboutButton.Command = new RelayCommand(o => (new AboutWindow()).ShowDialog());
-            MenuControl.ExitButton.Command = new RelayCommand(o =>
-            {
-                mainVM.Save();
-                Close();
-            });
-
-            MenuControl.AddButton.Command = command.AddContactCommand;
-            MenuControl.EditButton.Command = command.EditContactCommand;
-            MenuControl.RemoveButton.Command = command.RemoveContactCommand;
-
-            DataContext = mainVM;
+            var mainVm =
+                new MainViewModel(new ContactWindowService(), new MessageBoxService(), new AboutWindowService())
+                {
+                    MenuControlViewModel = {ExitCommand = new RelayCommand(o => Close())}
+                };
+            DataContext = mainVm;
         }
 
         public void ClosingWindow(object sender, CancelEventArgs e)

@@ -58,14 +58,20 @@
             Grid.Row="2"
             Grid.Column="0"
             Orientation="Horizontal">
-            <Button Command="{Binding Command.AddContactCommand}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Button Command="{Binding Command.AddContactCommand, ConverterParameter=this}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Height="20" Source="../Resources/AddFile.png" />
+                <Button.CommandParameter>
+                    <Binding />
+                </Button.CommandParameter>
             </Button>
             <Button
                 VerticalAlignment="Top"
-                Command="{Binding Command.EditContactCommand}"
+                Command="{Binding Command.EditContactCommand, ConverterParameter=this}"
                 Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Height="18" Source="../Resources/Customize.png" />
+                <Button.CommandParameter>
+                    <Binding />
+                </Button.CommandParameter>
             </Button>
             <Button Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Height="20" Source="../Resources/RemoveFile.png" />

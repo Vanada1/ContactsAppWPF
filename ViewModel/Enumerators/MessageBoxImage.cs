@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Enumerators
 {
+    /// <summary>
+    /// Enumeration MessageBox Images
+    /// </summary>
     public enum MessageBoxImage
     {
         Info,

@@ -23,6 +23,8 @@ namespace ViewModel
         /// </summary>
         public PersonDataControlViewModel PersonDataControlViewModel { get; set; }
 
+        public bool IsEnable => !PersonDataControlViewModel.Contact.HasErrors;
+
         /// <summary>
         /// Command when you click on the Ok button
         /// </summary>
@@ -36,8 +38,15 @@ namespace ViewModel
         public ContactWindowViewModel(Contact contact)
         {
             PersonDataControlViewModel = new PersonDataControlViewModel(false, contact);
+            PersonDataControlViewModel.Contact.PropertyChanged += ContactChanged;
         }
-
+        
         public ContactWindowViewModel():this(new Contact()){}
+
+
+        private void ContactChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(IsEnable));
+        }
     }
 }

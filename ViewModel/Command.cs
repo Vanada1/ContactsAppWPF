@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ContactsApp;
+using ContactsApp.Annotations;
 using ViewModel.Commands;
 using ViewModel.ControlViewModels;
 using ViewModel.Enumerators;
@@ -14,17 +17,17 @@ namespace ViewModel
     /// <summary>
     /// Basic command class
     /// </summary>
-    public class Command
+    public class Command : ViewModelBase
     {
         /// <summary>
         /// Service for display new window
         /// </summary>
-        private IWindowService _windowService;
+        private readonly IWindowService _windowService;
 
         /// <summary>
         /// Service for display messageBox
         /// </summary>
-        private IMessageBoxService _messageBoxService;
+        private readonly IMessageBoxService _messageBoxService;
 
         /// <summary>
         /// Command to delete a contact
@@ -62,7 +65,7 @@ namespace ViewModel
                 }
 
                 model.AllContacts.Remove(model.SelectedContact);
-                //TODO: сохранение
+                OnPropertyChanged(nameof(RemoveContactCommand));
             }));
 
         /// <summary>
@@ -70,11 +73,16 @@ namespace ViewModel
         /// </summary>
         public RelayCommand AddContactCommand => _addContactCommand ?? (_addContactCommand = new RelayCommand(o =>
         {
-            var viewModel = new ContactWindowViewModel();
-            if (_windowService.ShowDialog(viewModel) != true) return;
+            var viewModel = new ContactWindowViewModel
+            {
+                OkCommand = _windowService.OkCommand,
+                CancelCommand = _windowService.CancelCommand
+            };
+            _windowService.ShowDialog(viewModel);
+            if (!_windowService.DialogResult) return;
 
             ((ContactsListControlViewModel)o).AllContacts.Add(viewModel.PersonDataControlViewModel.Contact);
-            //TODO: сохранение
+            OnPropertyChanged(nameof(AddContactCommand));
         }));
 
         /// <summary>
@@ -90,13 +98,19 @@ namespace ViewModel
                 return;
             }
 
-            var window = new ContactWindowViewModel((Contact) listBoxControl.SelectedContact.Clone());
+            var window = new ContactWindowViewModel((Contact) listBoxControl.SelectedContact.Clone())
+            {
+                OkCommand = _windowService.OkCommand,
+                CancelCommand = _windowService.CancelCommand
+
+            };
             var itemIndex = listBoxControl.AllContacts.IndexOf(listBoxControl.SelectedContact);
-            if (_windowService.ShowDialog(window) != true) return;
+            _windowService.ShowDialog(window);
+            if (!_windowService.DialogResult) return;
 
             listBoxControl.SelectedContact =
                 listBoxControl.AllContacts[itemIndex] = window.PersonDataControlViewModel.Contact;
-            //TODO: сохранение
+            OnPropertyChanged(nameof(EditContactCommand));
         }));
 
         public Command(IWindowService windowService, IMessageBoxService messageBoxService)

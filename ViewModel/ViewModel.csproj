@@ -46,6 +46,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ControlViewModels\BirthdayControlViewModel.cs" />
     <Compile Include="ControlViewModels\ContactsListControlViewModel.cs" />
+    <Compile Include="ControlViewModels\MenuControlViewModel.cs" />
     <Compile Include="ControlViewModels\PersonDataControlViewModel.cs" />
     <Compile Include="Enumerators\MessageBoxButton.cs" />
     <Compile Include="Enumerators\MessageBoxImage.cs" />

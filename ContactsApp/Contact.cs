@@ -48,9 +48,10 @@ namespace ContactsApp
             get => _firstName;
             set
             {
-                Validation(value, nameof(FirstName));
                 _firstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
                 OnPropertyChanged(nameof(FirstName));
+                Validation(value, nameof(FirstName));
+                OnPropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -63,9 +64,9 @@ namespace ContactsApp
             get => _lastName;
             set
             {
-                Validation(value, nameof(LastName));
                 _lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
                 OnPropertyChanged(nameof(LastName));
+                Validation(value, nameof(LastName));
                 OnPropertyChanged(nameof(HasErrors));
             }
         }
@@ -78,9 +79,9 @@ namespace ContactsApp
             get => this._email;
             set
             {
-                Validation(value, nameof(Email));
                 _email = value;
                 OnPropertyChanged(nameof(Email));
+                Validation(value, nameof(Email));
                 OnPropertyChanged(nameof(HasErrors));
             }
 
@@ -99,9 +100,9 @@ namespace ContactsApp
             get => _vkId;
             set
             {
-                Validation(value, nameof(VkId));
                 _vkId = value;
                 OnPropertyChanged(nameof(VkId));
+                Validation(value, nameof(VkId));
                 OnPropertyChanged(nameof(HasErrors));
             }
 
@@ -115,9 +116,9 @@ namespace ContactsApp
             get => _birthday;
             set
             {
-                Validation(value, nameof(Birthday));
                 _birthday = value;
                 OnPropertyChanged(nameof(Birthday));
+                Validation(value, nameof(Birthday));
                 OnPropertyChanged(nameof(HasErrors));
             }
         }

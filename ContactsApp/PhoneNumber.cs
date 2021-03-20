@@ -27,8 +27,8 @@ namespace ContactsApp
             set
             {
                 _number = value;
-                Validation(this, nameof(Number));
                 OnPropertyChanged(nameof(Number));
+                Validation(this, nameof(Number));
                 OnPropertyChanged(nameof(HasErrors));
             }
         }

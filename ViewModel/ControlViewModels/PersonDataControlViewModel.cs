@@ -49,6 +49,9 @@ namespace ViewModel.ControlViewModels
             }
         }
 
+        /// <summary>
+        /// IsEnable Button Ok
+        /// </summary>
         public bool IsEnable => !IsReadOnly;
 
         public PersonDataControlViewModel(bool isReadOnly, Contact contact)

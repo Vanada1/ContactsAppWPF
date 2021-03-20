@@ -32,7 +32,8 @@
             x:Name="MenuControl"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2" />
+            Grid.ColumnSpan="2"
+            DataContext="{Binding MenuControlViewModel}" />
 
         <controls:ContactsListControl
             x:Name="ContactsListControl"

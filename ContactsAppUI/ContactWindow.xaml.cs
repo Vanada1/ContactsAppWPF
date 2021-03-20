@@ -52,8 +52,6 @@ namespace ContactsAppUI
             DataContext = Model;
         }
 
-        public ContactWindow() : this(new Contact(string.Empty, string.Empty, new PhoneNumber(), 
-            DateTime.Now, string.Empty, string.Empty))
-        { }
+        public ContactWindow() {}
     }
 }
