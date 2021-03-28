@@ -18,12 +18,20 @@ namespace ViewModel
     /// </summary>
     public class ContactWindowViewModel : ViewModelBase
     {
-        /// <summary>
-        /// PersonDataControlViewModel
-        /// </summary>
-        public PersonDataControlViewModel PersonDataControlViewModel { get; set; }
+	    private PersonDataControlViewModel _personDataControlViewModel;
 
-        public bool IsEnable => !PersonDataControlViewModel.Contact.HasErrors;
+	    /// <summary>
+	    /// PersonDataControlViewModel
+	    /// </summary>
+	    public PersonDataControlViewModel PersonDataControlViewModel
+	    {
+		    get => _personDataControlViewModel;
+		    set
+		    {
+			    _personDataControlViewModel = value;
+                OnPropertyChanged(nameof(PersonDataControlViewModel));
+		    }
+	    }
 
         /// <summary>
         /// Command when you click on the Ok button
@@ -37,8 +45,8 @@ namespace ViewModel
 
         public ContactWindowViewModel(Contact contact)
         {
-            PersonDataControlViewModel = new PersonDataControlViewModel(false, contact);
-            PersonDataControlViewModel.Contact.PropertyChanged += ContactChanged;
+	        contact.PropertyChanged += ContactChanged;
+	        PersonDataControlViewModel = new PersonDataControlViewModel(false, contact);
         }
         
         public ContactWindowViewModel():this(new Contact()){}
@@ -46,7 +54,7 @@ namespace ViewModel
 
         private void ContactChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(IsEnable));
+	        OkCommand?.RaiseCanExecuteChanged();
         }
     }
 }

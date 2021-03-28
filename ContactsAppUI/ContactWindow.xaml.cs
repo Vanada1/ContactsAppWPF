@@ -20,36 +20,10 @@ namespace ContactsAppUI
     /// </summary>
     public partial class ContactWindow : Window
     {
-        /// <summary>
-        /// VM окна
-        /// </summary>
-        public ContactWindowViewModel Model { get; set; }
-
-        public ContactWindow(Contact contact)
+	    public ContactWindow(object contact)
         {
             InitializeComponent();
-            Model = new ContactWindowViewModel(contact)
-            {
-                OkCommand = new RelayCommand(o =>
-                {
-                    if(!Model.PersonDataControlViewModel.Contact.HasErrors)
-                    {
-                        DialogResult = true;
-                        Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Some fields are wrong!\nCheck your entries", "Error", 
-                            MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }),
-                CancelCommand = new RelayCommand(o =>
-                {
-                    DialogResult = false;
-                    Close();
-                })
-            };
-            DataContext = Model;
+            DataContext = contact;
         }
 
         public ContactWindow() {}

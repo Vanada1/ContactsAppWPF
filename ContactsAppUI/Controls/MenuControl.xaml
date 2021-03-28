@@ -40,7 +40,7 @@
                     Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}"
                     Header="Remove Contact">
                     <MenuItem.CommandParameter>
-                        <Binding  />
+                        <Binding />
                     </MenuItem.CommandParameter>
                 </MenuItem>
             </MenuItem>

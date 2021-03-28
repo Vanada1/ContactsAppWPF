@@ -50,7 +50,7 @@ namespace ViewModel.ControlViewModels
         }
 
         /// <summary>
-        /// IsEnable Button Ok
+        /// IsEnable calendar
         /// </summary>
         public bool IsEnable => !IsReadOnly;
 
