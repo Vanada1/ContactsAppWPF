@@ -40,6 +40,16 @@ namespace ViewModel
         private MenuControlViewModel _menuControlViewModel;
 
         /// <summary>
+        /// Closing window command
+        /// </summary>
+        private RelayCommand _closingWindow;
+
+        public RelayCommand ClosingWindow
+        {
+	        get => _closingWindow ?? (_closingWindow = new RelayCommand(_ => Save()));
+        }
+
+        /// <summary>
         /// PersonDataControlViewModel list item model
         /// </summary>
         public ContactsListControlViewModel ContactsListControlViewModel
@@ -90,18 +100,18 @@ namespace ViewModel
 	            messageBoxService, aboutService);
         }
 
-        /// <summary>
-        /// Save application data
-        /// </summary>
-        public void Save()
-        {
-            ProjectManager.SaveProject(_project);
-        }
-
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
             Save();
+        }
+
+        /// <summary>
+        /// Save application data
+        /// </summary>
+        private void Save()
+        {
+	        ProjectManager.SaveProject(_project);
         }
 
         /// <summary>

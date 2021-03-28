@@ -16,19 +16,6 @@ namespace ContactsAppUI
         public MainWindow()
         {
             InitializeComponent();
-
-            var mainVm =
-                new MainViewModel(new ContactWindowService(), new MessageBoxService(), new AboutWindowService())
-                {
-                    MenuControlViewModel = {ExitCommand = new RelayCommand(o => Close())}
-                };
-            DataContext = mainVm;
-        }
-
-        public void ClosingWindow(object sender, CancelEventArgs e)
-        {
-            var dataContext = (MainViewModel) DataContext;
-            dataContext.Save();
         }
     }
 }

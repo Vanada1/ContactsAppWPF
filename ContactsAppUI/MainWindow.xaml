@@ -5,6 +5,7 @@
     xmlns:contactsApp="clr-namespace:ContactsApp;assembly=ContactsApp"
     xmlns:controls="clr-namespace:ContactsAppUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:ViewModel;assembly=ViewModel"
@@ -14,9 +15,13 @@
     MinWidth="600"
     MinHeight="400"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
-    Closing="ClosingWindow"
     Icon="Resources/phonebook.ico"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingWindow}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
