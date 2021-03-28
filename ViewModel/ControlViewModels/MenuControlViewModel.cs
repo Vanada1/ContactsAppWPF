@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,11 @@ namespace ViewModel.ControlViewModels
         public Command Command { get; }
 
         /// <summary>
+        /// Returns all contacts
+        /// </summary>
+        public ContactsListControlViewModel ContactsListControlViewModel { get; }
+
+        /// <summary>
         /// Return exit command
         /// </summary>
         public RelayCommand ExitCommand { get; set; }
@@ -39,10 +45,13 @@ namespace ViewModel.ControlViewModels
             _aboutWindowService.ShowDialog(null);
         }));
 
-        public MenuControlViewModel(IWindowService windowService, IMessageBoxService messageBoxService, IWindowService aboutWindowService)
+        public MenuControlViewModel(ContactsListControlViewModel contactsListControlViewModelListControlViewModel,
+	        IWindowService windowService,
+	        IMessageBoxService messageBoxService, IWindowService aboutWindowService)
         {
-            _aboutWindowService = aboutWindowService;
-            Command = new Command(windowService, messageBoxService);
+	        ContactsListControlViewModel = contactsListControlViewModelListControlViewModel;
+	        _aboutWindowService = aboutWindowService;
+	        Command = new Command(windowService, messageBoxService);
         }
     }
 }

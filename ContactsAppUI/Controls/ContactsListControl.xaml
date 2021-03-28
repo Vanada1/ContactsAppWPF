@@ -70,7 +70,7 @@
                 Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Height="18" Source="../Resources/Customize.png" />
                 <Button.CommandParameter>
-                    <Binding />
+                    <Binding/>
                 </Button.CommandParameter>
             </Button>
             <Button Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">

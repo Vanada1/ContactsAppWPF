@@ -84,11 +84,10 @@ namespace ViewModel
 			_project = ProjectManager.ReadProject();
             ContactsListControlViewModel = new ContactsListControlViewModel(_project.Contacts, 
                 windowService, messageBoxService);
-            ContactsListControlViewModel.Command.PropertyChanged += CommandChanged;
             ContactsListControlViewModel.SearchedStringChanged += OnSearchedStringChanged;
             BirthdayControlViewModel = new BirthdayControlViewModel(_project.FindBirthdayContacts(DateTime.Now));
-            MenuControlViewModel = new MenuControlViewModel(windowService, messageBoxService, aboutService);
-            MenuControlViewModel.Command.PropertyChanged += CommandChanged;
+            MenuControlViewModel = new MenuControlViewModel(ContactsListControlViewModel, windowService,
+	            messageBoxService, aboutService);
         }
 
         /// <summary>
@@ -116,16 +115,6 @@ namespace ViewModel
             if(model == null) return;
 
             model.SearchedContacts = _project.SearchContacts(model.SearchingString);
-        }
-
-        /// <summary>
-        /// Command changed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CommandChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged(sender.ToString());
         }
     }
 }

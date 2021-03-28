@@ -90,7 +90,17 @@ namespace ViewModel
         /// </summary>
         public RelayCommand EditContactCommand => _editContactCommand ?? (_editContactCommand = new RelayCommand(o =>
         {
-            var listBoxControl = (ContactsListControlViewModel) o;
+	        ContactsListControlViewModel listBoxControl;
+	        if (o is MenuControlViewModel menu)
+	        {
+		        listBoxControl = menu.ContactsListControlViewModel;
+
+	        }
+	        else
+	        {
+		        listBoxControl = (ContactsListControlViewModel) o;
+	        }
+
             if (listBoxControl.SelectedContact == null)
             {
                 _messageBoxService.Show("Select Item", "Alert",

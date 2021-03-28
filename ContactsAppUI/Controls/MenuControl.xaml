@@ -22,7 +22,7 @@
                 <MenuItem
                     x:Name="AddButton"
                     Command="{Binding Command.AddContactCommand, ConverterParameter=this}"
-                    Header="Add PersonDataControlViewModel">
+                    Header="Add Contact">
                     <MenuItem.CommandParameter>
                         <Binding />
                     </MenuItem.CommandParameter>
@@ -30,7 +30,7 @@
                 <MenuItem
                     x:Name="EditButton"
                     Command="{Binding Command.EditContactCommand, ConverterParameter=this}"
-                    Header="Edit PersonDataControlViewModel">
+                    Header="Edit Contact">
                     <MenuItem.CommandParameter>
                         <Binding />
                     </MenuItem.CommandParameter>
@@ -38,9 +38,9 @@
                 <MenuItem
                     x:Name="RemoveButton"
                     Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}"
-                    Header="Remove PersonDataControlViewModel">
+                    Header="Remove Contact">
                     <MenuItem.CommandParameter>
-                        <Binding />
+                        <Binding  />
                     </MenuItem.CommandParameter>
                 </MenuItem>
             </MenuItem>
