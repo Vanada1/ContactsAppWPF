@@ -26,12 +26,7 @@ namespace ViewModel.ControlViewModels
         /// </summary>
 		private int _visibility = 0;
 
-		/// <summary>
-		/// Events that are executed when the class is instantiated
-		/// </summary>
-		public static event EventHandler CreatedViewModel;
-
-		/// <summary>
+        /// <summary>
 		/// Returns and installs found contacts who have DR
 		/// </summary>
 		public ObservableCollection<Contact> SearchedContacts { get; set; }
@@ -62,9 +57,9 @@ namespace ViewModel.ControlViewModels
 			}
 		}
 
-		public BirthdayControlViewModel()
+		public BirthdayControlViewModel(IEnumerable<Contact> contacts)
 		{
-			CreatedViewModel?.Invoke(this, EventArgs.Empty);
+			SearchedContacts = new ObservableCollection<Contact>(contacts);
 			BirthdayNames = GetBirthdayNames();
 		}
 

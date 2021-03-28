@@ -86,8 +86,7 @@ namespace ViewModel
                 windowService, messageBoxService);
             ContactsListControlViewModel.Command.PropertyChanged += CommandChanged;
             ContactsListControlViewModel.SearchedStringChanged += OnSearchedStringChanged;
-            BirthdayControlViewModel.CreatedViewModel += OnCreatedViewModel;
-            BirthdayControlViewModel = new BirthdayControlViewModel();
+            BirthdayControlViewModel = new BirthdayControlViewModel(_project.FindBirthdayContacts(DateTime.Now));
             MenuControlViewModel = new MenuControlViewModel(windowService, messageBoxService, aboutService);
             MenuControlViewModel.Command.PropertyChanged += CommandChanged;
         }
@@ -117,19 +116,6 @@ namespace ViewModel
             if(model == null) return;
 
             model.SearchedContacts = _project.SearchContacts(model.SearchingString);
-        }
-
-        /// <summary>
-        /// Processor creating a ViewModel
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnCreatedViewModel(object sender, EventArgs e)
-        {
-            var model = (BirthdayControlViewModel)sender;
-            if (model == null) return;
-
-            model.SearchedContacts = _project.FindBirthdayContacts(DateTime.Now);
         }
 
         /// <summary>
