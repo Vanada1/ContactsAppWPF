@@ -129,22 +129,29 @@ namespace ContactsApp
         /// <summary>
         /// <see cref="Contact"> object constructor
         /// </summary>
-        /// <param name="lasrName"><see cref="LastName"></param>
+        /// <param name="lastName"><see cref="LastName"></param>
         /// <param name="firstName"><see cref="FirstName"/></param>
         /// <param name="phoneNumber"><see cref="PhoneNumber"/></param>
         /// <param name="birthday"><see cref="Birthday"/></param>
         /// <param name="email"><see cref="Email"/></param>
         /// <param name="vkId"><see cref="VkId"/></param>
-        public Contact(string firstName, string lasrName,
+        public Contact(string firstName, string lastName,
             PhoneNumber phoneNumber, DateTime birthday,
             string email, string vkId)
         {
-            LastName = lasrName;
+            LastName = lastName;
             FirstName = firstName;
             PhoneNumber = phoneNumber;
             Birthday = birthday;
             Email = email;
             VkId = vkId;
+            PhoneNumber.PropertyChanged += OnPhoneNumberChanged;
+        }
+
+        private void OnPhoneNumberChanged(object sender, PropertyChangedEventArgs e)
+        {
+	        OnPropertyChanged(nameof(PhoneNumber));
+            OnPropertyChanged(nameof(HasErrors));
         }
 
         public Contact() : this(string.Empty, string.Empty,
