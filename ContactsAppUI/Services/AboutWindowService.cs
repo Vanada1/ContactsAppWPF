@@ -9,31 +9,12 @@ namespace ContactsAppUI.Services
     /// <summary>
     /// Service for display about window
     /// </summary>
-    class AboutWindowService:IWindowService
+    class AboutWindowService:IInformationWindow
     {
-        /// <summary>
-        /// About Window
-        /// </summary>
-        private readonly AboutWindow _about;
-
-        /// <inheritdoc />
-        public bool DialogResult { get; }
-
-        /// <inheritdoc />
-        public RelayCommand OkCommand { get; set; }
-
-        /// <inheritdoc />
-        public RelayCommand CancelCommand { get; set; }
-
-        /// <inheritdoc />
-        public void ShowDialog(object dataContext)
-        {
-            _about.ShowDialog();
-        }
-
-        public AboutWindowService()
-        {
-            _about = new AboutWindow();
-        }
+	    public void Show()
+	    {
+		    var aboutWindow = new AboutWindow();
+		    aboutWindow.ShowDialog();
+	    }
     }
 }

@@ -15,7 +15,7 @@ namespace ViewModel.ControlViewModels
         /// <summary>
         /// For open about window
         /// </summary>
-        private IWindowService _aboutWindowService;
+        private readonly IInformationWindow _aboutWindowService;
 
         /// <summary>
         /// Open about window command
@@ -42,12 +42,12 @@ namespace ViewModel.ControlViewModels
         /// </summary>
         public RelayCommand AboutCommand => _aboutCommand ?? (_aboutCommand = new RelayCommand(o =>
         {
-            _aboutWindowService.ShowDialog(null);
+            _aboutWindowService.Show();
         }));
 
         public MenuControlViewModel(ContactsListControlViewModel contactsListControlViewModelListControlViewModel,
 	        IWindowService windowService,
-	        IMessageBoxService messageBoxService, IWindowService aboutWindowService)
+	        IMessageBoxService messageBoxService, IInformationWindow aboutWindowService)
         {
 	        ContactsListControlViewModel = contactsListControlViewModelListControlViewModel;
 	        _aboutWindowService = aboutWindowService;

@@ -50,21 +50,15 @@ namespace ViewModel
         public RelayCommand RemoveContactCommand =>
             _removeContactCommand ?? (_removeContactCommand = new RelayCommand(o =>
             {
-                if (!(o is ContactsListControlViewModel model))
-                {
-                    _messageBoxService.Show("Inappropriate data type", "Error", MessageBoxButton.Ok,
-                        MessageBoxImage.Error);
-                    return;
-                }
-
-                if (model.SelectedContact == null)
+	            var listBoxControl = GetContactsListControlViewModel(o);
+	            if (listBoxControl.SelectedContact == null)
                 {
                     _messageBoxService.Show("Item not selected", "Alert",
                         MessageBoxButton.Ok, MessageBoxImage.Warning);
                     return;
                 }
 
-                model.AllContacts.Remove(model.SelectedContact);
+                listBoxControl.AllContacts.Remove(listBoxControl.SelectedContact);
                 OnPropertyChanged(nameof(RemoveContactCommand));
             }));
 
@@ -81,7 +75,8 @@ namespace ViewModel
             _windowService.ShowDialog(viewModel);
             if (!_windowService.DialogResult) return;
 
-            ((ContactsListControlViewModel)o).AllContacts.Add(viewModel.PersonDataControlViewModel.Contact);
+            var listBoxControl = GetContactsListControlViewModel(o);
+            listBoxControl.AllContacts.Add(viewModel.PersonDataControlViewModel.Contact);
             OnPropertyChanged(nameof(AddContactCommand));
         }));
 
@@ -90,18 +85,8 @@ namespace ViewModel
         /// </summary>
         public RelayCommand EditContactCommand => _editContactCommand ?? (_editContactCommand = new RelayCommand(o =>
         {
-	        ContactsListControlViewModel listBoxControl;
-	        if (o is MenuControlViewModel menu)
-	        {
-		        listBoxControl = menu.ContactsListControlViewModel;
-
-	        }
-	        else
-	        {
-		        listBoxControl = (ContactsListControlViewModel) o;
-	        }
-
-            if (listBoxControl.SelectedContact == null)
+	        var listBoxControl = GetContactsListControlViewModel(o);
+	        if (listBoxControl.SelectedContact == null)
             {
                 _messageBoxService.Show("Select Item", "Alert",
                     MessageBoxButton.Ok, MessageBoxImage.Warning);
@@ -127,6 +112,27 @@ namespace ViewModel
         {
             _windowService = windowService;
             _messageBoxService = messageBoxService;
+        }
+
+        /// <summary>
+        /// Returns <see cref="ContactsListControlViewModel"/> object
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        private ContactsListControlViewModel GetContactsListControlViewModel(object o)
+        {
+	        ContactsListControlViewModel listBoxControl;
+	        if (o is MenuControlViewModel menu)
+	        {
+		        listBoxControl = menu.ContactsListControlViewModel;
+
+	        }
+	        else
+	        {
+		        listBoxControl = (ContactsListControlViewModel)o;
+	        }
+
+	        return listBoxControl;
         }
     }
 }

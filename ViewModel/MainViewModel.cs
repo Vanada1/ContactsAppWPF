@@ -44,10 +44,12 @@ namespace ViewModel
         /// </summary>
         private RelayCommand _closingWindow;
 
-        public RelayCommand ClosingWindow
-        {
-	        get => _closingWindow ?? (_closingWindow = new RelayCommand(_ => Save()));
-        }
+        public RelayCommand ClosingWindow =>
+	        _closingWindow ?? (_closingWindow = new RelayCommand(_ =>
+	        {
+		        _project.Contacts = new ObservableCollection<Contact>(_project.SortContacts());
+		        Save();
+	        }));
 
         /// <summary>
         /// PersonDataControlViewModel list item model
@@ -89,7 +91,7 @@ namespace ViewModel
         }
 
         public MainViewModel(IWindowService windowService, IMessageBoxService messageBoxService,
-            IWindowService aboutService)
+	        IInformationWindow aboutService)
 		{
 			_project = ProjectManager.ReadProject();
             ContactsListControlViewModel = new ContactsListControlViewModel(_project.Contacts, 

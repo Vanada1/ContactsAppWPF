@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -93,6 +94,13 @@ namespace ViewModel.ControlViewModels
         {
             SearchedContacts = AllContacts = allContacts;
             Command = new Command(windowService, messageBoxService);
+            AllContacts.CollectionChanged += OnCollectionChanged;
+            SearchingString = string.Empty;
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+	        SearchedStringChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

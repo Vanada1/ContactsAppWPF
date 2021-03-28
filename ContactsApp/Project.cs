@@ -19,7 +19,7 @@ namespace ContactsApp
 		/// Sort contacts list
 		/// </summary>
 		/// <returns>All sorted contacts</returns>
-		private IEnumerable<Contact> SortContacts()
+		public IEnumerable<Contact> SortContacts()
 		{
 			for (var i = 0; i < Contacts.Count; i++)
 			{
@@ -47,9 +47,11 @@ namespace ContactsApp
 			var contacts = new List<Contact>();
 	        var response = SortContacts().Where(contact => contact.FirstName.Contains(substring) ||
                                                         contact.LastName.Contains(substring)).ToArray();
-            
-			return response.Length == 0 ? Contacts : new ObservableCollection<Contact>(response);
-		}
+	        var result = response.Length == 0
+		        ? new ObservableCollection<Contact>(SortContacts())
+		        : new ObservableCollection<Contact>(response);
+	        return result;
+        }
 
 		/// <summary>
 		/// Find All people who has Birthday on a specific date
