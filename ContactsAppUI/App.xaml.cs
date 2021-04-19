@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using ContactsAppUI.Services;
+using GalaSoft.MvvmLight.Command;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ViewModel;
-using ViewModel.Commands;
 using ViewModel.Services;
 
 namespace ContactsAppUI
@@ -38,7 +33,7 @@ namespace ContactsAppUI
 
 			var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
 			((MainViewModel) mainWindow.DataContext).MenuControlViewModel.ExitCommand =
-				new RelayCommand(_ => mainWindow.Close());
+				new RelayCommand(() => mainWindow.Close());
 			mainWindow.ShowDialog();
 	    }
 

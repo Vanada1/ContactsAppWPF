@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ContactsApp;
-using ViewModel.Annotations;
-using ViewModel.Commands;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ViewModel.ControlViewModels;
 using ViewModel.Services;
 
@@ -45,7 +39,7 @@ namespace ViewModel
         private RelayCommand _closingWindow;
 
         public RelayCommand ClosingWindow =>
-	        _closingWindow ?? (_closingWindow = new RelayCommand(_ =>
+	        _closingWindow ?? (_closingWindow = new RelayCommand(() =>
 	        {
 		        _project.Contacts = new ObservableCollection<Contact>(_project.SortContacts());
 		        Save();
@@ -94,18 +88,10 @@ namespace ViewModel
 	        IInformationWindow aboutService)
 		{
 			_project = ProjectManager.ReadProject();
-            ContactsListControlViewModel = new ContactsListControlViewModel(_project.Contacts, 
-                windowService, messageBoxService);
-            ContactsListControlViewModel.SearchedStringChanged += OnSearchedStringChanged;
+            ContactsListControlViewModel = new ContactsListControlViewModel(_project, windowService, messageBoxService);
             BirthdayControlViewModel = new BirthdayControlViewModel(_project.FindBirthdayContacts(DateTime.Now));
             MenuControlViewModel = new MenuControlViewModel(ContactsListControlViewModel, windowService,
 	            messageBoxService, aboutService);
-        }
-
-        protected override void OnPropertyChanged(string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
-            Save();
         }
 
         /// <summary>
@@ -116,17 +102,11 @@ namespace ViewModel
 	        ProjectManager.SaveProject(_project);
         }
 
-        /// <summary>
-        /// Event handler for changing the search string
-        /// </summary>
-        /// <param name="sender"><see cref="ControlViewModels.ContactsListControlViewModel"/></param>
-        /// <param name="e"></param>
-        private void OnSearchedStringChanged(object sender, EventArgs e)
+        protected void OnPropertyChanged(string propertyName = null)
         {
-            var model = (ContactsListControlViewModel) sender;
-            if(model == null) return;
-
-            model.SearchedContacts = _project.SearchContacts(model.SearchingString);
+	        base.RaisePropertyChanged(propertyName);
+	        Save();
         }
+
     }
 }

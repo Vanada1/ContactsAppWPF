@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ContactsApp;
-using ViewModel.Annotations;
+using GalaSoft.MvvmLight;
 
 namespace ViewModel.ControlViewModels
 {
@@ -37,12 +32,8 @@ namespace ViewModel.ControlViewModels
 		public int Visibility
         {
             get=>_visibility;
-            set
-            {
-                _visibility = value;
-				OnPropertyChanged(nameof(Visibility));
-            }
-        }
+            set => Set(ref _visibility, value);
+		}
 
 		/// <summary>
 		/// Returns and sets the names of found contacts who have birthday today
@@ -50,11 +41,7 @@ namespace ViewModel.ControlViewModels
 		public string  BirthdayNames
 		{
 			get => _birthdayNames;
-			set
-			{
-				_birthdayNames = value;
-				OnPropertyChanged(nameof(BirthdayNames));
-			}
+			set => Set(ref _birthdayNames, value);
 		}
 
 		public BirthdayControlViewModel(IEnumerable<Contact> contacts)

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using ContactsApp;
-using ContactsApp.Annotations;
-using ViewModel.Commands;
+﻿using ContactsApp;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ViewModel.ControlViewModels;
 using ViewModel.Enumerators;
 using ViewModel.Services;
@@ -32,23 +25,23 @@ namespace ViewModel
         /// <summary>
         /// Command to delete a contact
         /// </summary>
-        private RelayCommand _removeContactCommand;
+        private RelayCommand<object> _removeContactCommand;
 
         /// <summary>
         /// Command to add a contact
         /// </summary>
-        private RelayCommand _addContactCommand;
+        private RelayCommand<object> _addContactCommand;
 
         /// <summary>
         /// Command to edit contact
         /// </summary>
-        private RelayCommand _editContactCommand;
+        private RelayCommand<object> _editContactCommand;
 
         /// <summary>
         /// Return command delete a contact
         /// </summary>
-        public RelayCommand RemoveContactCommand =>
-            _removeContactCommand ?? (_removeContactCommand = new RelayCommand(o =>
+        public RelayCommand<object> RemoveContactCommand =>
+            _removeContactCommand ?? (_removeContactCommand = new RelayCommand<object>(o =>
             {
 	            var listBoxControl = GetContactsListControlViewModel(o);
 	            if (listBoxControl.SelectedContact == null)
@@ -59,13 +52,13 @@ namespace ViewModel
                 }
 
                 listBoxControl.AllContacts.Remove(listBoxControl.SelectedContact);
-                OnPropertyChanged(nameof(RemoveContactCommand));
+                RaisePropertyChanged(nameof(RemoveContactCommand));
             }));
 
         /// <summary>
         /// Return command to add a contact
         /// </summary>
-        public RelayCommand AddContactCommand => _addContactCommand ?? (_addContactCommand = new RelayCommand(o =>
+        public RelayCommand<object> AddContactCommand => _addContactCommand ?? (_addContactCommand = new RelayCommand<object>(o =>
         {
             var viewModel = new ContactWindowViewModel
             {
@@ -77,13 +70,13 @@ namespace ViewModel
 
             var listBoxControl = GetContactsListControlViewModel(o);
             listBoxControl.AllContacts.Add(viewModel.PersonDataControlViewModel.Contact);
-            OnPropertyChanged(nameof(AddContactCommand));
+            RaisePropertyChanged(nameof(AddContactCommand));
         }));
 
         /// <summary>
         /// Return command to edit contact 
         /// </summary>
-        public RelayCommand EditContactCommand => _editContactCommand ?? (_editContactCommand = new RelayCommand(o =>
+        public RelayCommand<object> EditContactCommand => _editContactCommand ?? (_editContactCommand = new RelayCommand<object>(o =>
         {
 	        var listBoxControl = GetContactsListControlViewModel(o);
 	        if (listBoxControl.SelectedContact == null)
@@ -97,7 +90,6 @@ namespace ViewModel
             {
                 OkCommand = _windowService.OkCommand,
                 CancelCommand = _windowService.CancelCommand
-
             };
             var itemIndex = listBoxControl.AllContacts.IndexOf(listBoxControl.SelectedContact);
             _windowService.ShowDialog(window);
@@ -105,7 +97,7 @@ namespace ViewModel
 
             listBoxControl.SelectedContact =
                 listBoxControl.AllContacts[itemIndex] = window.PersonDataControlViewModel.Contact;
-            OnPropertyChanged(nameof(EditContactCommand));
+            RaisePropertyChanged(nameof(EditContactCommand));
         }));
 
         public Command(IWindowService windowService, IMessageBoxService messageBoxService)

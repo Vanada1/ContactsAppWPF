@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ContactsApp;
-using ViewModel.Annotations;
-using ViewModel.Commands;
+using GalaSoft.MvvmLight;
 using ViewModel.Services;
 
 namespace ViewModel.ControlViewModels
@@ -20,6 +13,11 @@ namespace ViewModel.ControlViewModels
     public class ContactsListControlViewModel : ViewModelBase
     {
         /// <summary>
+        /// All program data
+        /// </summary>
+	    private readonly Project _project;
+
+        /// <summary>
         /// Selected contact
         /// </summary>
         private readonly PersonDataControlViewModel _selectedContact = new PersonDataControlViewModel(true, null);
@@ -29,6 +27,9 @@ namespace ViewModel.ControlViewModels
         /// </summary>
         private string _searchingString;
 
+        /// <summary>
+        /// All found contacts
+        /// </summary>
         private ObservableCollection<Contact> _searchedContacts;
 
         /// <summary>
@@ -42,30 +43,21 @@ namespace ViewModel.ControlViewModels
         public ObservableCollection<Contact> SearchedContacts 
         { 
             get => _searchedContacts;
-            set
-            {
-                _searchedContacts = value;
-                OnPropertyChanged(nameof(SearchedContacts));
-            }
+            set => Set(ref _searchedContacts, value);
 
         }
-
-        /// <summary>
-        /// Returns the commands used by buttons
-        /// </summary>
-        public Command Command { get; }
-
+        
         /// <summary>
         /// Returns and sets the selected contact
         /// </summary>
         public Contact SelectedContact
         {
-            get => _selectedContact.Contact;
-            set
-            {
-                _selectedContact.Contact = value;
-                OnPropertyChanged(nameof(SelectedContact));
-            }
+	        get => _selectedContact.Contact;
+	        set
+	        {
+		        _selectedContact.Contact = value;
+		        RaisePropertyChanged(nameof(SelectedContact));
+	        }
         }
 
         public PersonDataControlViewModel PersonDataControlViewModel => _selectedContact;
@@ -75,32 +67,28 @@ namespace ViewModel.ControlViewModels
         /// </summary>
         public string SearchingString
         {
-            get => _searchingString;
-            set
-            {
-                _searchingString = value;
-                OnPropertyChanged(nameof(SearchingString));
-                SearchedStringChanged?.Invoke(this, EventArgs.Empty);
+	        get => _searchingString;
+	        set
+	        {
+		        Set(ref _searchingString, value);
+		        SearchedContacts = _project.SearchContacts(SearchingString);
             }
         }
 
         /// <summary>
-        /// Event that occurs when the search string changes
+        /// Returns the commands used by buttons
         /// </summary>
-        public event EventHandler SearchedStringChanged;
+        public Command Command { get; }
+
         
-        public ContactsListControlViewModel(ObservableCollection<Contact> allContacts, 
+        public ContactsListControlViewModel(Project project, 
             IWindowService windowService, IMessageBoxService messageBoxService)
         {
-            SearchedContacts = AllContacts = allContacts;
+	        _project = project;
+	        AllContacts = project.Contacts;
+            SearchedContacts = AllContacts;
             Command = new Command(windowService, messageBoxService);
-            AllContacts.CollectionChanged += OnCollectionChanged;
             SearchingString = string.Empty;
-        }
-
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-	        SearchedStringChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

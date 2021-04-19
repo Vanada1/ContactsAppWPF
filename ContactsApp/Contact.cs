@@ -48,10 +48,9 @@ namespace ContactsApp
             get => _firstName;
             set
             {
-                _firstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
-                OnPropertyChanged(nameof(FirstName));
+	            Set(ref _firstName, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value));
                 Validation(value, nameof(FirstName));
-                OnPropertyChanged(nameof(HasErrors));
+                RaisePropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -64,10 +63,9 @@ namespace ContactsApp
             get => _lastName;
             set
             {
-                _lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
-                OnPropertyChanged(nameof(LastName));
+	            Set(ref _lastName, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value));
                 Validation(value, nameof(LastName));
-                OnPropertyChanged(nameof(HasErrors));
+                RaisePropertyChanged(nameof(HasErrors));
             }
         }
 
@@ -79,10 +77,9 @@ namespace ContactsApp
             get => this._email;
             set
             {
-                _email = value;
-                OnPropertyChanged(nameof(Email));
+	            Set(ref _email, value);
                 Validation(value, nameof(Email));
-                OnPropertyChanged(nameof(HasErrors));
+                RaisePropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -100,10 +97,9 @@ namespace ContactsApp
             get => _vkId;
             set
             {
-                _vkId = value;
-                OnPropertyChanged(nameof(VkId));
+	            Set(ref _vkId, value);
                 Validation(value, nameof(VkId));
-                OnPropertyChanged(nameof(HasErrors));
+                RaisePropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -116,10 +112,9 @@ namespace ContactsApp
             get => _birthday;
             set
             {
-                _birthday = value;
-                OnPropertyChanged(nameof(Birthday));
+	            Set(ref _birthday, value);
                 Validation(value, nameof(Birthday));
-                OnPropertyChanged(nameof(HasErrors));
+                RaisePropertyChanged(nameof(HasErrors));
             }
         }
 
@@ -150,8 +145,8 @@ namespace ContactsApp
 
         private void OnPhoneNumberChanged(object sender, PropertyChangedEventArgs e)
         {
-	        OnPropertyChanged(nameof(PhoneNumber));
-            OnPropertyChanged(nameof(HasErrors));
+	        RaisePropertyChanged(nameof(PhoneNumber));
+	        RaisePropertyChanged(nameof(HasErrors));
         }
 
         public Contact() : this(string.Empty, string.Empty,

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using ContactsApp;
+﻿using GalaSoft.MvvmLight.Command;
 using ViewModel;
-using ViewModel.Commands;
 using ViewModel.Services;
 
 namespace ContactsAppUI.Services
@@ -45,8 +40,7 @@ namespace ContactsAppUI.Services
         /// <summary>
         /// Close window and <see cref="DialogResult"/> is true
         /// </summary>
-        /// <param name="sender"></param>
-        private void SetOk(object sender)
+        private void SetOk()
         {
             DialogResult = true;
             _window.Close();
@@ -57,23 +51,16 @@ namespace ContactsAppUI.Services
         /// </summary>
         /// <param name="arg"></param>
         /// <returns></returns>
-        private bool CanSetOk(object arg)
+        private bool CanSetOk()
         {
-	        if (arg == null)
-	        {
-		        var model = (ContactWindowViewModel)_window.DataContext;
-		        return !model.PersonDataControlViewModel.Contact.HasErrors;
-	        }
-
-	        var contact = ((ContactWindowViewModel) arg).PersonDataControlViewModel.Contact;
-	        return !contact.HasErrors;
+	        var model = (ContactWindowViewModel) _window.DataContext;
+	        return !model.PersonDataControlViewModel.Contact.HasErrors;
         }
 
         /// <summary>
         /// Close window and <see cref="DialogResult"/> is false
         /// </summary>
-        /// <param name="sender"></param>
-        private void SetCancel(object sender)
+        private void SetCancel()
         {
             DialogResult = false;
             _window.Close();

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using ContactsApp;
-using ContactsApp.Annotations;
+﻿using ContactsApp;
+using GalaSoft.MvvmLight;
 
 namespace ViewModel.ControlViewModels
 {
@@ -28,11 +21,7 @@ namespace ViewModel.ControlViewModels
         public Contact Contact
         {
             get => _contact;
-            set
-            {
-                _contact = value;
-                OnPropertyChanged(nameof(Contact));
-            }
+            set => Set(ref _contact, value);
         }
 
         /// <summary>
@@ -43,9 +32,8 @@ namespace ViewModel.ControlViewModels
             get => _isReadOnly;
             set
             {
-                _isReadOnly = value;
-                OnPropertyChanged(nameof(IsReadOnly));
-                OnPropertyChanged(nameof(IsEnable));
+	            Set(ref _isReadOnly, value);
+                RaisePropertyChanged(nameof(IsEnable));
             }
         }
 

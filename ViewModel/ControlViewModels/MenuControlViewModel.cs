@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ContactsApp;
-using ViewModel.Commands;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ViewModel.Services;
 
 namespace ViewModel.ControlViewModels
@@ -18,11 +12,6 @@ namespace ViewModel.ControlViewModels
         private readonly IInformationWindow _aboutWindowService;
 
         /// <summary>
-        /// Open about window command
-        /// </summary>
-        private RelayCommand _aboutCommand;
-
-        /// <summary>
         /// Returns the commands used by buttons
         /// </summary>
         public Command Command { get; }
@@ -33,6 +22,11 @@ namespace ViewModel.ControlViewModels
         public ContactsListControlViewModel ContactsListControlViewModel { get; }
 
         /// <summary>
+        /// Open about window command
+        /// </summary>
+        private RelayCommand _aboutCommand;
+
+        /// <summary>
         /// Return exit command
         /// </summary>
         public RelayCommand ExitCommand { get; set; }
@@ -40,7 +34,7 @@ namespace ViewModel.ControlViewModels
         /// <summary>
         /// Return open about window command
         /// </summary>
-        public RelayCommand AboutCommand => _aboutCommand ?? (_aboutCommand = new RelayCommand(o =>
+        public RelayCommand AboutCommand => _aboutCommand ?? (_aboutCommand = new RelayCommand(() =>
         {
             _aboutWindowService.Show();
         }));

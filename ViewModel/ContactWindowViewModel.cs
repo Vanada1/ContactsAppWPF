@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using ContactsApp;
-using ViewModel.Annotations;
-using ViewModel.Commands;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ViewModel.ControlViewModels;
 
 namespace ViewModel
@@ -26,11 +19,7 @@ namespace ViewModel
 	    public PersonDataControlViewModel PersonDataControlViewModel
 	    {
 		    get => _personDataControlViewModel;
-		    set
-		    {
-			    _personDataControlViewModel = value;
-                OnPropertyChanged(nameof(PersonDataControlViewModel));
-		    }
+		    set => Set(ref _personDataControlViewModel, value);
 	    }
 
         /// <summary>

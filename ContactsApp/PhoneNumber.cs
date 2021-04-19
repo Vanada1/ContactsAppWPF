@@ -11,7 +11,7 @@ namespace ContactsApp
 	/// <summary>
 	/// Class <see cref="PhoneNumber"> contains the telephone number of the person
 	/// </summary>
-	public class PhoneNumber:NotifyDataErrorInfoViewModelBase, ICloneable
+	public class PhoneNumber : NotifyDataErrorInfoViewModelBase, ICloneable
 	{
         /// <summary>
         /// Number phone
@@ -26,10 +26,9 @@ namespace ContactsApp
             get => _number;
             set
             {
-                _number = value;
-                OnPropertyChanged(nameof(Number));
+	            Set(ref _number, value);
                 Validation(this, nameof(Number));
-                OnPropertyChanged(nameof(HasErrors));
+                RaisePropertyChanged(nameof(HasErrors));
             }
         }
 

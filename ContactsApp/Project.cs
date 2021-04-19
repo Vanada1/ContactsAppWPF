@@ -44,11 +44,16 @@ namespace ContactsApp
 		/// </returns>
 		public ObservableCollection<Contact> SearchContacts(string substring)
         {
+	        if (string.IsNullOrWhiteSpace(substring))
+	        {
+		        return Contacts;
+	        }
+
 			var contacts = new List<Contact>();
 	        var response = SortContacts().Where(contact => contact.FirstName.Contains(substring) ||
                                                         contact.LastName.Contains(substring)).ToArray();
 	        var result = response.Length == 0
-		        ? new ObservableCollection<Contact>(SortContacts())
+		        ? Contacts
 		        : new ObservableCollection<Contact>(response);
 	        return result;
         }

@@ -1,10 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using ContactsApp;
-using ContactsAppUI.Services;
-using ViewModel;
-using ViewModel.Commands;
-using ViewModel.ControlViewModels;
+﻿using System.Windows;
 
 namespace ContactsAppUI
 {
