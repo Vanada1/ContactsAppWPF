@@ -18,6 +18,8 @@ namespace ContactsApp
         /// </summary>
         private string _number;
 
+        private PropertyState _numberState = PropertyState.Initial;
+
         /// <summary>
 		/// Sets and returns <see cref="Number"> values 
 		/// </summary>
@@ -27,7 +29,12 @@ namespace ContactsApp
             set
             {
 	            Set(ref _number, value);
-                Validation(this, nameof(Number));
+	            if (_numberState == PropertyState.Updated)
+	            {
+		            Validation(this, nameof(Number));
+	            }
+
+	            _numberState = PropertyState.Updated;
                 RaisePropertyChanged(nameof(HasErrors));
             }
         }

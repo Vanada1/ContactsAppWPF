@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PropertyState.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="DateValidator.cs" />
     <Compile Include="NotifyDataErrorInfoViewModelBase.cs" />

@@ -21,9 +21,19 @@ namespace ContactsApp
         private string _firstName;
 
         /// <summary>
+        /// FirstName state
+        /// </summary>
+        private PropertyState _firstNameState = PropertyState.Initial;
+
+        /// <summary>
         /// Contact <see cref="LastName"/>
         /// </summary>
         private string _lastName;
+
+        /// <summary>
+        /// LastName state
+        /// </summary>
+        private PropertyState _lastNameState = PropertyState.Initial;
 
         /// <summary>
         /// Contact <see cref="Birthday"/>
@@ -31,14 +41,29 @@ namespace ContactsApp
         private DateTime _birthday;
 
         /// <summary>
+        /// Birthday state
+        /// </summary>
+        private PropertyState _birthdayState = PropertyState.Initial;
+
+        /// <summary>
         /// Contact <see cref="Email"/>
         /// </summary>
         private string _email;
 
         /// <summary>
+        /// Email state
+        /// </summary>
+        private PropertyState _emailState = PropertyState.Initial;
+
+        /// <summary>
         /// Contact <see cref="VkId"/>
         /// </summary>
         private string _vkId;
+
+        /// <summary>
+        /// VkId state
+        /// </summary>
+        private PropertyState _vkIdState = PropertyState.Initial;
 
         /// <summary>
         /// Sets and returns <see cref="FirstName"> values 
@@ -49,7 +74,13 @@ namespace ContactsApp
             set
             {
 	            Set(ref _firstName, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value));
-                Validation(value, nameof(FirstName));
+
+	            if (_firstNameState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(FirstName));
+	            }
+
+	            _firstNameState = PropertyState.Updated;
                 RaisePropertyChanged(nameof(HasErrors));
             }
 
@@ -64,7 +95,12 @@ namespace ContactsApp
             set
             {
 	            Set(ref _lastName, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value));
-                Validation(value, nameof(LastName));
+	            if (_lastNameState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(LastName));
+	            }
+
+	            _lastNameState = PropertyState.Updated;
                 RaisePropertyChanged(nameof(HasErrors));
             }
         }
@@ -78,8 +114,13 @@ namespace ContactsApp
             set
             {
 	            Set(ref _email, value);
-                Validation(value, nameof(Email));
-                RaisePropertyChanged(nameof(HasErrors));
+	            if (_emailState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(Email));
+	            }
+
+	            _emailState = PropertyState.Updated;
+	            RaisePropertyChanged(nameof(HasErrors));
             }
 
         }
@@ -98,7 +139,12 @@ namespace ContactsApp
             set
             {
 	            Set(ref _vkId, value);
-                Validation(value, nameof(VkId));
+	            if (_vkIdState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(VkId));
+	            }
+
+	            _vkIdState = PropertyState.Updated;
                 RaisePropertyChanged(nameof(HasErrors));
             }
 
@@ -113,13 +159,25 @@ namespace ContactsApp
             set
             {
 	            Set(ref _birthday, value);
-                Validation(value, nameof(Birthday));
+	            if (_birthdayState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(Birthday));
+	            }
+
+	            _birthdayState = PropertyState.Updated;
                 RaisePropertyChanged(nameof(HasErrors));
             }
         }
 
         /// <inheritdoc />
-        public override bool HasErrors => base.HasErrors || PhoneNumber.HasErrors;
+        public override bool HasErrors => base.HasErrors || PhoneNumber.HasErrors || !IsNotEmpty;
+
+        private bool IsNotEmpty => !string.IsNullOrWhiteSpace(FirstName) &&
+                                   !string.IsNullOrWhiteSpace(LastName) &&
+                                   !string.IsNullOrWhiteSpace(Email) &&
+                                   !string.IsNullOrWhiteSpace(VkId) &&
+                                   !string.IsNullOrWhiteSpace(PhoneNumber.Number);
+
 
         /// <summary>
         /// <see cref="Contact"> object constructor
