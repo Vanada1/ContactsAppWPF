@@ -51,11 +51,7 @@ namespace ViewModel
         public ContactsListControlViewModel ContactsListControlViewModel
         {
             get=>_contactsListControlViewModel;
-            set
-            {
-                _contactsListControlViewModel = value;
-				OnPropertyChanged(nameof(ContactsListControlViewModel));
-            }
+            set => Set(ref _contactsListControlViewModel, value);
         }
 
         /// <summary>
@@ -64,11 +60,7 @@ namespace ViewModel
         public BirthdayControlViewModel BirthdayControlViewModel
         {
             get => _birthdayControlViewModel;
-            set
-            {
-                _birthdayControlViewModel = value;
-                OnPropertyChanged(nameof(BirthdayControlViewModel));
-            }
+            set => Set(ref _birthdayControlViewModel, value);
         }
 
         /// <summary>
@@ -77,11 +69,7 @@ namespace ViewModel
         public MenuControlViewModel MenuControlViewModel
         {
             get => _menuControlViewModel;
-            set
-            {
-                _menuControlViewModel = value;
-                OnPropertyChanged(nameof(MenuControlViewModel));
-            }
+            set => Set(ref _menuControlViewModel, value);
         }
 
         public MainViewModel(IWindowService windowService, IMessageBoxService messageBoxService,

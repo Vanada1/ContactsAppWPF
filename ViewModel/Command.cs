@@ -40,8 +40,8 @@ namespace ViewModel
         /// <summary>
         /// Return command delete a contact
         /// </summary>
-        public RelayCommand<object> RemoveContactCommand =>
-            _removeContactCommand ?? (_removeContactCommand = new RelayCommand<object>(o =>
+        public RelayCommand<object> RemoveContactCommand => _removeContactCommand ?? 
+                                                            (_removeContactCommand = new RelayCommand<object>(o =>
             {
 	            var listBoxControl = GetContactsListControlViewModel(o);
 	            if (listBoxControl.SelectedContact == null)
@@ -58,7 +58,8 @@ namespace ViewModel
         /// <summary>
         /// Return command to add a contact
         /// </summary>
-        public RelayCommand<object> AddContactCommand => _addContactCommand ?? (_addContactCommand = new RelayCommand<object>(o =>
+        public RelayCommand<object> AddContactCommand => _addContactCommand ??
+                                                         (_addContactCommand = new RelayCommand<object>(o =>
         {
             var viewModel = new ContactWindowViewModel
             {
@@ -76,7 +77,8 @@ namespace ViewModel
         /// <summary>
         /// Return command to edit contact 
         /// </summary>
-        public RelayCommand<object> EditContactCommand => _editContactCommand ?? (_editContactCommand = new RelayCommand<object>(o =>
+        public RelayCommand<object> EditContactCommand => _editContactCommand ?? 
+                                                          (_editContactCommand = new RelayCommand<object>(o =>
         {
 	        var listBoxControl = GetContactsListControlViewModel(o);
 	        if (listBoxControl.SelectedContact == null)
