@@ -76,7 +76,7 @@
             Grid.Column="1"
             IsEnabled="{Binding IsEnable}"
             SelectedDate="{Binding Contact.Birthday, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-            Style="{StaticResource ControlStyle}" />
+            Style="{StaticResource DatePickerStyle}" />
         <TextBox
             Grid.Row="3"
             Grid.Column="1"

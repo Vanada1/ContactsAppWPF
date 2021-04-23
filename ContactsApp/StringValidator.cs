@@ -14,9 +14,14 @@ namespace ContactsApp
 		public static void AssertStringLength(string checkedString,
 			int maxLength, string name)
 		{
-			if (checkedString.Length > maxLength || checkedString.Length == 0)
+			if (checkedString.Length > maxLength)
 			{
-				throw new ArgumentException(name + " is wrong");
+				throw new ArgumentException($"{name} too long. Maximum length is {maxLength}");
+			}
+
+			if (checkedString.Length == 0)
+			{
+				throw new ArgumentException($"Field {name} cannot be empty");
 			}
 		}
 
