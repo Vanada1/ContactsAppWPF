@@ -5,7 +5,7 @@ namespace ContactsAppUI.Services
     /// <summary>
     /// Service for display about window
     /// </summary>
-    class AboutWindowService:IInformationWindow
+    class AboutWindowService : IInformationWindow
     {
 	    public void Show()
 	    {

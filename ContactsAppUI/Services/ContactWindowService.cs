@@ -7,7 +7,7 @@ namespace ContactsAppUI.Services
     /// <summary>
     /// To work with the _window for adding / changing a contact
     /// </summary>
-    public class ContactWindowService :IWindowService
+    public class ContactWindowService : IWindowService
     {
         /// <summary>
         /// Add edit contact window

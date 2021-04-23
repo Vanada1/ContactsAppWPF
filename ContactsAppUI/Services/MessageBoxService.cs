@@ -11,7 +11,7 @@ namespace ContactsAppUI
     /// <summary>
     /// Shows the MessageBox
     /// </summary>
-    class MessageBoxService :IMessageBoxService
+    class MessageBoxService : IMessageBoxService
     {
         /// <summary>
         /// Dictionary for defining buttons

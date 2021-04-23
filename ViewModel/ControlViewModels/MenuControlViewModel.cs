@@ -4,7 +4,7 @@ using ViewModel.Services;
 
 namespace ViewModel.ControlViewModels
 {
-    public class MenuControlViewModel:ViewModelBase
+    public class MenuControlViewModel : ViewModelBase
     {
         /// <summary>
         /// For open about window
