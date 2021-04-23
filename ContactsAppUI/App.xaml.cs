@@ -39,9 +39,8 @@ namespace ContactsAppUI
 
 		private void ConfigureService(ServiceCollection service)
 		{
-			service.AddScoped<IWindowService, ContactWindowService>();
+			service.AddScoped<IWindowService, WindowService>();
 			service.AddScoped<IMessageBoxService, MessageBoxService>();
-			service.AddScoped<IInformationWindow, AboutWindowService>();
 			service.AddTransient<MainViewModel>();
 			service.AddTransient<MainWindow>(provider => new MainWindow
 				{DataContext = provider.GetService<MainViewModel>()});

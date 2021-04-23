@@ -67,7 +67,6 @@
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IInformationWindow.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\IWindowService.cs" />
   </ItemGroup>

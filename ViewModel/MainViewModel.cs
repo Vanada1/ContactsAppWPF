@@ -72,14 +72,13 @@ namespace ViewModel
             set => Set(ref _menuControlViewModel, value);
         }
 
-        public MainViewModel(IWindowService windowService, IMessageBoxService messageBoxService,
-	        IInformationWindow aboutService)
+        public MainViewModel(IWindowService windowService, IMessageBoxService messageBoxService)
 		{
 			_project = ProjectManager.ReadProject();
             ContactsListControlViewModel = new ContactsListControlViewModel(_project, windowService, messageBoxService);
             BirthdayControlViewModel = new BirthdayControlViewModel(_project.FindBirthdayContacts(DateTime.Now));
             MenuControlViewModel = new MenuControlViewModel(ContactsListControlViewModel, windowService,
-	            messageBoxService, aboutService);
+	            messageBoxService);
         }
 
         /// <summary>

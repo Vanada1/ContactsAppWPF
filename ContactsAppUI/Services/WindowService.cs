@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System.Windows;
+using GalaSoft.MvvmLight.Command;
 using ViewModel;
 using ViewModel.Services;
 
@@ -7,12 +8,12 @@ namespace ContactsAppUI.Services
     /// <summary>
     /// To work with the _window for adding / changing a contact
     /// </summary>
-    public class ContactWindowService : IWindowService
+    public class WindowService : IWindowService
     {
         /// <summary>
         /// Add edit contact window
         /// </summary>
-        private ContactWindow _window;
+        private Window _window;
 
         /// <inheritdoc />
         public bool DialogResult { get; set; } = false;
@@ -23,7 +24,7 @@ namespace ContactsAppUI.Services
         /// <inheritdoc />
         public RelayCommand CancelCommand { get; set; }
 
-        public ContactWindowService()
+        public WindowService()
         {
             OkCommand = new RelayCommand(SetOk, CanSetOk);
             CancelCommand = new RelayCommand(SetCancel);
@@ -32,7 +33,19 @@ namespace ContactsAppUI.Services
         /// <inheritdoc />
         public void ShowDialog(object dataContext)
         {
-            _window = new ContactWindow(dataContext);
+	        if (dataContext == null)
+	        {
+		        _window = new AboutWindow();
+            }
+            else if (dataContext is ContactWindowViewModel)
+	        {
+		        _window = new ContactWindow(dataContext);
+	        }
+	        else
+	        {
+		        return;
+	        }
+
             _window.ShowDialog();
         }
 

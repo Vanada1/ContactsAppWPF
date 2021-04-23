@@ -9,7 +9,7 @@ namespace ViewModel.ControlViewModels
         /// <summary>
         /// For open about window
         /// </summary>
-        private readonly IInformationWindow _aboutWindowService;
+        private readonly IWindowService _windowService;
 
         /// <summary>
         /// Returns the commands used by buttons
@@ -36,15 +36,14 @@ namespace ViewModel.ControlViewModels
         /// </summary>
         public RelayCommand AboutCommand => _aboutCommand ?? (_aboutCommand = new RelayCommand(() =>
         {
-            _aboutWindowService.Show();
+            _windowService.ShowDialog(null);
         }));
 
         public MenuControlViewModel(ContactsListControlViewModel contactsListControlViewModelListControlViewModel,
-	        IWindowService windowService,
-	        IMessageBoxService messageBoxService, IInformationWindow aboutWindowService)
+	        IWindowService windowService, IMessageBoxService messageBoxService)
         {
 	        ContactsListControlViewModel = contactsListControlViewModelListControlViewModel;
-	        _aboutWindowService = aboutWindowService;
+	        _windowService = windowService;
 	        Command = new Command(windowService, messageBoxService);
         }
     }
