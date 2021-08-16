@@ -51,7 +51,7 @@ namespace ContactsApp
 
             try
             {
-	            using (StreamReader file = new StreamReader(
+	            using (var file = new StreamReader(
 		            DefaultPath, System.Text.Encoding.Default))
 	            {
 		            var projectText = file.ReadLine();
@@ -85,7 +85,7 @@ namespace ContactsApp
 				CreatePath(_folder, _fileName);
 			}
 
-			using (StreamWriter file = new StreamWriter(
+			using (var file = new StreamWriter(
 				DefaultPath, false, System.Text.Encoding.UTF8))
 			{
                 file.Write(JsonConvert.SerializeObject(project));
@@ -99,11 +99,11 @@ namespace ContactsApp
         /// <param name="fileName">File name</param>
         public static void CreatePath(string folder, string fileName)
 		{
-			if (folder == null)
+			if (string.IsNullOrEmpty(folder) || string.IsNullOrWhiteSpace(folder))
 			{
 				folder = _folder;
 			}
-			if (fileName == null)
+			if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
 			{
 				fileName = _fileName;
 			}

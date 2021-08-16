@@ -1,81 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ContactsApp;
-using ViewModel.Annotations;
+using GalaSoft.MvvmLight;
 
 namespace ViewModel.ControlViewModels
 {
-	public class BirthdayControlViewModel : INotifyPropertyChanged
+	/// <summary>
+	/// ViewModel class for a list of people who have a birthday
+	/// </summary>
+	public class BirthdayControlViewModel : ViewModelBase
 	{
 		/// <summary>
-		/// Все имена контактов, у которых ДР
+		/// All names of contacts who have a birthday
 		/// </summary>
 		private string _birthdayNames;
 
+        /// <summary>
+        /// Is the window visible
+        /// </summary>
 		private int _visibility = 0;
 
-		/// <summary>
-		/// События, которые выполняется при создании экземпляра класса
-		/// </summary>
-		public static event EventHandler CreatedViewModel;
-
-		/// <summary>
-		/// Возвращает и устанавливает найденные контакты, у которых сегодня ДР
+        /// <summary>
+		/// Returns and installs found contacts who have DR
 		/// </summary>
 		public ObservableCollection<Contact> SearchedContacts { get; set; }
 
-        /// <summary>
-        /// Видимо ли окно
-        /// </summary>
-        public int Visibility
+		/// <summary>
+		/// Returns or sets the visibility of the window
+		/// </summary>
+		public int Visibility
         {
             get=>_visibility;
-            set
-            {
-                _visibility = value;
-				OnPropertyChanged(nameof(Visibility));
-            }
-        }
+            set => Set(ref _visibility, value);
+		}
 
 		/// <summary>
-		/// Возвращает и устанавливает имена найденных контакты, у которых сегодня ДР
+		/// Returns and sets the names of found contacts who have birthday today
 		/// </summary>
 		public string  BirthdayNames
 		{
 			get => _birthdayNames;
-			set
-			{
-				_birthdayNames = value;
-				OnPropertyChanged(nameof(BirthdayNames));
-			}
+			set => Set(ref _birthdayNames, value);
 		}
 
-        public BirthdayControlViewModel()
+		public BirthdayControlViewModel(IEnumerable<Contact> contacts)
 		{
-			CreatedViewModel?.Invoke(this, EventArgs.Empty);
+			SearchedContacts = new ObservableCollection<Contact>(contacts);
 			BirthdayNames = GetBirthdayNames();
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-		/// <summary>
-		/// Делает строку имен и фамилий контактов, у которых сегодня ДР
+        /// <summary>
+		/// Makes a string of first and last names of contacts who have DR today
 		/// </summary>
 		/// <returns>
-		///		Строку имен и фамилий контактов, у которых сегодня ДР. 
-		///		Если контактов нет, то контрол не показывается
+		///		A string of first and last names of contacts who have a birthday today.
+        ///		If there are no contacts, then the control is not shown
 		/// </returns>
 		private string GetBirthdayNames()
 		{

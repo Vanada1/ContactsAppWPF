@@ -1,37 +1,45 @@
-﻿namespace ContactsApp
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using ContactsApp.Annotations;
+
+namespace ContactsApp
 {
 	/// <summary>
 	/// Class <see cref="PhoneNumber"> contains the telephone number of the person
 	/// </summary>
-	public class PhoneNumber
+	public class PhoneNumber : NotifyDataErrorInfoViewModelBase, ICloneable
 	{
-		/// <summary>
-		/// Number phone
-		/// </summary>
-		private string _number;
+        /// <summary>
+        /// Number phone
+        /// </summary>
+        private string _number;
 
-		/// <summary>
-		/// Max count of <see cref="Number"/>
-		/// </summary>
-		public const int MAXDIGITCOUNT = 11;
+        private PropertyState _numberState = PropertyState.Initial;
 
-		/// <summary>
+        /// <summary>
 		/// Sets and returns <see cref="Number"> values 
 		/// </summary>
 		public string Number
-		{
-			get 
-			{
-				return this._number;
-			}
-			set
-			{
-               StringValidator.AssertPhoneNumber(value, MAXDIGITCOUNT);
-				this._number = value;
-			}
-		}
+        { 
+            get => _number;
+            set
+            {
+	            Set(ref _number, value);
+	            if (_numberState == PropertyState.Updated)
+	            {
+		            Validation(this, nameof(Number));
+	            }
 
-		/// <summary>
+	            _numberState = PropertyState.Updated;
+                RaisePropertyChanged(nameof(HasErrors));
+            }
+        }
+
+        /// <summary>
 		/// <see cref="PhoneNumber"/> constructor
 		/// </summary>
 		/// <param name="number">
@@ -39,12 +47,18 @@
 		/// </param>
 		public PhoneNumber(string number)
 		{
-			this.Number = number;
+			Number = number;
 		}
 
         public PhoneNumber()
         {
-
+            Number = string.Empty;
         }
-	}
+
+        /// <inheritdoc />
+        public object Clone()
+        {
+            return new PhoneNumber(Number);
+        }
+    }
 }

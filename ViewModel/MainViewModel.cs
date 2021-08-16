@@ -1,101 +1,99 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ContactsApp;
-using ViewModel.Annotations;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ViewModel.ControlViewModels;
+using ViewModel.Services;
 
 namespace ViewModel
 {
-	public class MainViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// ViewModel for window MainWindow
+    /// </summary>
+	public class MainViewModel : ViewModelBase
 	{
-		/// <summary>
-		/// Все данные приложения
-		/// </summary>
-		private readonly Project _project;
+        /// <summary>
+        /// Application data
+        /// </summary>
+        private readonly Project _project;
 
         /// <summary>
-        /// Контрол со списком контактов
+        /// Control with contact list
         /// </summary>
-        private ContactsListControlViewModel _contactsControlView;
+        private ContactsListControlViewModel _contactsListControlViewModel;
 
         /// <summary>
-        /// Контрол с контактами, у которых ДР
+        /// Control with contacts who have a birthday
         /// </summary>
-        private BirthdayControlViewModel _birthdayControlView;
+        private BirthdayControlViewModel _birthdayControlViewModel;
 
         /// <summary>
-        /// Модель элемента списка контактов
+        /// Menu control
         /// </summary>
-        public ContactsListControlViewModel ContactsModel
+        private MenuControlViewModel _menuControlViewModel;
+
+        /// <summary>
+        /// Closing window command
+        /// </summary>
+        private RelayCommand _closingWindow;
+
+        public RelayCommand ClosingWindow =>
+	        _closingWindow ?? (_closingWindow = new RelayCommand(() =>
+	        {
+		        _project.Contacts = new ObservableCollection<Contact>(_project.SortContacts());
+		        Save();
+	        }));
+
+        /// <summary>
+        /// PersonDataControlViewModel list item model
+        /// </summary>
+        public ContactsListControlViewModel ContactsListControlViewModel
         {
-            get=>_contactsControlView;
-            set
-            {
-                _contactsControlView = value;
-				OnPropertyChanged(nameof(ContactsModel));
-            }
+            get=>_contactsListControlViewModel;
+            set => Set(ref _contactsListControlViewModel, value);
         }
 
         /// <summary>
-        /// Возвращает и устанавливает контрол с контактами, у которых ДР
+        /// Revives and establishes control with contacts who have birthday
         /// </summary>
-        public BirthdayControlViewModel BirthdayControlView
+        public BirthdayControlViewModel BirthdayControlViewModel
         {
-            get => _birthdayControlView;
-            set
-            {
-                _birthdayControlView = value;
-                OnPropertyChanged(nameof(BirthdayControlView));
-            }
+            get => _birthdayControlViewModel;
+            set => Set(ref _birthdayControlViewModel, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-        public void Save()
+        /// <summary>
+        /// Returns and sets Menu control
+        /// </summary>
+        public MenuControlViewModel MenuControlViewModel
         {
-            ProjectManager.SaveProject(_project);
+            get => _menuControlViewModel;
+            set => Set(ref _menuControlViewModel, value);
         }
 
-		public MainViewModel()
+        public MainViewModel(IWindowService windowService, IMessageBoxService messageBoxService)
 		{
 			_project = ProjectManager.ReadProject();
-            ContactsModel = new ContactsListControlViewModel(_project.Contacts);
-            ContactsModel.SearchedStringChanged += OnSearchedStringChanged;
-            BirthdayControlViewModel.CreatedViewModel += OnCreatedViewModel;
-            BirthdayControlView = new BirthdayControlViewModel();
+            ContactsListControlViewModel = new ContactsListControlViewModel(_project, windowService, messageBoxService);
+            BirthdayControlViewModel = new BirthdayControlViewModel(_project.FindBirthdayContacts(DateTime.Now));
+            MenuControlViewModel = new MenuControlViewModel(ContactsListControlViewModel, windowService,
+	            messageBoxService);
         }
 
         /// <summary>
-        /// Обработчик события для изменения строки поиска
+        /// Save application data
         /// </summary>
-        /// <param name="sender"><see cref="ContactsListControlViewModel"/></param>
-        /// <param name="e"></param>
-        private void OnSearchedStringChanged(object sender, EventArgs e)
+        private void Save()
         {
-            var model = (ContactsListControlViewModel) sender;
-            if(model == null) return;
-
-            model.SearchedContacts = _project.SearchContacts(model.SearchingString);
+	        ProjectManager.SaveProject(_project);
         }
 
-        private void OnCreatedViewModel(object sender, EventArgs e)
+        protected void OnPropertyChanged(string propertyName = null)
         {
-            var model = (BirthdayControlViewModel)sender;
-            if (model == null) return;
-
-            model.SearchedContacts = _project.FindBirthdayContacts(DateTime.Now);
+	        base.RaisePropertyChanged(propertyName);
+	        Save();
         }
+
     }
 }

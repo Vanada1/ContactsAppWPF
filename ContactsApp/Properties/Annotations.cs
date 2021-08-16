@@ -31,7 +31,7 @@ using System;
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
 
-namespace ViewModel.Annotations
+namespace ContactsApp.Annotations
 {
   /// <summary>
   /// Indicates that the value of the marked element could be <c>null</c> sometimes,
@@ -147,7 +147,7 @@ namespace ViewModel.Annotations
   ///     public const string STRING_CONST = "1";
   ///   }
   ///
-  ///   public class MessageBoxButton
+  ///   public class Class1
   ///   {
   ///     [ValueProvider("TestNamespace.Constants")] public int myField;
   ///     public void Foo([ValueProvider("TestNamespace.Constants")] string str) { }

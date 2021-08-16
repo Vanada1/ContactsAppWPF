@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance control:Contact}"
+    xmlns:vm="clr-namespace:ViewModel.ControlViewModels;assembly=ViewModel"
+    d:DataContext="{d:DesignInstance vm:PersonDataControlViewModel}"
     d:DesignHeight="200"
     d:DesignWidth="400"
     mc:Ignorable="d">
@@ -61,34 +62,39 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
+            IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=LastName}" />
+            Text="{Binding Contact.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
+            IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=FirstName}" />
+            Text="{Binding Contact.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <DatePicker
             Grid.Row="2"
             Grid.Column="1"
-            Style="{StaticResource ControlStyle}"
-            Text="{Binding Path=Birthday}" />
+            IsEnabled="{Binding IsEnable}"
+            SelectedDate="{Binding Contact.Birthday, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource DatePickerStyle}" />
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
-            DataContext="{Binding Path=PhoneNumber}"
+            IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=Number}" />
+            Text="{Binding Contact.PhoneNumber.Number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
+            IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=Email}" />
+            Text="{Binding Contact.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Width="Auto"
+            IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Path=VkId}" />
+            Text="{Binding Contact.VkId, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

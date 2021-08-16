@@ -1,99 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Specialized;
 using ContactsApp;
-using ViewModel.Annotations;
-using ViewModel.Commands;
+using GalaSoft.MvvmLight;
+using ViewModel.Services;
 
 namespace ViewModel.ControlViewModels
 {
-    public class ContactsListControlViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// ViewModel class for contact list
+    /// </summary>
+    public class ContactsListControlViewModel : ViewModelBase
     {
         /// <summary>
-        /// Выбранный контакт
+        /// All program data
         /// </summary>
-        private Contact _selectedContact;
+	    private readonly Project _project;
 
         /// <summary>
-        /// Строка поиска
+        /// Selected contact
+        /// </summary>
+        private readonly PersonDataControlViewModel _selectedContact = new PersonDataControlViewModel(true, null);
+
+        /// <summary>
+        /// Search line
         /// </summary>
         private string _searchingString;
 
+        /// <summary>
+        /// All found contacts
+        /// </summary>
         private ObservableCollection<Contact> _searchedContacts;
 
         /// <summary>
-        /// Возвращает все контакты
+        /// Returns all contacts
         /// </summary>
         public ObservableCollection<Contact> AllContacts { get; }
 
         /// <summary>
-        /// Возвращает и устанавливает все найденные контакты
+        /// Returns and sets all found contacts
         /// </summary>
         public ObservableCollection<Contact> SearchedContacts 
         { 
             get => _searchedContacts;
-            set
-            {
-                _searchedContacts = value;
-                OnPropertyChanged(nameof(SearchedContacts));
-            }
+            set => Set(ref _searchedContacts, value);
 
-        }
-
-        /// <summary>
-        /// Возвращает команды, которые используются кнопками
-        /// </summary>
-        public Command Command { get; }
-
-        /// <summary>
-        /// Возвращает и устанавливает выбранный контакт 
-        /// </summary>
-        public Contact SelectedContact
-        {
-            get => _selectedContact;
-            set
-            {
-                _selectedContact = value;
-                OnPropertyChanged(nameof(SelectedContact));
-            }
         }
         
         /// <summary>
-        /// Возвращает и устанавливает поисковую строку
+        /// Returns and sets the selected contact
+        /// </summary>
+        public Contact SelectedContact
+        {
+	        get => _selectedContact.Contact;
+	        set
+	        {
+		        _selectedContact.Contact = value;
+		        RaisePropertyChanged(nameof(SelectedContact));
+	        }
+        }
+
+        public PersonDataControlViewModel PersonDataControlViewModel => _selectedContact;
+
+        /// <summary>
+        /// Returns and sets the search string
         /// </summary>
         public string SearchingString
         {
-            get => _searchingString;
-            set
-            {
-                _searchingString = value;
-                OnPropertyChanged(nameof(SearchingString));
-                SearchedStringChanged?.Invoke(this, EventArgs.Empty);
+	        get => _searchingString;
+	        set
+	        {
+		        Set(ref _searchingString, value);
+		        SearchedContacts = _project.SearchContacts(SearchingString);
             }
         }
 
-        public ContactsListControlViewModel(ObservableCollection<Contact> allContacts)
-        {
-            SearchedContacts = AllContacts = allContacts;
-            Command = new Command();
-        }
-
         /// <summary>
-        /// Событие, возникающее при изменении поисковой строки
+        /// Returns the commands used by buttons
         /// </summary>
-        public event EventHandler SearchedStringChanged;
+        public Command Command { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        
+        public ContactsListControlViewModel(Project project, 
+            IWindowService windowService, IMessageBoxService messageBoxService)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	        _project = project;
+	        AllContacts = project.Contacts;
+            SearchedContacts = AllContacts;
+            Command = new Command(windowService, messageBoxService);
+            SearchingString = string.Empty;
         }
     }
 }

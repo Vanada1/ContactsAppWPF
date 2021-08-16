@@ -5,6 +5,7 @@
     xmlns:contactsApp="clr-namespace:ContactsApp;assembly=ContactsApp"
     xmlns:controls="clr-namespace:ContactsAppUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:ViewModel;assembly=ViewModel"
@@ -16,6 +17,11 @@
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
     Icon="Resources/phonebook.ico"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingWindow}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
@@ -31,14 +37,15 @@
             x:Name="MenuControl"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2" />
+            Grid.ColumnSpan="2"
+            DataContext="{Binding MenuControlViewModel}" />
 
         <controls:ContactsListControl
             x:Name="ContactsListControl"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
-            DataContext="{Binding Path=ContactsModel}"
+            DataContext="{Binding Path=ContactsListControlViewModel}"
             Style="{StaticResource ControlStyle}" />
 
         <controls:PersonDataControl
@@ -47,8 +54,7 @@
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
-            DataContext="{Binding Path=ContactsModel.SelectedContact}"
-            IsEnabled="False"
+            DataContext="{Binding Path=ContactsListControlViewModel.PersonDataControlViewModel}"
             Style="{StaticResource ControlStyle}" />
 
         <controls:BirthdayControl
@@ -58,7 +64,7 @@
             Grid.Column="1"
             Margin="3,0,0,0"
             VerticalAlignment="Bottom"
-            DataContext="{Binding Path=BirthdayControlView}">
+            DataContext="{Binding Path=BirthdayControlViewModel}">
             <controls:BirthdayControl.Style>
                 <Style>
                     <Style.Triggers>

@@ -9,8 +9,32 @@
         <Setter Property="TextBlock.HorizontalAlignment" Value="Right" />
         <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
     </Style>
-    <Style x:Key="TextBoxStyle" BasedOn="{StaticResource ControlStyle}">
+    <Style
+        x:Key="TextBoxStyle"
+        BasedOn="{StaticResource ControlStyle}"
+        TargetType="TextBox">
         <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                <Setter Property="Foreground" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="DatePickerStyle"
+        BasedOn="{StaticResource ControlStyle}"
+        TargetType="DatePicker">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Binding Path="(Validation.Errors).CurrentItem.ErrorContent" RelativeSource="{x:Static RelativeSource.Self}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="ButtonStyle" BasedOn="{StaticResource ControlStyle}" />
