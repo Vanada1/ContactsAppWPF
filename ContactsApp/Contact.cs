@@ -1,178 +1,223 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
-	/// <summary>
-	/// The <see cref="Contact"> class contains information about the contact: 
-	/// <see cref="Name">, <see cref="Surname">, <see cref="PhoneNumber">,
-	/// <see cref="Birthday">, <see cref="Email">, <see cref="VkId">
-	/// </summary>
-	public class Contact : ICloneable
+    /// <summary>
+    /// The <see cref="Contact"> class contains information about the contact: 
+    /// <see cref="FirstName">, <see cref="LastName">, <see cref="PhoneNumber">,
+    /// <see cref="Birthday">, <see cref="Email">, <see cref="VkId">
+    /// </summary>
+    public class Contact : NotifyDataErrorInfoViewModelBase, ICloneable
     {
-		/// <summary>
-		/// Max count of letters for <see cref="Name"/>, 
-		/// <see cref="Surname"/>, <see cref="Email"/>
-		/// </summary>
-        public const int MAXLETTERCOUNT = 50;
+        /// <summary>
+        /// Contact <see cref="FirstName"/>
+        /// </summary>
+        private string _firstName;
 
-		/// <summary>
-		/// Max count of letters for <see cref="VkId"/>
-		/// </summary>
-		public const int MAXVKLETTERCOUNT = 15;
+        /// <summary>
+        /// FirstName state
+        /// </summary>
+        private PropertyState _firstNameState = PropertyState.Initial;
 
-		/// <summary>
-		/// Contact <see cref="Name"/>
-		/// </summary>
-		private string _name;
+        /// <summary>
+        /// Contact <see cref="LastName"/>
+        /// </summary>
+        private string _lastName;
 
-		/// <summary>
-		/// Contact <see cref="Surname"/>
-		/// </summary>
-		private string _surname;
+        /// <summary>
+        /// LastName state
+        /// </summary>
+        private PropertyState _lastNameState = PropertyState.Initial;
 
-		/// <summary>
-		/// Contact <see cref="Birthday"/>
-		/// </summary>
-		private DateTime _birthday;
+        /// <summary>
+        /// Contact <see cref="Birthday"/>
+        /// </summary>
+        private DateTime _birthday;
 
-		/// <summary>
-		/// Contact <see cref="Email"/>
-		/// </summary>
-		private string _email;
+        /// <summary>
+        /// Birthday state
+        /// </summary>
+        private PropertyState _birthdayState = PropertyState.Initial;
 
-		/// <summary>
-		/// Contact <see cref="VkId"/>
-		/// </summary>
-		private string _vkId;
+        /// <summary>
+        /// Contact <see cref="Email"/>
+        /// </summary>
+        private string _email;
 
-		/// <summary>
-		/// Sets and returns <see cref="Name"> values 
-		/// </summary>
-		public string Name
-		{
-			get 
-			{
-				return _name; 
-			}
-			set
-			{
-				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(Name)); 
-				this._name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
-			}
-			
-		}
+        /// <summary>
+        /// Email state
+        /// </summary>
+        private PropertyState _emailState = PropertyState.Initial;
 
-		/// <summary>
-		/// Sets and returns <see cref="Surname"> values
-		/// </summary>
-		public string Surname
-		{
-			get 
-			{ 
-				return this._surname; 
-			}
-			set
-			{
-				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(Surname));
-				this._surname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value); ;
-			}
-		}
+        /// <summary>
+        /// Contact <see cref="VkId"/>
+        /// </summary>
+        private string _vkId;
 
-		/// <summary>
-		/// Sets and returns <see cref="Email"> values 
-		/// </summary>
-		public string Email
-		{
-			get 
-			{ 
-				return this._email;
-			}
-			set
-			{
-				StringValidator.AssertStringLength(value,
-					MAXLETTERCOUNT, nameof(Email));
-				this._email = value;
-			}
-			
-		}
+        /// <summary>
+        /// VkId state
+        /// </summary>
+        private PropertyState _vkIdState = PropertyState.Initial;
 
-		/// <summary>
-		/// Sets and returns <see cref="PhoneNumber"> values 
-		/// </summary>
-		public PhoneNumber PhoneNumber { get; set; }
-
-		/// <summary>
-		/// Sets and returns <see cref="VkId"> values 
-		/// </summary>
-		public string VkId
-		{
-			get
-			{ 
-				return this._vkId;
-			}
-			set
-			{
-				StringValidator.AssertStringLength(value,
-					MAXVKLETTERCOUNT, nameof(VkId));
-				this._vkId = value;
-			}
-			
-		}
-
-		/// <summary>
-		/// Sets and returns <see cref="Birthday"> values 
-		/// </summary>
-		public DateTime Birthday
-		{
-			get
-			{
-				return this._birthday;
-			}
-			set
-			{
-				DateValidator.AssertDate(value);
-				this._birthday = value;
-            }
-		}
-
-		/// <summary>
-		/// <see cref="Contact"> object constructor
-		/// </summary>
-		/// <param name="surname"><see cref="Surname"></param>
-		/// <param name="name"><see cref="Name"/></param>
-		/// <param name="phoneNumber"><see cref="PhoneNumber"/></param>
-		/// <param name="birthday"><see cref="Birthday"/></param>
-		/// <param name="email"><see cref="Email"/></param>
-		/// <param name="vkId"><see cref="VkId"/></param>
-		public Contact(string name, string surname,
-			 PhoneNumber phoneNumber, DateTime birthday,
-			 string email, string vkId)
-		{
-			this.Surname = surname;
-			this.Name = name;
-			this.PhoneNumber = phoneNumber;
-			this.Birthday = birthday;
-			this.Email = email;
-			this.VkId = vkId;
-		}
-
-		/// <summary>
-		/// Creates a <see cref="Contact"/> clone
-		/// </summary>
-		/// <returns>Returns a clone of the <see cref="Contact"/>
-		/// object</returns>
-		public object Clone()
+        /// <summary>
+        /// Sets and returns <see cref="FirstName"> values 
+        /// </summary>
+        public string FirstName
         {
-            return new Contact(this.Name, this.Surname,
-				 new PhoneNumber(this.PhoneNumber.Number),  
-				 this.Birthday,  this.Email, this.VkId);
-		}
-	}
+            get => _firstName;
+            set
+            {
+	            Set(ref _firstName, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value));
+
+	            if (_firstNameState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(FirstName));
+	            }
+
+	            _firstNameState = PropertyState.Updated;
+                RaisePropertyChanged(nameof(HasErrors));
+            }
+
+        }
+
+        /// <summary>
+        /// Sets and returns <see cref="LastName"> values
+        /// </summary>
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+	            Set(ref _lastName, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value));
+	            if (_lastNameState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(LastName));
+	            }
+
+	            _lastNameState = PropertyState.Updated;
+                RaisePropertyChanged(nameof(HasErrors));
+            }
+        }
+
+        /// <summary>
+        /// Sets and returns <see cref="Email"> values 
+        /// </summary>
+        public string Email
+        {
+            get => this._email;
+            set
+            {
+	            Set(ref _email, value);
+	            if (_emailState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(Email));
+	            }
+
+	            _emailState = PropertyState.Updated;
+	            RaisePropertyChanged(nameof(HasErrors));
+            }
+
+        }
+
+        /// <summary>
+        /// Sets and returns <see cref="PhoneNumber"> values 
+        /// </summary>
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Sets and returns <see cref="VkId"> values 
+        /// </summary>
+        public string VkId
+        {
+            get => _vkId;
+            set
+            {
+	            Set(ref _vkId, value);
+	            if (_vkIdState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(VkId));
+	            }
+
+	            _vkIdState = PropertyState.Updated;
+                RaisePropertyChanged(nameof(HasErrors));
+            }
+
+        }
+
+        /// <summary>
+        /// Sets and returns <see cref="Birthday"> values 
+        /// </summary>
+        public DateTime Birthday
+        {
+            get => _birthday;
+            set
+            {
+	            Set(ref _birthday, value);
+	            if (_birthdayState == PropertyState.Updated)
+	            {
+		            Validation(value, nameof(Birthday));
+	            }
+
+	            _birthdayState = PropertyState.Updated;
+                RaisePropertyChanged(nameof(HasErrors));
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool HasErrors => base.HasErrors || PhoneNumber.HasErrors || !IsNotEmpty;
+
+        private bool IsNotEmpty => !string.IsNullOrWhiteSpace(FirstName) &&
+                                   !string.IsNullOrWhiteSpace(LastName) &&
+                                   !string.IsNullOrWhiteSpace(Email) &&
+                                   !string.IsNullOrWhiteSpace(VkId) &&
+                                   !string.IsNullOrWhiteSpace(PhoneNumber.Number);
+
+
+        /// <summary>
+        /// <see cref="Contact"> object constructor
+        /// </summary>
+        /// <param name="lastName"><see cref="LastName"></param>
+        /// <param name="firstName"><see cref="FirstName"/></param>
+        /// <param name="phoneNumber"><see cref="PhoneNumber"/></param>
+        /// <param name="birthday"><see cref="Birthday"/></param>
+        /// <param name="email"><see cref="Email"/></param>
+        /// <param name="vkId"><see cref="VkId"/></param>
+        public Contact(string firstName, string lastName,
+            PhoneNumber phoneNumber, DateTime birthday,
+            string email, string vkId)
+        {
+            LastName = lastName;
+            FirstName = firstName;
+            PhoneNumber = phoneNumber;
+            Birthday = birthday;
+            Email = email;
+            VkId = vkId;
+            PhoneNumber.PropertyChanged += OnPhoneNumberChanged;
+        }
+
+        private void OnPhoneNumberChanged(object sender, PropertyChangedEventArgs e)
+        {
+	        RaisePropertyChanged(nameof(PhoneNumber));
+	        RaisePropertyChanged(nameof(HasErrors));
+        }
+
+        public Contact() : this(string.Empty, string.Empty,
+            new PhoneNumber(), DateTime.Now, string.Empty, string.Empty)
+        {
+        }
+
+        /// <inheritdoc />
+        public object Clone()
+        {
+            return new Contact(FirstName, LastName,
+                (PhoneNumber)PhoneNumber.Clone(),
+                Birthday, Email, VkId);
+        }
+    }
 }

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.SqlServer.Server;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
 	/// <summary>
 	/// contains all the data about the <see cref="Project"/>
@@ -16,24 +13,24 @@ namespace ContactsAppBL
 		/// <summary>
 		/// Contains all <see cref="Contacts"/> at the moment
 		/// </summary>
-		public List<Contact> Contacts { set; get; } = new List<Contact>();
+		public ObservableCollection<Contact> Contacts { set; get; } = new ObservableCollection<Contact>();
 
 		/// <summary>
 		/// Sort contacts list
 		/// </summary>
 		/// <returns>All sorted contacts</returns>
-		private IOrderedEnumerable<Contact> SortContacts()
+		public IEnumerable<Contact> SortContacts()
 		{
-			for (int i = 0; i < Contacts.Count; i++)
+			for (var i = 0; i < Contacts.Count; i++)
 			{
 				if (Contacts[i] == null)
 				{
 					Contacts.RemoveAt(i);
 				}
 			}
+
 			return Contacts.OrderBy(
-				contact => contact.Surname);
-			var contacts = new List<Contact>();
+				contact => contact.LastName);
 		}
 
 		/// <summary>
@@ -45,59 +42,33 @@ namespace ContactsAppBL
 		/// <returns>
 		/// Returns all contacts that have a <paramref name="substring"/>
 		/// </returns>
-		public List<Contact> SearchContacts(string substring)
+		public ObservableCollection<Contact> SearchContacts(string substring)
         {
-			var contacts = new List<Contact>();
-	        var query = SortContacts();
-			foreach (var i in query)
-			{
-				if (i.Surname.Contains(substring))
-				{
-					contacts.Add(i);
-				}
-				else if (i.Name.Contains(substring))
-				{
-					contacts.Add(i);
-				}
-			}
-
-			return contacts;
-		}
-
-		/// <summary>
-		/// Looking for all non-zero contacts
-		/// </summary>
-		/// <returns>Returns all contacts</returns>
-		public List<Contact> SearchContacts()
-        {
-			var contacts = new List<Contact>();
-	        var query = SortContacts();
-	        foreach (var i in query)
+	        if (string.IsNullOrWhiteSpace(substring))
 	        {
-		        contacts.Add(i);
+		        return Contacts;
 	        }
 
-	        return contacts;
-		}
+			var contacts = new List<Contact>();
+	        var response = SortContacts().Where(contact => contact.FirstName.Contains(substring) ||
+                                                        contact.LastName.Contains(substring)).ToArray();
+	        var result = response.Length == 0
+		        ? Contacts
+		        : new ObservableCollection<Contact>(response);
+	        return result;
+        }
 
 		/// <summary>
 		/// Find All people who has Birthday on a specific date
 		/// </summary>
 		/// <param name="date"></param>
 		/// <returns></returns>
-		public List<Contact> FindBirthdayContacts(DateTime date) 
+		public ObservableCollection<Contact> FindBirthdayContacts(DateTime date)
         {
-			var birthdayContacts = new List<Contact>();
-			foreach (var contact in Contacts)
-			{
-				if (contact.Birthday.Day == date.Day &&
-				    contact.Birthday.Month == date.Month)
-				{
-					birthdayContacts.Add(contact);
-				}
-			}
+            var response = Contacts.Where(contact =>
+                contact.Birthday.Day == date.Date.Day && contact.Birthday.Month == date.Month).ToArray();
 
-			return birthdayContacts;
+			return new ObservableCollection<Contact>(response);
 		}
 
 		/// <summary>
@@ -110,8 +81,8 @@ namespace ContactsAppBL
 		{
 			for (int i = 0; i < Contacts.Count; i++)
 			{
-				if (Contacts[i].Name == contact.Name && 
-				    Contacts[i].Surname == contact.Surname)
+				if (Contacts[i].FirstName == contact.FirstName && 
+				    Contacts[i].LastName == contact.LastName)
 				{
 					return i;
 				}

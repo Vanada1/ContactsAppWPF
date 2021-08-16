@@ -1,13 +1,14 @@
 ﻿<Application
-    x:Class="ContactsApp.App"
+    x:Class="ContactsAppUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:ContactsApp"
-    StartupUri="MainWindow.xaml">
+    xmlns:local="clr-namespace:ContactsAppUI"
+    xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary1.xaml" />
+                <ResourceDictionary Source="Dictionaries/StyleDictionary.xaml" />
+                <ResourceDictionary Source="Dictionaries/TriggerDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

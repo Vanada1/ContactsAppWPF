@@ -8,17 +8,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContactsApp
+namespace ContactsAppUI
 {
     /// <summary>
-    /// Interaction logic for PersonData.xaml
+    /// Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class PersonData : UserControl
+    public partial class AboutWindow : Window
     {
-        public PersonData()
+        public AboutWindow()
         {
             InitializeComponent();
         }

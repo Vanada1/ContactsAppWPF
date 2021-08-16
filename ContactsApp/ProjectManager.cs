@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
 	/// <summary>
 	/// Class for working with files
@@ -56,17 +51,15 @@ namespace ContactsAppBL
 
             try
             {
-	            using (StreamReader file = new StreamReader(
+	            using (var file = new StreamReader(
 		            DefaultPath, System.Text.Encoding.Default))
 	            {
 		            var projectText = file.ReadLine();
-		            if (string.IsNullOrEmpty(projectText))
+		            if (!string.IsNullOrEmpty(projectText))
 		            {
-			            projectText = null;
-		            }
-
-		            project = JsonConvert.DeserializeObject<Project>(projectText);
-	            }
+						project = JsonConvert.DeserializeObject<Project>(projectText);
+					}
+                }
             }
             catch (SerializationException)
             {
@@ -92,7 +85,7 @@ namespace ContactsAppBL
 				CreatePath(_folder, _fileName);
 			}
 
-			using (StreamWriter file = new StreamWriter(
+			using (var file = new StreamWriter(
 				DefaultPath, false, System.Text.Encoding.UTF8))
 			{
                 file.Write(JsonConvert.SerializeObject(project));
@@ -106,11 +99,11 @@ namespace ContactsAppBL
         /// <param name="fileName">File name</param>
         public static void CreatePath(string folder, string fileName)
 		{
-			if (folder == null)
+			if (string.IsNullOrEmpty(folder) || string.IsNullOrWhiteSpace(folder))
 			{
 				folder = _folder;
 			}
-			if (fileName == null)
+			if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
 			{
 				fileName = _fileName;
 			}

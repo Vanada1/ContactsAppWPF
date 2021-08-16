@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ContactsAppBL
+namespace ContactsApp
 {
+	/// <summary>
+	/// Checks if the date is correct
+	/// </summary>
 	public static class DateValidator
 	{
+		/// <summary>
+		/// Checks if the date is correct
+		/// </summary>
+		/// <param name="date"></param>
 		public static void AssertDate(DateTime date)
 		{
 			if (date.Year < 1900)
