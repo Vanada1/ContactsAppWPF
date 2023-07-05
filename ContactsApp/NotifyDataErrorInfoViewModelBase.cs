@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json.Serialization;
 using GalaSoft.MvvmLight;
 
 namespace ContactsApp
@@ -28,6 +29,7 @@ namespace ContactsApp
         private static readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
 
         /// <inheritdoc />
+        [JsonIgnore]
         public virtual bool HasErrors => _errors.Any();
 
         /// <inheritdoc />

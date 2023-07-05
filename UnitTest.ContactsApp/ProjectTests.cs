@@ -61,9 +61,10 @@ namespace ContactsApp.UnitTests
 			};
 
 			var actual = new Project();
-			actual.Contacts = project.SearchContacts(string.Empty);
+            project.SortContacts();
+            actual.Contacts = new ObservableCollection<Contact>(project.SortContacts());
 
-			Assert.AreEqual(expected.Contacts[0].LastName, 
+            Assert.AreEqual(expected.Contacts[0].LastName, 
 				actual.Contacts[0].LastName, "Dotes not sorted");
 		}
 
@@ -119,7 +120,7 @@ namespace ContactsApp.UnitTests
 			};
 
 			var actual = new Project();
-			actual.Contacts = project.SearchContacts(string.Empty);
+            actual.Contacts = new ObservableCollection<Contact>(project.SortContacts());
 
 			Assert.AreEqual(expected.Contacts[0].LastName,
 				actual.Contacts[0].LastName, "Dotes not sorted");

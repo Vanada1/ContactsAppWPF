@@ -34,10 +34,9 @@ namespace ContactsApp.UnitTests
 		public void TestNumberSet_ArgumentException(string wrongNumber, string message)
 		{
 			var phoneNumber = CreateClearPhoneNumber();
-			Assert.Throws<ArgumentException>(
-				() => { phoneNumber.Number = wrongNumber; },
-				message);
-		}
+            phoneNumber.Number = wrongNumber;
+            Assert.IsTrue(phoneNumber.HasErrors, message);
+        }
 
 		[Test(Description = "Positive test of the Number setter")]
 		public void TestNumberSet_CorrectValue()

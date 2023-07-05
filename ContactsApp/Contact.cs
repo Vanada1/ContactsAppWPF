@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace ContactsApp
 {
@@ -170,8 +171,10 @@ namespace ContactsApp
         }
 
         /// <inheritdoc />
+        [JsonIgnore]
         public override bool HasErrors => base.HasErrors || PhoneNumber.HasErrors || !IsNotEmpty;
 
+        [JsonIgnore]
         private bool IsNotEmpty => !string.IsNullOrWhiteSpace(FirstName) &&
                                    !string.IsNullOrWhiteSpace(LastName) &&
                                    !string.IsNullOrWhiteSpace(Email) &&

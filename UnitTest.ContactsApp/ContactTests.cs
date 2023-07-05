@@ -34,10 +34,9 @@ namespace ContactsApp.UnitTests
 			string message)
 		{
 			var contact = CreateEmptyContact();
-			Assert.Throws<ArgumentException>(
-				() => { contact.FirstName = wrongValue; },
-				message);
-		}
+            contact.FirstName = wrongValue;
+            Assert.IsTrue(contact.HasErrors, message);
+        }
 
 		[Test(Description = "Positive test of the Name setter")]
 		public void TestNameSet_CorrectValue()
@@ -72,10 +71,9 @@ namespace ContactsApp.UnitTests
 			string message)
 		{
 			var contact = CreateEmptyContact();
-			Assert.Throws<ArgumentException>(
-				() => { contact.LastName = wrongValue; },
-				message);
-		}
+            contact.LastName = wrongValue;
+            Assert.IsTrue(contact.HasErrors, message);
+        }
 
 		[Test(Description = "Positive test of the Surname setter")]
 		public void TestSurnameSet_CorrectValue()
@@ -110,9 +108,8 @@ namespace ContactsApp.UnitTests
 			string message)
 		{
 			var contact = CreateEmptyContact();
-			Assert.Throws<ArgumentException>(
-				() => { contact.Email = wrongValue; },
-				message);
+            contact.Email = wrongValue;
+            Assert.IsTrue(contact.HasErrors, message);
 		}
 
 		[Test(Description = "Positive test of the Email setter")]
@@ -148,10 +145,9 @@ namespace ContactsApp.UnitTests
 			string message)
 		{
 			var contact = CreateEmptyContact();
-			Assert.Throws<ArgumentException>(
-				() => { contact.VkId = wrongValue; },
-				message);
-		}
+            contact.VkId = wrongValue;
+            Assert.IsTrue(contact.HasErrors, message);
+        }
 
 		[Test(Description = "Positive test of the VKID setter")]
 		public void TestVKIDSet_CorrectValue()
@@ -187,10 +183,9 @@ namespace ContactsApp.UnitTests
 			string message)
 		{
 			var contact = CreateEmptyContact();
-			Assert.Throws<ArgumentException>(
-				() => { contact.PhoneNumber = new PhoneNumber(wrongNumber); },
-				message);
-		}
+            contact.PhoneNumber = new PhoneNumber(wrongNumber);
+            Assert.IsTrue(contact.HasErrors, message);
+        }
 
 		[Test(Description = "Positive test of the PhoneNumber setter")]
 		public void TestPhoneNumberSet_CorrectValue()
@@ -229,10 +224,9 @@ namespace ContactsApp.UnitTests
 		{
 			var contact = CreateEmptyContact();
 			var wrongValue = new DateTime(year, month, day);
-			Assert.Throws<ArgumentException>(
-				() => { contact.Birthday = wrongValue; },
-				message);
-		}
+			contact.Birthday = wrongValue;
+			Assert.IsTrue(contact.HasErrors, message);
+        }
 
 		[Test(Description = "Positive test of the Birthday setter")]
 		public void TestBirthdaySet_CorrectValue()
