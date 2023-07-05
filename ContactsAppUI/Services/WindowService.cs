@@ -3,80 +3,78 @@ using GalaSoft.MvvmLight.Command;
 using ViewModel;
 using ViewModel.Services;
 
-namespace ContactsAppUI.Services
+namespace ContactsAppUI.Services;
+
+/// <summary>
+/// To work with the _window for adding / changing a contact
+/// </summary>
+public class WindowService : IWindowService
 {
     /// <summary>
-    /// To work with the _window for adding / changing a contact
+    /// Add edit contact window
     /// </summary>
-    public class WindowService : IWindowService
+    private Window _window;
+
+    public WindowService()
     {
-        /// <summary>
-        /// Add edit contact window
-        /// </summary>
-        private Window _window;
+        OkCommand = new RelayCommand(SetOk, CanSetOk);
+        CancelCommand = new RelayCommand(SetCancel);
+    }
 
-        /// <inheritdoc />
-        public bool DialogResult { get; set; } = false;
+    /// <inheritdoc/>
+    public RelayCommand CancelCommand { get; set; }
 
-        /// <inheritdoc />
-        public RelayCommand OkCommand { get; set; }
+    /// <inheritdoc/>
+    public bool DialogResult { get; set; }
 
-        /// <inheritdoc />
-        public RelayCommand CancelCommand { get; set; }
+    /// <inheritdoc/>
+    public RelayCommand OkCommand { get; set; }
 
-        public WindowService()
+    /// <inheritdoc/>
+    public void ShowDialog(object dataContext)
+    {
+        if (dataContext == null)
         {
-            OkCommand = new RelayCommand(SetOk, CanSetOk);
-            CancelCommand = new RelayCommand(SetCancel);
+            _window = new AboutWindow();
+        }
+        else if (dataContext is ContactWindowViewModel)
+        {
+            _window = new ContactWindow(dataContext);
+        }
+        else
+        {
+            return;
         }
 
-        /// <inheritdoc />
-        public void ShowDialog(object dataContext)
-        {
-	        if (dataContext == null)
-	        {
-		        _window = new AboutWindow();
-            }
-            else if (dataContext is ContactWindowViewModel)
-	        {
-		        _window = new ContactWindow(dataContext);
-	        }
-	        else
-	        {
-		        return;
-	        }
+        _window.ShowDialog();
+    }
 
-            _window.ShowDialog();
-        }
+    /// <summary>
+    /// Close window and <see cref="DialogResult"/> is true
+    /// </summary>
+    private void SetOk()
+    {
+        DialogResult = true;
+        _window.Close();
+    }
 
+    /// <summary>
+    /// Can close window and <see cref="DialogResult"/> is true
+    /// </summary>
+    /// <param name="arg"> </param>
+    /// <returns> </returns>
+    private bool CanSetOk()
+    {
+        var model = (ContactWindowViewModel) _window.DataContext;
+        return !model.PersonDataControlViewModel.Contact.HasErrors;
+    }
 
-        /// <summary>
-        /// Close window and <see cref="DialogResult"/> is true
-        /// </summary>
-        private void SetOk()
-        {
-            DialogResult = true;
-            _window.Close();
-        }
-
-        /// <summary>
-        /// Can close window and <see cref="DialogResult"/> is true
-        /// </summary>
-        /// <param name="arg"></param>
-        /// <returns></returns>
-        private bool CanSetOk()
-        {
-	        var model = (ContactWindowViewModel) _window.DataContext;
-	        return !model.PersonDataControlViewModel.Contact.HasErrors;
-        }
-
-        /// <summary>
-        /// Close window and <see cref="DialogResult"/> is false
-        /// </summary>
-        private void SetCancel()
-        {
-            DialogResult = false;
-            _window.Close();
-        }
+    /// <summary>
+    /// Close window and <see cref="DialogResult"/> is false
+    /// </summary>
+    private void SetCancel()
+    {
+        DialogResult = false;
+        _window.Close();
     }
 }

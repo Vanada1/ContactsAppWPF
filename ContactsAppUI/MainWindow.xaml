@@ -2,11 +2,9 @@
     x:Class="ContactsAppUI.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:contactsApp="clr-namespace:ContactsApp;assembly=ContactsApp"
     xmlns:controls="clr-namespace:ContactsAppUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:ViewModel;assembly=ViewModel"
     Title="ContactsApp"
@@ -18,19 +16,26 @@
     Icon="Resources/phonebook.ico"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <i:InvokeCommandAction Command="{Binding ClosingWindow}" />
+        <i:EventTrigger
+            EventName="Closing">
+            <i:InvokeCommandAction
+                Command="{Binding ClosingWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition
+                Width="0.5*"/>
+            <ColumnDefinition
+                Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition
+                Height="Auto"/>
+            <RowDefinition
+                Height="Auto"/>
+            <RowDefinition
+                Height="*"/>
         </Grid.RowDefinitions>
 
         <controls:MenuControl
@@ -38,7 +43,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            DataContext="{Binding MenuControlViewModel}" />
+            DataContext="{Binding MenuControlViewModel}"/>
 
         <controls:ContactsListControl
             x:Name="ContactsListControl"
@@ -46,7 +51,7 @@
             Grid.RowSpan="2"
             Grid.Column="0"
             DataContext="{Binding Path=ContactsListControlViewModel}"
-            Style="{StaticResource ControlStyle}" />
+            Style="{StaticResource ControlStyle}"/>
 
         <controls:PersonDataControl
             x:Name="PersonDataControl"
@@ -55,7 +60,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
             DataContext="{Binding Path=ContactsListControlViewModel.PersonDataControlViewModel}"
-            Style="{StaticResource ControlStyle}" />
+            Style="{StaticResource ControlStyle}"/>
 
         <controls:BirthdayControl
             x:Name="BirthdayControl"
@@ -68,8 +73,12 @@
             <controls:BirthdayControl.Style>
                 <Style>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding SearchedContacts.Count}" Value="0">
-                            <Setter Property="UserControl.Visibility" Value="Hidden" />
+                        <DataTrigger
+                            Binding="{Binding SearchedContacts.Count}"
+                            Value="0">
+                            <Setter
+                                Property="UserControl.Visibility"
+                                Value="Hidden"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

@@ -8,42 +8,44 @@ using Microsoft.Extensions.DependencyInjection;
 using ViewModel;
 using ViewModel.Services;
 
-namespace ContactsAppUI
+namespace ContactsAppUI;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-	/// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public IConfiguration Configuration { get; private set; }
+
+    public IServiceProvider ServiceProvider { get; private set; }
+
+    protected override void OnStartup(StartupEventArgs e)
     {
-	    public IServiceProvider ServiceProvider { get; private set; }
+        base.OnStartup(e);
+        var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory());
 
-		public IConfiguration Configuration { get; private set; }
+        Configuration = builder.Build();
 
-		protected override void OnStartup(StartupEventArgs e)
-	    {
-		    base.OnStartup(e);
-		    var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory());
+        var serviceCollection = new ServiceCollection();
+        ConfigureService(serviceCollection);
 
-		    Configuration = builder.Build();
+        ServiceProvider = serviceCollection.BuildServiceProvider();
 
-			var serviceCollection = new ServiceCollection();
-			ConfigureService(serviceCollection);
+        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+        ((MainViewModel) mainWindow.DataContext).MenuControlViewModel.ExitCommand =
+            new RelayCommand(() => mainWindow.Close());
+        mainWindow.ShowDialog();
+    }
 
-			ServiceProvider = serviceCollection.BuildServiceProvider();
-
-			var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-			((MainViewModel) mainWindow.DataContext).MenuControlViewModel.ExitCommand =
-				new RelayCommand(() => mainWindow.Close());
-			mainWindow.ShowDialog();
-	    }
-
-		private void ConfigureService(ServiceCollection service)
-		{
-			service.AddScoped<IWindowService, WindowService>();
-			service.AddScoped<IMessageBoxService, MessageBoxService>();
-			service.AddTransient<MainViewModel>();
-			service.AddTransient<MainWindow>(provider => new MainWindow
-				{DataContext = provider.GetService<MainViewModel>()});
-		}
+    private void ConfigureService(ServiceCollection service)
+    {
+        service.AddScoped<IWindowService, WindowService>();
+        service.AddScoped<IMessageBoxService, MessageBoxService>();
+        service.AddTransient<MainViewModel>();
+        service.AddTransient(
+            provider => new MainWindow
+            {
+                DataContext = provider.GetService<MainViewModel>()
+            });
     }
 }

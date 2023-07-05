@@ -1,8 +1,8 @@
-﻿namespace ContactsApp
+﻿namespace ContactsApp;
+
+public enum PropertyState
 {
-	public enum PropertyState
-	{
-		Initial,
-		Updated
-	}
+    Initial,
+
+    Updated
 }

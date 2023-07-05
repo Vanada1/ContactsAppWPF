@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace ContactsAppUI.Controls
+namespace ContactsAppUI.Controls;
+
+/// <summary>
+/// Interaction logic for MenuControl.xaml
+/// </summary>
+public partial class MenuControl : UserControl
 {
-    /// <summary>
-    /// Interaction logic for MenuControl.xaml
-    /// </summary>
-    public partial class MenuControl : UserControl
+    public MenuControl()
     {
-        public MenuControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

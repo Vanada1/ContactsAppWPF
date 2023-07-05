@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:ContactsAppUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
     Title="ContactWindow"
@@ -16,8 +15,9 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition
+                Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <controls:PersonDataControl
@@ -25,7 +25,7 @@
             Grid.Row="0"
             VerticalAlignment="Top"
             DataContext="{Binding Path=PersonDataControlViewModel}"
-            Style="{StaticResource ControlStyle}" />
+            Style="{StaticResource ControlStyle}"/>
 
         <Grid
             Grid.Row="1"
@@ -35,8 +35,10 @@
             Style="{StaticResource ControlStyle}">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition SharedSizeGroup="Buttons" />
-                <ColumnDefinition SharedSizeGroup="Buttons" />
+                <ColumnDefinition
+                    SharedSizeGroup="Buttons"/>
+                <ColumnDefinition
+                    SharedSizeGroup="Buttons"/>
             </Grid.ColumnDefinitions>
 
             <Button
@@ -45,7 +47,7 @@
                 Content="Ok"
                 Style="{StaticResource ControlStyle}">
                 <Button.CommandParameter>
-                    <Binding />
+                    <Binding/>
                 </Button.CommandParameter>
             </Button>
             <Button
@@ -53,7 +55,9 @@
                 Command="{Binding CancelCommand}"
                 Style="{StaticResource ControlStyle}">
                 <ContentControl>
-                    <TextBlock Margin="3,0,3,0" Text="Cancel" />
+                    <TextBlock
+                        Margin="3,0,3,0"
+                        Text="Cancel"/>
                 </ContentControl>
             </Button>
         </Grid>

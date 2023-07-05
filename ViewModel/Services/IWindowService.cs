@@ -1,31 +1,30 @@
 ﻿using GalaSoft.MvvmLight.Command;
 
-namespace ViewModel.Services
+namespace ViewModel.Services;
+
+/// <summary>
+/// Interface to show second window
+/// </summary>
+public interface IWindowService
 {
     /// <summary>
-    /// Interface to show second window
+    /// Command for handling the Cancel button
     /// </summary>
-    public interface IWindowService
-    {
-        /// <summary>
-        /// Dialog result
-        /// </summary>
-        bool DialogResult { get; }
+    RelayCommand CancelCommand { get; set; }
 
-        /// <summary>
-        /// Command for processing the Ok button
-        /// </summary>
-        RelayCommand OkCommand { get; set; }
+    /// <summary>
+    /// Dialog result
+    /// </summary>
+    bool DialogResult { get; }
 
-        /// <summary>
-        /// Command for handling the Cancel button
-        /// </summary>
-        RelayCommand CancelCommand { get; set; }
+    /// <summary>
+    /// Command for processing the Ok button
+    /// </summary>
+    RelayCommand OkCommand { get; set; }
 
-        /// <summary>
-        /// Shows second window
-        /// </summary>
-        /// <param name="dataContext"></param>
-        void ShowDialog(object dataContext);
-    }
+    /// <summary>
+    /// Shows second window
+    /// </summary>
+    /// <param name="dataContext"> </param>
+    void ShowDialog(object dataContext);
 }

@@ -4,27 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controlViewModels="clr-namespace:ViewModel.ControlViewModels;assembly=ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:ContactsAppUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DataContext="{d:DesignInstance controlViewModels:MenuControlViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <Menu VerticalAlignment="Top" Background="White">
-            <MenuItem Header="File">
+        <Menu
+            VerticalAlignment="Top"
+            Background="White">
+            <MenuItem
+                Header="File">
                 <MenuItem
                     x:Name="ExitButton"
                     Command="{Binding ExitCommand}"
-                    Header="Exit" />
+                    Header="Exit"/>
             </MenuItem>
-            <MenuItem Header="Edit">
+            <MenuItem
+                Header="Edit">
                 <MenuItem
                     x:Name="AddButton"
                     Command="{Binding Command.AddContactCommand, ConverterParameter=this}"
                     Header="Add Contact">
                     <MenuItem.CommandParameter>
-                        <Binding />
+                        <Binding/>
                     </MenuItem.CommandParameter>
                 </MenuItem>
                 <MenuItem
@@ -32,7 +35,7 @@
                     Command="{Binding Command.EditContactCommand, ConverterParameter=this}"
                     Header="Edit Contact">
                     <MenuItem.CommandParameter>
-                        <Binding />
+                        <Binding/>
                     </MenuItem.CommandParameter>
                 </MenuItem>
                 <MenuItem
@@ -40,15 +43,16 @@
                     Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}"
                     Header="Remove Contact">
                     <MenuItem.CommandParameter>
-                        <Binding />
+                        <Binding/>
                     </MenuItem.CommandParameter>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Help">
+            <MenuItem
+                Header="Help">
                 <MenuItem
                     x:Name="AboutButton"
                     Command="{Binding AboutCommand}"
-                    Header="About" />
+                    Header="About"/>
             </MenuItem>
         </Menu>
     </Grid>

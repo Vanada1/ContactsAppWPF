@@ -1,13 +1,15 @@
-﻿namespace ViewModel.Enumerators
+﻿namespace ViewModel.Enumerators;
+
+/// <summary>
+/// Enumeration buttons for MessageBox
+/// </summary>
+public enum MessageBoxButton
 {
-    /// <summary>
-    /// Enumeration buttons for MessageBox
-    /// </summary>
-    public enum MessageBoxButton
-    {
-        Ok,
-        OkCancel,
-        YesNo,
-        YesNoCancel
-    }
+    Ok,
+
+    OkCancel,
+
+    YesNo,
+
+    YesNoCancel
 }
