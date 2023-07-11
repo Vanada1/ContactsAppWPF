@@ -1,1 +1,1 @@
-{"Contacts":[{"FirstName":"Name","LastName":"Surname","Email":"me@gg.conm","PhoneNumber":{"Number":"71111111111","HasErrors":false,"IsInDesignMode":false},"VkId":"id1234567","Birthday":"2000-12-12T00:00:00","IsInDesignMode":false}]}
+{"Contacts":[{"Birthday":"2000-12-12T00:00:00","Email":"me@gg.conm","FirstName":"Name","LastName":"Surname","PhoneNumber":{"Number":"71111111111","HasErrors":false,"IsInDesignMode":false},"VkId":"id1234567","IsInDesignMode":false}]}
