@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    
+    .birthday-div {
+        background-color: #87cefa;
+        display: flex;
+        padding-right: 10px
+    }
+
+    .selecting-contact {
+        width: 30%;
+        height: 100%;
+        display: inline-block;
+        float: left;
+        padding-right: 10px;
+    }
+
+    .selecting-contact .select-controls { width: 100%; }
+
+    .selecting-contact .outer {
+        width: 100%;
+        margin: 20px auto;
+        display: flex;
+    }
+
+    .selecting-contact .label-class {
+        width: 40px;
+        float: left;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .selecting-contact .input { width: 100%; }
+
+    .selected-contact {
+        pointer-events: none;
+        display: inline-block;
+        height: 100%;
+    }
+
+    .selected-contact .outer {
+        width: 100%;
+        margin: 20px auto;
+        display: flex;
+    }
+
+    .selected-contact .label-class {
+        width: 100px;
+        float: left;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .selected-contact .input { width: 100%; }
+
+    .outer {
+        width: 100%;
+        margin: 20px auto;
+        display: flex;
+    }
+
+    .right-control-class {
+        width: 100%;
+    }
+
+</style>
+
+<div>
+
+    <div class="selecting-contact">
+        <div class="outer">
+            <label class="label-class">Find:</label>
+            <input class="input"/>
+        </div>
+
+        <p>
+            <select class="select-controls" size="12">
+            </select>
+        </p>
+
+        <p>
+            <button>Add</button>
+            <button>Edit</button>
+            <button>Remove</button>
+        </p>
+    </div>
+
+    <div class="right-control-class">
+        <div class="selected-contact">
+
+            <div class="outer">
+                <label class="label-class">Surname:</label>
+                <input class="input"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">Name:</label>
+                <input class="input"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">Birthday:</label>
+                <input type="date" class="input"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">Phone:</label>
+                <input class="input"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">E-mail:</label>
+                <input class="input"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">vk.com:</label>
+                <input class="input"/>
+            </div>
+
+        </div>
+
+        <div class="birthday-div">
+            <div>
+                <label>Birthday:</label>
+            </div>
+            <div>
+                <label>Me</label>
+            </div>
+        </div>
+
+    </div>
+
+</div>

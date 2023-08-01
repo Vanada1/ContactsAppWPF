@@ -1,39 +1,20 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style
-        x:Key="ControlStyle">
-        <Setter
-            Property="Control.Margin"
-            Value="3"/>
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ControlStyle">
+        <Setter Property="Control.Margin" Value="3" />
     </Style>
-    <Style
-        x:Key="TextBlockStyle"
-        BasedOn="{StaticResource ControlStyle}">
-        <Setter
-            Property="TextBlock.HorizontalAlignment"
-            Value="Right"/>
-        <Setter
-            Property="TextBlock.VerticalAlignment"
-            Value="Center"/>
+    <Style x:Key="TextBlockStyle" BasedOn="{StaticResource ControlStyle}">
+        <Setter Property="TextBlock.HorizontalAlignment" Value="Right" />
+        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
     </Style>
     <Style
         x:Key="TextBoxStyle"
         BasedOn="{StaticResource ControlStyle}"
         TargetType="TextBox">
-        <Setter
-            Property="TextBox.VerticalAlignment"
-            Value="Center"/>
+        <Setter Property="TextBox.VerticalAlignment" Value="Center" />
         <Style.Triggers>
-            <Trigger
-                Property="Validation.HasError"
-                Value="True">
-                <Setter
-                    Property="ToolTip"
-                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                <Setter
-                    Property="Foreground"
-                    Value="Red"/>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                <Setter Property="Foreground" Value="Red" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -43,22 +24,15 @@
         BasedOn="{StaticResource ControlStyle}"
         TargetType="DatePicker">
         <Style.Triggers>
-            <Trigger
-                Property="Validation.HasError"
-                Value="True">
-                <Setter
-                    Property="ToolTip">
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip">
                     <Setter.Value>
-                        <Binding
-                            Path="(Validation.Errors).CurrentItem.ErrorContent"
-                            RelativeSource="{x:Static RelativeSource.Self}"/>
+                        <Binding Path="(Validation.Errors).CurrentItem.ErrorContent" RelativeSource="{x:Static RelativeSource.Self}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style
-        x:Key="ButtonStyle"
-        BasedOn="{StaticResource ControlStyle}"/>
+    <Style x:Key="ButtonStyle" BasedOn="{StaticResource ControlStyle}" />
 </ResourceDictionary>

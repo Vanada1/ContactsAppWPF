@@ -10,36 +10,29 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <ResourceDictionary
-            Source="../Dictionaries/StyleDictionary.xaml"/>
+        <ResourceDictionary Source="../Dictionaries/StyleDictionary.xaml" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition
-                Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid
-            Grid.Row="0"
-            Grid.Column="0">
+        <Grid Grid.Row="0" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="Auto"/>
-                <ColumnDefinition
-                    Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Column="0"
                 Style="{StaticResource TextBlockStyle}"
-                Text="Find:"/>
+                Text="Find:" />
             <TextBox
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 Style="{StaticResource TextBoxStyle}"
-                Text="{Binding SearchingString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding SearchingString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <ListBox
@@ -50,14 +43,10 @@
             SelectedItem="{Binding Path=SelectedContact}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel
-                        Orientation="Horizontal">
-                        <TextBlock
-                            Text="{Binding LastName}"/>
-                        <TextBlock
-                            Text=" "/>
-                        <TextBlock
-                            Text="{Binding FirstName}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LastName}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding FirstName}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -66,35 +55,25 @@
             Grid.Row="2"
             Grid.Column="0"
             Orientation="Horizontal">
-            <Button
-                Command="{Binding Command.AddContactCommand, ConverterParameter=this}"
-                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                <Image
-                    Height="20"
-                    Source="../Resources/AddFile.png"/>
+            <Button Command="{Binding Command.AddContactCommand, ConverterParameter=this}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Image Height="20" Source="../Resources/AddFile.png" />
                 <Button.CommandParameter>
-                    <Binding/>
+                    <Binding />
                 </Button.CommandParameter>
             </Button>
             <Button
                 VerticalAlignment="Top"
                 Command="{Binding Command.EditContactCommand, ConverterParameter=this}"
                 Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                <Image
-                    Height="18"
-                    Source="../Resources/Customize.png"/>
+                <Image Height="18" Source="../Resources/Customize.png" />
                 <Button.CommandParameter>
-                    <Binding/>
+                    <Binding />
                 </Button.CommandParameter>
             </Button>
-            <Button
-                Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}"
-                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                <Image
-                    Height="20"
-                    Source="../Resources/RemoveFile.png"/>
+            <Button Command="{Binding Command.RemoveContactCommand, ConverterParameter=this}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Image Height="20" Source="../Resources/RemoveFile.png" />
                 <Button.CommandParameter>
-                    <Binding/>
+                    <Binding />
                 </Button.CommandParameter>
             </Button>
         </StackPanel>

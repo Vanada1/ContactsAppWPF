@@ -10,88 +10,89 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <ResourceDictionary
-            Source="../Dictionaries/StyleDictionary.xaml"/>
+        <ResourceDictionary Source="../Dictionaries/StyleDictionary.xaml" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition
-                Width="Auto"/>
-            <ColumnDefinition
-                Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/> <RowDefinition/> <RowDefinition/> <RowDefinition/> <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition /> 
+            <RowDefinition /> 
+            <RowDefinition /> 
+            <RowDefinition /> 
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
-            Text="Surname:"/>
+            Text="Surname:" />
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
-            Text="Name:"/>
+            Text="Name:" />
         <TextBlock
             Grid.Row="2"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
-            Text="Birthday:"/>
+            Text="Birthday:" />
         <TextBlock
             Grid.Row="3"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
-            Text="Phone:"/>
+            Text="Phone:" />
         <TextBlock
             Grid.Row="4"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
-            Text="E-mail:"/>
+            Text="E-mail:" />
         <TextBlock
             Grid.Row="5"
             Grid.Column="0"
             Style="{StaticResource TextBlockStyle}"
-            Text="vk.com"/>
+            Text="vk.com" />
 
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
             IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Contact.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Contact.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
             IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Contact.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Contact.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <DatePicker
             Grid.Row="2"
             Grid.Column="1"
             IsEnabled="{Binding IsEnable}"
             SelectedDate="{Binding Contact.Birthday, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-            Style="{StaticResource DatePickerStyle}"/>
+            Style="{StaticResource DatePickerStyle}" />
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
             IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Contact.PhoneNumber.Number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Contact.PhoneNumber.Number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
             IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Contact.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Contact.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Width="Auto"
             IsReadOnly="{Binding IsReadOnly}"
             Style="{StaticResource TextBoxStyle}"
-            Text="{Binding Contact.VkId, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Contact.VkId, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>
