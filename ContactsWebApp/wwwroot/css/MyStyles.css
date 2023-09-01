@@ -1,7 +1,12 @@
 ﻿.birthday-div {
     background-color: #87cefa;
     display: flex;
-    padding-right: 10px
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.birthday-div label {
+    margin: 5px;
 }
 
 .selecting-contact {

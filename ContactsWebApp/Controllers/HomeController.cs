@@ -28,6 +28,10 @@ namespace ContactsWebApp.Controllers
 
             mainVM.Contacts = _contactsAppDbContext.Contacts.ToList();
             mainVM.SelectContact = selectedContact;
+            mainVM.BirthdayContacts = _contactsAppDbContext.Contacts.Where(
+                contact => contact.Birthday.Day == DateTime.Now.Day
+                           && contact.Birthday.Month == DateTime.Now.Month)
+                .ToList();
             return View(mainVM);
 		}
 

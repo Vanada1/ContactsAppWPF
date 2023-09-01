@@ -66,10 +66,13 @@
 
         <div class="birthday-div">
             <div>
-                <label>Birthday:</label>
-            </div>
-            <div>
-                <label>Me</label>
+                <label style="font-weight: bold">Birthday:</label>
+                <br/>
+                @foreach (var item in Model.BirthdayContacts)
+                {
+                    <label>@item.FirstName @item.LastName</label>
+                    <br/>
+                }
             </div>
         </div>
 
