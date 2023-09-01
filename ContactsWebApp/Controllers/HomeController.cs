@@ -1,6 +1,7 @@
 ﻿using ContactsWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ContactsWebApp.Data;
 
 namespace ContactsWebApp.Controllers
 {
@@ -8,34 +9,100 @@ namespace ContactsWebApp.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
+        private readonly ContactsAppDbContext _contactsAppDbContext;
+
+        public HomeController(ILogger<HomeController> logger, ContactsAppDbContext contactsAppDbContext)
+        {
+            _logger = logger;
+            _contactsAppDbContext = contactsAppDbContext;
+        }
+
+		public IActionResult Index(string? id)
+        {
+            var mainVM = new MainViewModel();
+            Contact? selectedContact = null;
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                selectedContact = _contactsAppDbContext.Contacts.Find(new Guid(id));
+            }
+
+            mainVM.Contacts = _contactsAppDbContext.Contacts.ToList();
+            mainVM.SelectContact = selectedContact;
+            return View(mainVM);
 		}
 
-		public IActionResult Index()
-		{
-			return View();
-		}
+        public IActionResult GetContact(string? id)
+        {
+            Contact? selectedContact = null;
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                selectedContact = _contactsAppDbContext.Contacts.Find(new Guid(id));
+            }
 
-		public IActionResult Privacy()
+            return Json(selectedContact);
+        }
+
+        public IActionResult Privacy()
 		{
 			return View();
 		}
 
         public IActionResult AddContact()
         {
-			return RedirectToAction("Index", new Contact());
+            ViewBag.Title = "Add Contact";
+            return View("AddEdit", new Contact());
         }
 
-        public IActionResult EditContact()
+        public IActionResult EditContact(string id)
         {
-            throw new NotSupportedException();
+            var contact = new Contact();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                contact = _contactsAppDbContext.Contacts.Find(new Guid(id));
+            }
+
+            ViewBag.Title = "Edit Contact";
+            return View("AddEdit", contact);
         }
 
-        public IActionResult RemoveContact()
+        [HttpGet]
+        public IActionResult RemoveContact(string id)
         {
-            throw new NotSupportedException();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                Contact customer = new Contact()
+                {
+                    Id = new Guid(id)
+                };
+                _contactsAppDbContext.Contacts.Attach(customer);
+                _contactsAppDbContext.Contacts.Remove(customer);
+                _contactsAppDbContext.SaveChanges();
+            }
+
+            var result = new { Success = "True" };
+            return Json(result);
+        }
+
+        [HttpPost]
+        public IActionResult SaveChange(Contact contact)
+        {
+            if (_contactsAppDbContext.Contacts.Contains(contact))
+            {
+                _contactsAppDbContext.Contacts.Update(contact);
+            }
+            else
+            {
+                _contactsAppDbContext.Contacts.Add(contact);
+            }
+
+            _contactsAppDbContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult CancelChange()
+        {
+            return RedirectToAction(nameof(Index));
         }
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

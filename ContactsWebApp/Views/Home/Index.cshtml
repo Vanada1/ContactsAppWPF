@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ContactsWebApp.Models.MainViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -11,14 +12,20 @@
         </div>
 
         <p>
-            <select class="select-controls" size="12">
+            <select id="SelectionContact" class="select-controls" size="12" onchange="SelectedChanged()">
+                @foreach (var item in Model.Contacts)
+                {
+                    <option id="@item.Id">
+                        @item.FirstName @item.LastName
+                    </option>
+                }
             </select>
         </p>
 
         <p>
-            <button>Add</button>
-            <button>Edit</button>
-            <button>Remove</button>
+            <button onclick="location.href='@Url.Action("AddContact", "Home")'">Add</button>
+            <button onclick="EditContact()">Edit</button>
+            <button onclick="RemoveContact()">Remove</button>
         </p>
     </div>
 
@@ -26,33 +33,33 @@
         <div class="selected-contact">
 
             <div class="outer">
-                <label class="label-class">Surname:</label>
-                <input class="input"/>
+                <label class="label-class">Last Name:</label>
+                <input class="input" id="LastName" value="@Model.SelectContact?.LastName" />
             </div>
 
             <div class="outer">
-                <label class="label-class">Name:</label>
-                <input class="input"/>
+                <label class="label-class">First Name:</label>
+                <input class="input" id="FirstName" value="@Model.SelectContact?.FirstName" />
             </div>
 
             <div class="outer">
                 <label class="label-class">Birthday:</label>
-                <input type="date" class="input"/>
+                <input type="date" class="input" id="Birthday" value="@Model.SelectContact?.Birthday" />
             </div>
 
             <div class="outer">
                 <label class="label-class">Phone:</label>
-                <input class="input"/>
+                <input class="input" id="PhoneNumber" value="@Model.SelectContact?.PhoneNumber" />
             </div>
 
             <div class="outer">
                 <label class="label-class">E-mail:</label>
-                <input class="input"/>
+                <input class="input" id="Email" value="@Model.SelectContact?.Email" />
             </div>
 
             <div class="outer">
                 <label class="label-class">vk.com:</label>
-                <input class="input"/>
+                <input class="input" id="VkId" value="@Model.SelectContact?.VkId" />
             </div>
 
         </div>

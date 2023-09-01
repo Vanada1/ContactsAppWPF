@@ -1,0 +1,48 @@
+﻿@model ContactsWebApp.Models.Contact?
+
+@using (Html.BeginForm("SaveChange", "Home", Model))
+{
+    <div class="right-control-class">
+
+        <div class="edit-contact">
+            <input hidden value="@Model.Id" asp-for="Id"/>
+            <div class="outer">
+                <label class="label-class">Last Name:</label>
+                <input aps-for="LastName" value="@Model?.LastName" asp-for="LastName"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">First Name:</label>
+                <input class="input" value="@Model?.FirstName" asp-for="FirstName"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">Birthday:</label>
+                <input type="date" class="input" value="@Model?.Birthday.ToString("yyyy-MM-dd")" asp-for="Birthday"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">Phone:</label>
+                <input class="input" value="@Model?.PhoneNumber" asp-for="PhoneNumber"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">E-mail:</label>
+                <input class="input" value="@Model?.Email" asp-for="Email"/>
+            </div>
+
+            <div class="outer">
+                <label class="label-class">vk.com:</label>
+                <input class="input" value="@Model?.VkId" asp-for="VkId"/>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="submit" value="Save" />
+}
+
+@using (Html.BeginForm("CancelChange", "Home"))
+{
+    <input type="submit" value="Cancel" />
+}

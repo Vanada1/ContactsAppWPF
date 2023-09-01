@@ -2,7 +2,7 @@
 
 public class Contact
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = new ();
 
     public string FirstName { get; set; }
 

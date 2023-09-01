@@ -46,7 +46,7 @@
 }
 
 .selected-contact .label-class {
-    width: 100px;
+    width: 150px;
     float: left;
     text-align: right;
     padding-right: 10px;
@@ -65,3 +65,15 @@
 .right-control-class {
     width: 100%;
 }
+
+.edit-contact {
+    display: inline-block;
+    height: 100%;
+}
+
+.edit-contact .label-class {
+        width: 100px;
+        float: left;
+        text-align: left;
+        padding-right: 10px;
+    }
