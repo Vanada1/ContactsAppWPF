@@ -23,6 +23,21 @@ namespace ContactsWebApp.Controllers
 			return View();
 		}
 
+        public IActionResult AddContact()
+        {
+			return RedirectToAction("Index", new Contact());
+        }
+
+        public IActionResult EditContact()
+        {
+            throw new NotSupportedException();
+        }
+
+        public IActionResult RemoveContact()
+        {
+            throw new NotSupportedException();
+        }
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
