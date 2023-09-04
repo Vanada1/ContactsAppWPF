@@ -7,33 +7,39 @@
         <div class="edit-contact">
             <input hidden value="@Model.Id" asp-for="Id"/>
             <div class="outer">
-                <label class="label-class">Last Name:</label>
-                <input aps-for="LastName" value="@Model?.LastName" asp-for="LastName"/>
+                @Html.LabelFor(model => model.LastName, new {Class="label-class"})
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
             </div>
 
             <div class="outer">
-                <label class="label-class">First Name:</label>
-                <input class="input" value="@Model?.FirstName" asp-for="FirstName"/>
+                @Html.LabelFor(model => model.FirstName, new {Class="label-class"})
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
             </div>
 
             <div class="outer">
                 <label class="label-class">Birthday:</label>
-                <input type="date" class="input" value="@Model?.Birthday.ToString("yyyy-MM-dd")" asp-for="Birthday"/>
+                <input type="date" class="input" value="@Model?.Birthday?.ToString("yyyy-MM-dd")" asp-for="Birthday" />
+                @Html.ValidationMessageFor(model => model.Birthday)
             </div>
 
             <div class="outer">
-                <label class="label-class">Phone:</label>
-                <input class="input" value="@Model?.PhoneNumber" asp-for="PhoneNumber"/>
+                @Html.LabelFor(model => model.PhoneNumber, new {Class="label-class"})
+                @Html.EditorFor(model => model.PhoneNumber)
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
             </div>
 
             <div class="outer">
-                <label class="label-class">E-mail:</label>
-                <input class="input" value="@Model?.Email" asp-for="Email"/>
+                @Html.LabelFor(model => model.Email, new {Class="label-class"})
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
             </div>
 
             <div class="outer">
-                <label class="label-class">vk.com:</label>
-                <input class="input" value="@Model?.VkId" asp-for="VkId"/>
+                @Html.LabelFor(model => model.VkId, new {Class="label-class"})
+                @Html.EditorFor(model => model.VkId)
+                @Html.ValidationMessageFor(model => model.VkId)
             </div>
         </div>
 
