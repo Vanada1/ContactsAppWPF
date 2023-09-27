@@ -1,0 +1,35 @@
+{
+  "executable": "ContactsWebApp",
+  "splashscreen": {
+    "imageFile": ""
+  },
+  "name": "ContactsWebApp",
+  "author": "",
+  "singleInstance": false,
+  "environment": "Production",
+  "build": {
+    "appId": "com.ContactsWebApp.app",
+    "productName": "ContactsWebApp",
+    "copyright": "Copyright © 2020",
+    "buildVersion": "1.0.0",
+    "compression": "maximum",
+    "directories": {
+      "output": "../../../bin/Desktop"
+    },
+    "extraResources": [
+      {
+        "from": "./bin",
+        "to": "bin",
+        "filter": [ "**/*" ]
+      }
+    ],
+    "files": [
+      {
+        "from": "./ElectronHostHook/node_modules",
+        "to": "ElectronHostHook/node_modules",
+        "filter": [ "**/*" ]
+      },
+      "**/*"
+    ]
+  }
+}
