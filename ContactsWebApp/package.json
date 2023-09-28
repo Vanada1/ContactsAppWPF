@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "electron": "^26.2.3"
+  },
+  "main": "wwwroot/js/main.js",
+  "preload": "wwwroot/js/preload.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "name": "contactswebapp",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -13,8 +13,12 @@
     "copyright": "Copyright © 2020",
     "buildVersion": "1.0.0",
     "compression": "maximum",
+    "icon": "../../../wwwroot/phonebook.ico",
     "directories": {
       "output": "../../../bin/Desktop"
+    },
+    "win": {
+      "icon": "../../../wwwroot/phonebook.ico"
     },
     "extraResources": [
       {
